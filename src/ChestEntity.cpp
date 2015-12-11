@@ -45,10 +45,10 @@ void ChestEntity::makeAppear()
 
   for(int i=0; i < 8; i++)
   {
-    generateStar(sf::Color(50, 50, 255, 255));
-    generateStar(sf::Color(255, 50, 50, 255));
-    generateStar(sf::Color(50, 255, 50, 255));
-    generateStar(sf::Color(255, 255, 255, 255));
+    generateStar(cpp3ds::Color(50, 50, 255, 255));
+    generateStar(cpp3ds::Color(255, 50, 50, 255));
+    generateStar(cpp3ds::Color(50, 255, 50, 255));
+    generateStar(cpp3ds::Color(255, 255, 255, 255));
   }
 }
 
@@ -89,15 +89,15 @@ void ChestEntity::animate(float delay)
   }
 }
 
-void ChestEntity::render(sf::RenderTarget* app)
+void ChestEntity::render(cpp3ds::RenderTarget* app)
 {
   if (appearTimer > 0.0f)
   {
     int fade = 255 * (1.0f - appearTimer / CHEST_APPEAR_DELAY);
-    sprite.setColor(sf::Color(255, 255, 255, fade));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, fade));
   }
   else
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
 
   CollidingSpriteEntity::render(app);
   if (game().getShowLogical())
@@ -293,7 +293,7 @@ void ChestEntity::fallRock()
                         true);
 }
 
-void ChestEntity::generateStar(sf::Color starColor)
+void ChestEntity::generateStar(cpp3ds::Color starColor)
 {
   SpriteEntity* spriteStar = new SpriteEntity(
                            ImageManager::getInstance().getImage(IMAGE_STAR_2),

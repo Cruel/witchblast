@@ -13,7 +13,7 @@ class BubbleEntity : public EnemyEntity
     int getBubbleSize();
 
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
 
   protected:
     virtual void collideMapRight();

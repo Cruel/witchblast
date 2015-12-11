@@ -161,13 +161,13 @@ void BoltEntity::animate(float delay)
   // key room collision
   if (game().getCurrentMap()->getRoomType() == roomTypeKey && !game().getCurrentMap()->isCleared())
   {
-    sf::IntRect col1;
+    cpp3ds::IntRect col1;
     col1.width = 198;
     col1.height = 68;
     col1.top = 254;
     col1.left = 380;
 
-    sf::IntRect col2;
+    cpp3ds::IntRect col2;
     col2.width = 68;
     col2.height = 198;
     col2.top = 189;
@@ -189,19 +189,19 @@ void BoltEntity::animate(float delay)
   if (boltType != ShotTypeBomb && boltType != ShotTypeStone && (lifetime - age) < 0.2f)
   {
     if (age >= lifetime)
-      sprite.setColor(sf::Color(255, 255, 255, 0));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 0));
     else
-      sprite.setColor(sf::Color(255, 255, 255, (sf::Uint8)((lifetime - age) / 0.2f * 255)));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, (cpp3ds::Uint8)((lifetime - age) / 0.2f * 255)));
   }
 
   if (((velocity.x)*(velocity.x) + (velocity.y)*(velocity.y)) < 1500.0f) isDying = true;
 }
 
-void BoltEntity::render(sf::RenderTarget* app)
+void BoltEntity::render(cpp3ds::RenderTarget* app)
 {
   if (boltType == ShotTypeBomb)
   {
-    sprite.setTextureRect(sf::IntRect(8 * width, 0, width * 2, height * 2));
+    sprite.setTextureRect(cpp3ds::IntRect(8 * width, 0, width * 2, height * 2));
     sprite.setPosition(x - width / 2, y - height);
     app->draw(sprite);
   }

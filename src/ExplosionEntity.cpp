@@ -53,7 +53,7 @@ void ExplosionEntity::animate(float delay)
   }
 }
 
-void ExplosionEntity::render(sf::RenderTarget* app)
+void ExplosionEntity::render(cpp3ds::RenderTarget* app)
 {
   SpriteEntity::render(app);
 }
@@ -82,7 +82,7 @@ void ExplosionEntity::testCollisions()
       {
         entity->calculateBB();
 
-        sf::IntRect bb;
+        cpp3ds::IntRect bb;
         bb.left = x - 90;
         bb.width = 180;
         bb.top = y - 90;

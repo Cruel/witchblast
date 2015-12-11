@@ -16,7 +16,7 @@ struct displayEntityStruct
   float initialScale;
   float age;
   float lifetime;
-  sf::Color color;
+  cpp3ds::Color color;
 };
 
 class DungeonMapEntity : public GameEntity
@@ -24,11 +24,11 @@ class DungeonMapEntity : public GameEntity
 public:
   DungeonMapEntity();
   virtual void animate(float delay);
-  virtual void render(sf::RenderTarget* app);
-  void renderDoors(sf::RenderTarget* app);
-  void renderKeyStone(sf::RenderTarget* app);
-  void renderPost(sf::RenderTarget* app);
-  void renderOverlay(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
+  void renderDoors(cpp3ds::RenderTarget* app);
+  void renderKeyStone(cpp3ds::RenderTarget* app);
+  void renderPost(cpp3ds::RenderTarget* app);
+  void renderOverlay(cpp3ds::RenderTarget* app);
 
   void refreshMap();
 
@@ -53,18 +53,18 @@ public:
   void activateKeyRoomEffect();
 
 private:
-  sf::VertexArray vertices;
-  sf::VertexArray overVertices;
-  sf::VertexArray shadowVertices;
+  cpp3ds::VertexArray vertices;
+  cpp3ds::VertexArray overVertices;
+  cpp3ds::VertexArray shadowVertices;
   bool hasChanged;
   enum EnumShadowType { ShadowTypeStandard, ShadowTypeCorner, ShadowTypeMedium, ShadowTypeSmall };
   EnumShadowType shadowType;
 
-  sf::VertexArray bloodVertices;
-  sf::VertexArray corpsesVertices;
-  sf::VertexArray corpsesLargeVertices;
-  sf::VertexArray boltParticlesVertices;
-  sf::VertexArray backBoltParticlesVertices;
+  cpp3ds::VertexArray bloodVertices;
+  cpp3ds::VertexArray corpsesVertices;
+  cpp3ds::VertexArray corpsesLargeVertices;
+  cpp3ds::VertexArray boltParticlesVertices;
+  cpp3ds::VertexArray backBoltParticlesVertices;
 
   bool getChanged();
   void computeVertices();
@@ -82,9 +82,9 @@ private:
   void autoSpeed(displayEntityStruct &particle, float speed);
   bool checkFalling(displayEntityStruct &particle, int boxWidth, int boxHeight);
 
-  void displayBlood(sf::RenderTarget* app);
-  void displayCorpses(sf::RenderTarget* app);
-  void displayBoltParticles(sf::RenderTarget* app);
+  void displayBlood(cpp3ds::RenderTarget* app);
+  void displayCorpses(cpp3ds::RenderTarget* app);
+  void displayBoltParticles(cpp3ds::RenderTarget* app);
 
   std::vector<displayEntityStruct> blood;
   std::vector<displayEntityStruct> boltParticles;
@@ -101,19 +101,19 @@ private:
     SudEast
   };
 
-  sf::Sprite overlaySprite;
-  sf::Sprite randomSprite[NB_RANDOM_TILES_IN_ROOM];
+  cpp3ds::Sprite overlaySprite;
+  cpp3ds::Sprite randomSprite[NB_RANDOM_TILES_IN_ROOM];
   roomTypeEnum roomType;
 
-  sf::Sprite doorShadow[4];
+  cpp3ds::Sprite doorShadow[4];
   bool isDoorShadow[4];
-  sf::Sprite doorWall[4];
+  cpp3ds::Sprite doorWall[4];
   bool isDoorWall[4];
-  sf::Sprite doorFrame[4];
+  cpp3ds::Sprite doorFrame[4];
   bool isDoorFrame[4];
-  sf::Sprite doorKeyStone[4];
+  cpp3ds::Sprite doorKeyStone[4];
   bool isDoorKeyStone[4];
-  sf::Sprite doorSpecial;
+  cpp3ds::Sprite doorSpecial;
   bool isDoorSpecial;
 
   struct structKeyRoomFX
@@ -129,7 +129,7 @@ class DungeonMapEntityPost : public GameEntity
 public:
   DungeonMapEntityPost(DungeonMapEntity* parent);
   virtual void animate(float delay);
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
 private:
   DungeonMapEntity* parent;
 };
@@ -139,7 +139,7 @@ class DungeonMapEntityOverlay: public GameEntity
 public:
   DungeonMapEntityOverlay(DungeonMapEntity* parent);
   virtual void animate(float delay);
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
 private:
   DungeonMapEntity* parent;
 };

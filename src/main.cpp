@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include <cpp3ds/Graphics.hpp>
 #include "WitchBlastGame.h"
 
 #ifdef __APPLE__
@@ -25,6 +25,7 @@ int main()
 #endif
 
     WitchBlastGame game;
+	game.console(cpp3ds::BottomScreen);
     game.startGame();
 
     return 0;

@@ -12,7 +12,7 @@ class ExplosionEntity : public SpriteEntity
     ExplosionEntity(float x, float y, explosionTypeEnum explosionType, int damage, enemyTypeEnum enemyType, bool canHurtPlayer);
 
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void dying();
 
     void setCanHurtPlayer(bool can);

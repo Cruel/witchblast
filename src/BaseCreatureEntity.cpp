@@ -9,7 +9,7 @@
 #include <iostream>
 #include <sstream>
 
-BaseCreatureEntity::BaseCreatureEntity(sf::Texture* image, float x = 0.0f, float y = 0.0f, int spriteWidth = -1, int spriteHeight = -1)
+BaseCreatureEntity::BaseCreatureEntity(cpp3ds::Texture* image, float x = 0.0f, float y = 0.0f, int spriteWidth = -1, int spriteHeight = -1)
   : CollidingSpriteEntity (image, x, y, spriteWidth, spriteHeight )
 {
   hurting = false;
@@ -143,33 +143,33 @@ float BaseCreatureEntity::animateStates(float delay)
 void BaseCreatureEntity::animateColors(float delay)
 {
   // no color
-  sprite.setColor(sf::Color(255, 255, 255, 255 ));
+  sprite.setColor(cpp3ds::Color(255, 255, 255, 255 ));
 
   if (hurting && hp > 0)
   {
     hurtingDelay -= delay;
     if (hurtingDelay > 0.0f)
     {
-      int fadeColor = (sf::Uint8)((HURTING_DELAY - hurtingDelay) * 255);
+      int fadeColor = (cpp3ds::Uint8)((HURTING_DELAY - hurtingDelay) * 255);
       if (hurtingDelay > HURTING_DELAY) fadeColor = 0;
       if (hurtingType == ShotTypeIce || hurtingType == ShotTypeCold)
-        sprite.setColor(sf::Color(fadeColor, fadeColor, 255, 255 )); // blue
+        sprite.setColor(cpp3ds::Color(fadeColor, fadeColor, 255, 255 )); // blue
       else if (hurtingType == ShotTypePoison)
-        sprite.setColor(sf::Color(fadeColor, 255, fadeColor, 255 )); // green
+        sprite.setColor(cpp3ds::Color(fadeColor, 255, fadeColor, 255 )); // green
       else
-        sprite.setColor(sf::Color(255, fadeColor, fadeColor, 255 )); // red
+        sprite.setColor(cpp3ds::Color(255, fadeColor, fadeColor, 255 )); // red
     }
     else
     {
       hurting = false;
-      sprite.setColor(sf::Color(255, 255, 255, 255 ));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 255 ));
     }
   }
-  if (specialState[SpecialStateIce].active) sprite.setColor(sf::Color(100, 100, 255, 255 ));
+  if (specialState[SpecialStateIce].active) sprite.setColor(cpp3ds::Color(100, 100, 255, 255 ));
   else if (specialState[SpecialStatePoison].active)
   {
     int fade = 180 + 70 * cos(age * 5);
-    sprite.setColor(sf::Color(fade, 255, fade, 255 ));
+    sprite.setColor(cpp3ds::Color(fade, 255, fade, 255 ));
   }
 }
 
@@ -332,7 +332,7 @@ void BaseCreatureEntity::animate(float delay)
   z = y + height/2;
 }
 
-void BaseCreatureEntity::render(sf::RenderTarget* app)
+void BaseCreatureEntity::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying && shadowFrame > -1)
   {
@@ -345,7 +345,7 @@ void BaseCreatureEntity::render(sf::RenderTarget* app)
       nx = shadowFrame % imagesProLine;
       ny = shadowFrame / imagesProLine;
     }
-    sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
     app->draw(sprite);
   }
   CollidingSpriteEntity::render(app);
@@ -697,7 +697,7 @@ bool BaseCreatureEntity::canCollide()
   return true;
 }
 
-void BaseCreatureEntity::generateStar(sf::Color starColor)
+void BaseCreatureEntity::generateStar(cpp3ds::Color starColor)
 {
   game().generateStar(starColor, x, y);
 }

@@ -16,14 +16,14 @@
 
 #include "SpriteEntity.h"
 
-SpriteEntity::SpriteEntity(sf::Texture* image, float x, float y, int width, int height, int imagesProLine) : GameEntity(x, y)
+SpriteEntity::SpriteEntity(cpp3ds::Texture* image, float x, float y, int width, int height, int imagesProLine) : GameEntity(x, y)
 {
   frame = 0;
   isFading = false;
   isShrinking = false;
   isVisible = true;
   isMirroring = false;
-  color = sf::Color(255, 255, 255, 255);
+  color = cpp3ds::Color(255, 255, 255, 255);
   this->image = image;
   sprite.setTexture(*image);
   this->width  = width  <= 0 ? image->getSize().x  : width;
@@ -53,13 +53,13 @@ void SpriteEntity::setFading(bool isFading)
   this->isFading = isFading;
 }
 
-void SpriteEntity::setColor(sf::Color color)
+void SpriteEntity::setColor(cpp3ds::Color color)
 {
   this->color = color;
-  sprite.setColor(sf::Color(color.r, color.g, color.b, color.a));
+  sprite.setColor(cpp3ds::Color(color.r, color.g, color.b, color.a));
 }
 
-void SpriteEntity::setTexture(sf::Texture* image)
+void SpriteEntity::setTexture(cpp3ds::Texture* image)
 {
   sprite.setTexture(*image);
 }
@@ -111,7 +111,7 @@ void SpriteEntity::removeCenter()
   sprite.setOrigin(0.0f, 0.0f);
 }
 
-void SpriteEntity::render(sf::RenderTarget* app)
+void SpriteEntity::render(cpp3ds::RenderTarget* app)
 {
   if (isVisible)
   {
@@ -125,16 +125,16 @@ void SpriteEntity::render(sf::RenderTarget* app)
     }
 
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect((nx + 1) * width, ny * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect((nx + 1) * width, ny * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
 
     sprite.setPosition(x, y);
     sprite.setRotation(angle);
 
     if (isFading)
     {
-      sprite.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(getFade() * 255)));
+      sprite.setColor(cpp3ds::Color(color.r, color.g, color.b, (cpp3ds::Uint8)(getFade() * 255)));
     }
 
     if (isShrinking)
@@ -145,8 +145,8 @@ void SpriteEntity::render(sf::RenderTarget* app)
 
     if (renderAdd)
     {
-      sf::RenderStates r;
-      r.blendMode = sf::BlendAdd;
+      cpp3ds::RenderStates r;
+      r.blendMode = cpp3ds::BlendAdd;
       app->draw(sprite, r);
     }
     else
@@ -156,18 +156,18 @@ void SpriteEntity::render(sf::RenderTarget* app)
   }
 }
 
-void SpriteEntity::displayCenterAndZ(sf::RenderTarget* app)
+void SpriteEntity::displayCenterAndZ(cpp3ds::RenderTarget* app)
 {
-  sf::Vertex line[] =
+  cpp3ds::Vertex line[] =
   {
-    sf::Vertex(sf::Vector2f(x - 2, y), sf::Color::Green),
-    sf::Vertex(sf::Vector2f(x + 2, y), sf::Color::Green),
-    sf::Vertex(sf::Vector2f(x, y - 2), sf::Color::Green),
-    sf::Vertex(sf::Vector2f(x, y + 2), sf::Color::Green),
-    sf::Vertex(sf::Vector2f(x - 5, z), sf::Color::Green),
-    sf::Vertex(sf::Vector2f(x + 5, z), sf::Color::Green)
+    cpp3ds::Vertex(cpp3ds::Vector2f(x - 2, y), cpp3ds::Color::Green),
+    cpp3ds::Vertex(cpp3ds::Vector2f(x + 2, y), cpp3ds::Color::Green),
+    cpp3ds::Vertex(cpp3ds::Vector2f(x, y - 2), cpp3ds::Color::Green),
+    cpp3ds::Vertex(cpp3ds::Vector2f(x, y + 2), cpp3ds::Color::Green),
+    cpp3ds::Vertex(cpp3ds::Vector2f(x - 5, z), cpp3ds::Color::Green),
+    cpp3ds::Vertex(cpp3ds::Vector2f(x + 5, z), cpp3ds::Color::Green)
   };
-  app->draw(line, 6, sf::Lines);
+  app->draw(line, 6, cpp3ds::Lines);
 }
 
 void SpriteEntity::animate(float delay)

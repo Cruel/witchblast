@@ -318,14 +318,14 @@ void GiantSlimeEntity::animate(float delay)
   {
     int fade = timer * 512;
     if (fade < 0) fade = 0;
-    sprite.setColor(sf::Color(255, 255, 255, fade));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, fade));
   }
   else if (state == 7 && timer < 1.5f)
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
   else if (state == 7 && timer < 2.0f)
-    sprite.setColor(sf::Color(255, 255, 255, (2.0f - timer) * 512));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, (2.0f - timer) * 512));
   else if (state == 7)
-    sprite.setColor(sf::Color(255, 255, 255, 0));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 0));
 
   isMirroring = (frame == 2) && (velocity.x < 0.0f);
   z = y + 26;
@@ -398,23 +398,23 @@ void GiantSlimeEntity::dying()
   star->setSpin(400.0f);
 }
 
-void GiantSlimeEntity::render(sf::RenderTarget* app)
+void GiantSlimeEntity::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying)
   {
     // shadow
     sprite.setPosition(x, y);
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect(shadowFrame * width + width, 0, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width + width, 0, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect(shadowFrame * width, 0, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width, 0, width, height));
     app->draw(sprite);
   }
   sprite.setPosition(x, y - h);
   if (isMirroring)
-      sprite.setTextureRect(sf::IntRect(frame * width + width, 0, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(frame * width + width, 0, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect(frame * width, 0, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(frame * width, 0, width, height));
   app->draw(sprite);
 
   renderLifeBar(app, tools::getLabel("enemy_giant_slime"));

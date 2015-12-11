@@ -58,7 +58,7 @@ void ArtefactDescriptionEntity::animate(float delay)
   SpriteEntity::animate(delay);
 }
 
-void ArtefactDescriptionEntity::render(sf::RenderTarget* app)
+void ArtefactDescriptionEntity::render(cpp3ds::RenderTarget* app)
 {
     int nx = frame;
     int ny = 0;
@@ -69,13 +69,13 @@ void ArtefactDescriptionEntity::render(sf::RenderTarget* app)
         ny = frame / imagesProLine;
     }
 
-    sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
 
     sprite.setPosition(x, y);
 
     if (isFading)
     {
-        sprite.setColor(sf::Color(255, 255, 255, (sf::Uint8)(getFade() * 255)));
+        sprite.setColor(cpp3ds::Color(255, 255, 255, (cpp3ds::Uint8)(getFade() * 255)));
     }
 
     if (isShrinking)
@@ -83,12 +83,12 @@ void ArtefactDescriptionEntity::render(sf::RenderTarget* app)
         sprite.setScale(getFade(), getFade());
     }
 
-    sf::Color fadeColor = sf::Color::White;
+    cpp3ds::Color fadeColor = cpp3ds::Color::White;
     if (age > lifetime - 0.5f)
     {
       int fade = 500 * (lifetime - age);
       if (fade < 0) fade = 0;
-      fadeColor = sf::Color(255, 255, 255, fade);
+      fadeColor = cpp3ds::Color(255, 255, 255, fade);
       rectangle.setColor(fadeColor);
       sprite.setColor(fadeColor);
     }

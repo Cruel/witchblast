@@ -191,13 +191,13 @@ void ImpEntity::teleport()
   {
     if (impType == ImpTypeBlue)
     {
-      generateStar(sf::Color(50, 50, 255, 255));
-      generateStar(sf::Color(200, 200, 255, 255));
+      generateStar(cpp3ds::Color(50, 50, 255, 255));
+      generateStar(cpp3ds::Color(200, 200, 255, 255));
     }
     else
     {
-      generateStar(sf::Color(255, 50, 50, 255));
-      generateStar(sf::Color(255, 200, 200, 255));
+      generateStar(cpp3ds::Color(255, 50, 50, 255));
+      generateStar(cpp3ds::Color(255, 200, 200, 255));
     }
   }
 
@@ -220,13 +220,13 @@ void ImpEntity::teleport()
   {
     if (impType == ImpTypeBlue)
     {
-      generateStar(sf::Color(50, 50, 255, 255));
-      generateStar(sf::Color(200, 200, 255, 255));
+      generateStar(cpp3ds::Color(50, 50, 255, 255));
+      generateStar(cpp3ds::Color(200, 200, 255, 255));
     }
     else
     {
-      generateStar(sf::Color(255, 50, 50, 255));
-      generateStar(sf::Color(255, 200, 200, 255));
+      generateStar(cpp3ds::Color(255, 50, 50, 255));
+      generateStar(cpp3ds::Color(255, 200, 200, 255));
     }
   }
 }

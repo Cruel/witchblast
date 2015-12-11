@@ -17,7 +17,7 @@
 #ifndef __GAMEENTITY
 #define __GAMEENTITY
 
-#include <SFML/Graphics.hpp>
+#include <cpp3ds/Graphics.hpp>
 
 #include "MyTools.h"
 #include "EntityManager.h"
@@ -70,7 +70,7 @@ public:
 	void setViscosity(float viscosity);
 
 
-	virtual void render(sf::RenderTarget* app);
+	virtual void render(cpp3ds::RenderTarget* app);
 	virtual void animate(float delay);
 
 	virtual void onDying();

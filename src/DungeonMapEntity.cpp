@@ -37,7 +37,7 @@ DungeonMapEntity::DungeonMapEntity() : GameEntity (0.0f, 0.0f)
     isDoorFrame[i] = false;
 
     doorShadow[i].setTexture(*ImageManager::getInstance().getImage(IMAGE_TILES));
-    doorShadow[i].setTextureRect(sf::IntRect(DOOR_SHADOW_SPRITE_X, DOOR_SHADOW_SPRITE_Y, 192, 64));
+    doorShadow[i].setTextureRect(cpp3ds::IntRect(DOOR_SHADOW_SPRITE_X, DOOR_SHADOW_SPRITE_Y, 192, 64));
     doorShadow[i].setOrigin(96, 32);
     isDoorShadow[i] = false;
 
@@ -114,7 +114,7 @@ void DungeonMapEntity::animate(float delay)
       if (fade > 1) fade = 1;
       else if (fade < 0) fade = 0;
       backBoltParticles[i].scale = backBoltParticles[i].initialScale * fade;
-      backBoltParticles[i].color = sf::Color(255, 255, 255, 255 * fade);
+      backBoltParticles[i].color = cpp3ds::Color(255, 255, 255, 255 * fade);
     }
   }
   for (unsigned int i = 0; i < boltParticles.size(); i++)
@@ -131,7 +131,7 @@ void DungeonMapEntity::animate(float delay)
       if (fade > 1) fade = 1;
       else if (fade < 0) fade = 0;
       boltParticles[i].scale = boltParticles[i].initialScale * fade;
-      boltParticles[i].color = sf::Color(255, 255, 255, 255 * fade);
+      boltParticles[i].color = cpp3ds::Color(255, 255, 255, 255 * fade);
     }
   }
 
@@ -415,7 +415,7 @@ bool DungeonMapEntity::getChanged()
   return result;
 }
 
-void DungeonMapEntity::render(sf::RenderTarget* app)
+void DungeonMapEntity::render(cpp3ds::RenderTarget* app)
 {
   app->draw(vertices, ImageManager::getInstance().getImage(IMAGE_TILES));
 
@@ -436,14 +436,14 @@ void DungeonMapEntity::render(sf::RenderTarget* app)
         if (game().getCurrentMap()->getTile(i, j) >= MAP_TEMPLE
             && game().getCurrentMap()->getTile(i, j) < MAP_TEMPLE + 10)
         {
-          sf::Sprite tile;
+          cpp3ds::Sprite tile;
           tile.setTexture(*ImageManager::getInstance().getImage(IMAGE_TILES));
           tile.setPosition(i * TILE_WIDTH, j * TILE_HEIGHT);
-          tile.setTextureRect(sf::IntRect((game().getCurrentMap()->getTile(i, j) % 24) * TILE_WIDTH,
+          tile.setTextureRect(cpp3ds::IntRect((game().getCurrentMap()->getTile(i, j) % 24) * TILE_WIDTH,
                                           (1 + game().getCurrentMap()->getTile(i, j) / 24) * TILE_HEIGHT,
                                           TILE_WIDTH, TILE_HEIGHT));
           int fade = 127 + 127 * (cosf(6.0f * game().getAbsolutTime()));
-          tile.setColor(sf::Color(255, 255, 255, fade));
+          tile.setColor(cpp3ds::Color(255, 255, 255, fade));
           app->draw(tile);
         }
   }
@@ -462,19 +462,19 @@ void DungeonMapEntity::render(sf::RenderTarget* app)
         fade = keyRoomEffect.amplitude - keyRoomEffect.amplitude * (KeyRoomFXDelay / 2 - keyRoomEffect.delay) / KeyRoomFXDelay * 2;
     }
 
-    sf::Sprite tiles;
+    cpp3ds::Sprite tiles;
     tiles.setTexture(*ImageManager::getInstance().getImage(IMAGE_KEY_AREA));
     tiles.setPosition((MAP_WIDTH / 2 - 1) * TILE_WIDTH, (MAP_HEIGHT / 2 - 1) * TILE_HEIGHT);
-    tiles.setTextureRect(sf::IntRect(0, 0, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
+    tiles.setTextureRect(cpp3ds::IntRect(0, 0, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
     app->draw(tiles);
 
-    tiles.setColor(sf::Color(255, 255, 255, fade));
-    tiles.setTextureRect(sf::IntRect(3 * TILE_WIDTH, 0, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
+    tiles.setColor(cpp3ds::Color(255, 255, 255, fade));
+    tiles.setTextureRect(cpp3ds::IntRect(3 * TILE_WIDTH, 0, 3 * TILE_WIDTH, 3 * TILE_HEIGHT));
     app->draw(tiles);
   }
 }
 
-void DungeonMapEntity::renderKeyStone(sf::RenderTarget* app)
+void DungeonMapEntity::renderKeyStone(cpp3ds::RenderTarget* app)
 {
   for (int i = 0; i < 4; i++)
     if (isDoorKeyStone[i]) app->draw(doorKeyStone[i]);
@@ -487,13 +487,13 @@ void DungeonMapEntity::computeDoors()
   if (currentMap->hasKnownNeighbour(North, true) || (currentMap->getRoomType() == roomTypeExit && game().getLevel() < LAST_LEVEL))
   {
     isDoorShadow[North] = true;
-    doorWall[North].setTextureRect(sf::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
+    doorWall[North].setTextureRect(cpp3ds::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
     isDoorWall[North] = true;
-    doorFrame[North].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(North) / DOORS_PRO_COLUMN),
+    doorFrame[North].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(North) / DOORS_PRO_COLUMN),
                                                 64 + 192 * (currentMap->getDoorType(North) % DOORS_PRO_COLUMN),
                                                 192, 64));
     isDoorFrame[North] = true;
-    doorKeyStone[North].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(North) / DOORS_PRO_COLUMN),
+    doorKeyStone[North].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(North) / DOORS_PRO_COLUMN),
                                                    128 + 192 * (currentMap->getDoorType(North) % DOORS_PRO_COLUMN),
                                                    192, 64));
     isDoorKeyStone[North] = true;
@@ -509,13 +509,13 @@ void DungeonMapEntity::computeDoors()
   if (currentMap->hasKnownNeighbour(South, true) || ( (game().getLevel() > 1 && currentMap->getRoomType() == roomTypeStarting)))
   {
     isDoorShadow[South] = true;
-    doorWall[South].setTextureRect(sf::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
+    doorWall[South].setTextureRect(cpp3ds::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
     isDoorWall[South] = true;
-    doorFrame[South].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(South) / DOORS_PRO_COLUMN),
+    doorFrame[South].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(South) / DOORS_PRO_COLUMN),
                                                 64 + 192 * (currentMap->getDoorType(South) % DOORS_PRO_COLUMN),
                                                 192, 64));
     isDoorFrame[South] = true;
-    doorKeyStone[South].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(South) / DOORS_PRO_COLUMN),
+    doorKeyStone[South].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(South) / DOORS_PRO_COLUMN),
                                                    128 + 192 * (currentMap->getDoorType(South) % DOORS_PRO_COLUMN),
                                                    192, 64));
     isDoorKeyStone[South] = true;
@@ -531,13 +531,13 @@ void DungeonMapEntity::computeDoors()
   if (currentMap->hasKnownNeighbour(West, true))
   {
     isDoorShadow[West] = true;
-    doorWall[West].setTextureRect(sf::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
+    doorWall[West].setTextureRect(cpp3ds::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
     isDoorWall[West] = true;
-    doorFrame[West].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(West) / DOORS_PRO_COLUMN),
+    doorFrame[West].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(West) / DOORS_PRO_COLUMN),
                                                64 + 192 * (currentMap->getDoorType(West) % DOORS_PRO_COLUMN),
                                                192, 64));
     isDoorFrame[West] = true;
-    doorKeyStone[West].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(West) / DOORS_PRO_COLUMN),
+    doorKeyStone[West].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(West) / DOORS_PRO_COLUMN),
                                                   128 + 192 * (currentMap->getDoorType(West) % DOORS_PRO_COLUMN),
                                                   192, 64));
     isDoorKeyStone[West] = true;
@@ -553,12 +553,12 @@ void DungeonMapEntity::computeDoors()
   if (currentMap->hasKnownNeighbour(East, true))
   {
     isDoorShadow[East] = true;
-    doorWall[East].setTextureRect(sf::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
+    doorWall[East].setTextureRect(cpp3ds::IntRect(DOOR_WALL_SPRITE_X, currentMap->getWallType() * 64 +  DOOR_WALL_SPRITE_Y, 192, 64));
     isDoorWall[East] = true;
-    doorFrame[East].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(East) / DOORS_PRO_COLUMN),
+    doorFrame[East].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(East) / DOORS_PRO_COLUMN),
                                                64 + 192 * (currentMap->getDoorType(East) % DOORS_PRO_COLUMN), 192, 64));
     isDoorFrame[East] = true;
-    doorKeyStone[East].setTextureRect(sf::IntRect(64 + 256 * (currentMap->getDoorType(East) / DOORS_PRO_COLUMN),
+    doorKeyStone[East].setTextureRect(cpp3ds::IntRect(64 + 256 * (currentMap->getDoorType(East) / DOORS_PRO_COLUMN),
                                                   128 + 192 * (currentMap->getDoorType(East) % DOORS_PRO_COLUMN), 192, 64));
     isDoorKeyStone[East] = true;
   }
@@ -574,19 +574,19 @@ void DungeonMapEntity::computeDoors()
   {
     isDoorSpecial = true;
     doorSpecial.setPosition(TILE_WIDTH * MAP_WIDTH / 2, TILE_HEIGHT / 2);
-    doorSpecial.setTextureRect(sf::IntRect(DOOR_STAIRS_SPRITE_X, DOOR_STAIRS_SPRITE_Y, 192, 64));
+    doorSpecial.setTextureRect(cpp3ds::IntRect(DOOR_STAIRS_SPRITE_X, DOOR_STAIRS_SPRITE_Y, 192, 64));
   }
   else if (game().getLevel() > 1 && currentMap->getRoomType() == roomTypeStarting)
   {
     isDoorSpecial = true;
     doorSpecial.setPosition(TILE_WIDTH * MAP_WIDTH / 2, TILE_HEIGHT * MAP_HEIGHT - TILE_HEIGHT / 2);
-    doorSpecial.setTextureRect(sf::IntRect(DOOR_GRID_SPRITE_X, DOOR_GRID_SPRITE_Y, 192, 64));
+    doorSpecial.setTextureRect(cpp3ds::IntRect(DOOR_GRID_SPRITE_X, DOOR_GRID_SPRITE_Y, 192, 64));
   }
   else
     isDoorSpecial = false;
 }
 
-void DungeonMapEntity::renderDoors(sf::RenderTarget* app)
+void DungeonMapEntity::renderDoors(cpp3ds::RenderTarget* app)
 {
   // fading from doors
   for (int i = 0; i < 4; i++)
@@ -606,7 +606,7 @@ void DungeonMapEntity::renderDoors(sf::RenderTarget* app)
     if (isDoorFrame[i]) app->draw(doorFrame[i]);
 }
 
-void DungeonMapEntity::renderPost(sf::RenderTarget* app)
+void DungeonMapEntity::renderPost(cpp3ds::RenderTarget* app)
 {
   displayBlood(app);
   displayCorpses(app);
@@ -628,7 +628,7 @@ void DungeonMapEntity::renderPost(sf::RenderTarget* app)
   displayBoltParticles(app);
 }
 
-void DungeonMapEntity::renderOverlay(sf::RenderTarget* app)
+void DungeonMapEntity::renderOverlay(cpp3ds::RenderTarget* app)
 {
   renderKeyStone(app);
   app->draw(overlaySprite);
@@ -646,22 +646,22 @@ std::vector <displayEntityStruct> DungeonMapEntity::getCorpses()
   return result;
 }
 
-void DungeonMapEntity::displayBlood(sf::RenderTarget* app)
+void DungeonMapEntity::displayBlood(cpp3ds::RenderTarget* app)
 {
   app->draw(bloodVertices, ImageManager::getInstance().getImage(IMAGE_BLOOD));
 }
 
-void DungeonMapEntity::displayCorpses(sf::RenderTarget* app)
+void DungeonMapEntity::displayCorpses(cpp3ds::RenderTarget* app)
 {
   app->draw(corpsesVertices, ImageManager::getInstance().getImage(IMAGE_CORPSES));
   app->draw(corpsesLargeVertices, ImageManager::getInstance().getImage(IMAGE_CORPSES_BIG));
 }
 
-void DungeonMapEntity::displayBoltParticles(sf::RenderTarget* app)
+void DungeonMapEntity::displayBoltParticles(cpp3ds::RenderTarget* app)
 {
   app->draw(backBoltParticlesVertices, ImageManager::getInstance().getImage(IMAGE_BOLT));
-  sf::RenderStates r;
-  r.blendMode = sf::BlendAdd ;
+  cpp3ds::RenderStates r;
+  r.blendMode = cpp3ds::BlendAdd ;
   r.texture = ImageManager::getInstance().getImage(IMAGE_BOLT);
 
   app->draw(boltParticlesVertices, r); //ImageManager::getInstance().getImage(IMAGE_BOLT));
@@ -700,7 +700,7 @@ void DungeonMapEntity::computeVertices()
   int tileBoxWidth = 64;
   int tileBoxHeight = 64;
 
-  vertices.setPrimitiveType(sf::Quads);
+  vertices.setPrimitiveType(cpp3ds::Quads);
   vertices.resize(gameMap->getWidth() * gameMap->getHeight() * 4);
 
   for (int i = 0; i < gameMap->getWidth(); i++)
@@ -709,136 +709,136 @@ void DungeonMapEntity::computeVertices()
       int nx = gameMap->getTile(i, j) % tilesProLine;
       int ny = gameMap->getTile(i, j) / tilesProLine;
 
-      sf::Vertex* quad = &vertices[(i + j * gameMap->getWidth()) * 4];
+      cpp3ds::Vertex* quad = &vertices[(i + j * gameMap->getWidth()) * 4];
 
       if (shouldBeTransformed(gameMap->getTile(i, j)))
       {
         if (j == 0 && i <= MAP_WIDTH / 2)
         {
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j == 0 && i > MAP_HEIGHT / 2)
         {
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j == MAP_HEIGHT - 1 && i <= MAP_WIDTH / 2)
         {
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j == MAP_HEIGHT - 1 && i > MAP_WIDTH / 2)
         {
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i == 0 && j <= MAP_HEIGHT / 2)
         {
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i == 0 && j > MAP_HEIGHT / 2)
         {
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i == MAP_WIDTH - 1 && j <= MAP_HEIGHT / 2)
         {
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i == MAP_WIDTH - 1 && j > MAP_HEIGHT / 2)
         {
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         // corridors
         else if (i < MAP_WIDTH / 2 && j <= MAP_HEIGHT / 2 && gameMap->getTile(i, j - 1) != MAP_WALL_X)
         {
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i < MAP_WIDTH / 2 && j > MAP_HEIGHT / 2 && gameMap->getTile(i, j + 1) != MAP_WALL_X)
         {
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i > MAP_WIDTH / 2 && j <= MAP_HEIGHT / 2 && gameMap->getTile(i, j - 1) != MAP_WALL_X)
         {
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (i > MAP_WIDTH / 2 && j > MAP_HEIGHT / 2 && gameMap->getTile(i, j + 1) != MAP_WALL_X)
         {
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j < MAP_HEIGHT / 2 && i <= MAP_WIDTH / 2)
         {
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j < MAP_HEIGHT / 2 && i > MAP_HEIGHT / 2)
         {
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j > MAP_HEIGHT / 2 && i <= MAP_WIDTH / 2)
         {
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
         else if (j > MAP_HEIGHT / 2 && i > MAP_WIDTH / 2)
         {
-          quad[2].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[3].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[0].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[1].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[2].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[0].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
       }
       else
       {
-        quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-        quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-        quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-        quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+        quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+        quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+        quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+        quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
       }
 
-      quad[0].texCoords = sf::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
-      quad[1].texCoords = sf::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
-      quad[2].texCoords = sf::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
-      quad[3].texCoords = sf::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
+      quad[0].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
+      quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
+      quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
+      quad[3].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
     }
 
   //if (roomType != game().getCurrentMap()->getRoomType())
@@ -884,7 +884,7 @@ void DungeonMapEntity::computeVertices()
       randomSprite[i].setPosition(game().getCurrentMap()->getRandomTileElement(i).x + randomDungeonTiles[n].width / 2,
                                game().getCurrentMap()->getRandomTileElement(i).y + randomDungeonTiles[n].height / 2);
       randomSprite[i].setOrigin(randomDungeonTiles[n].width / 2, randomDungeonTiles[n].height / 2);
-      randomSprite[i].setTextureRect(sf::IntRect(randomDungeonTiles[n].xOffset, randomDungeonTiles[n].yOffset, randomDungeonTiles[n].width, randomDungeonTiles[n].height));
+      randomSprite[i].setTextureRect(cpp3ds::IntRect(randomDungeonTiles[n].xOffset, randomDungeonTiles[n].yOffset, randomDungeonTiles[n].width, randomDungeonTiles[n].height));
       randomSprite[i].setRotation(game().getCurrentMap()->getRandomTileElement(i).rotation);
     }
   }
@@ -899,7 +899,7 @@ void DungeonMapEntity::computeOverVertices()
   int tileBoxWidth = 64;
   int tileBoxHeight = 64;
 
-  overVertices.setPrimitiveType(sf::Quads);
+  overVertices.setPrimitiveType(cpp3ds::Quads);
   overVertices.resize(gameMap->getWidth() * gameMap->getHeight() * 4);
 
   for (int i = 0; i < gameMap->getWidth(); i++)
@@ -915,18 +915,18 @@ void DungeonMapEntity::computeOverVertices()
           ny = 0;
         }
 
-        sf::Vertex* quad = &overVertices[(i + j * gameMap->getWidth()) * 4];
+        cpp3ds::Vertex* quad = &overVertices[(i + j * gameMap->getWidth()) * 4];
         {
-          quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-          quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-          quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-          quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+          quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+          quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+          quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
         }
 
-        quad[0].texCoords = sf::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
-        quad[1].texCoords = sf::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
-        quad[2].texCoords = sf::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
-        quad[3].texCoords = sf::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
+        quad[0].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
+        quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
+        quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
+        quad[3].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
       }
     }
 }
@@ -982,7 +982,7 @@ void DungeonMapEntity::computeShadowVertices()
     }
   }
 
-  shadowVertices.setPrimitiveType(sf::Quads);
+  shadowVertices.setPrimitiveType(cpp3ds::Quads);
   shadowVertices.resize(8 * 4);
 
   int xm0 = x0 + xd;
@@ -992,161 +992,161 @@ void DungeonMapEntity::computeShadowVertices()
 
   // top left
   {
-    sf::Vertex* quad = &shadowVertices[0 * 4];
-    quad[0].position = sf::Vector2f(x0 * tileWidth, y0 * tileHeight);
-    quad[1].position = sf::Vector2f((x0 + xd)* tileWidth, y0 * tileHeight);
-    quad[2].position = sf::Vector2f((x0 + xd) * tileWidth, (y0 + yd) * tileHeight);
-    quad[3].position = sf::Vector2f(x0 * tileWidth, (y0 + yd) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[0 * 4];
+    quad[0].position = cpp3ds::Vector2f(x0 * tileWidth, y0 * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((x0 + xd)* tileWidth, y0 * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((x0 + xd) * tileWidth, (y0 + yd) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f(x0 * tileWidth, (y0 + yd) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f(0 * tileBoxWidth, 0 * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f(xd * tileBoxWidth, 0 * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f(xd * tileBoxWidth, yd * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f(0 * tileBoxWidth, yd * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f(0 * tileBoxWidth, 0 * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, 0 * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, yd * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f(0 * tileBoxWidth, yd * tileBoxHeight);
   }
   // top
   {
-    sf::Vertex* quad = &shadowVertices[1 * 4];
-    quad[0].position = sf::Vector2f(xm0 * tileWidth, y0 * tileHeight);
-    quad[1].position = sf::Vector2f((xmf + 1)* tileWidth, y0 * tileHeight);
-    quad[2].position = sf::Vector2f((xmf + 1) * tileWidth, (y0 + yd) * tileHeight);
-    quad[3].position = sf::Vector2f(xm0 * tileWidth, (y0 + yd) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[1 * 4];
+    quad[0].position = cpp3ds::Vector2f(xm0 * tileWidth, y0 * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((xmf + 1)* tileWidth, y0 * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((xmf + 1) * tileWidth, (y0 + yd) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f(xm0 * tileWidth, (y0 + yd) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f(xd * tileBoxWidth, 0 * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, 0 * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, yd * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f(xd * tileBoxWidth, yd * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, 0 * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, 0 * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, yd * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, yd * tileBoxHeight);
   }
   // top right
   {
-    sf::Vertex* quad = &shadowVertices[2 * 4];
-    quad[0].position = sf::Vector2f((xf - xd + 1) * tileWidth, y0 * tileHeight);
-    quad[1].position = sf::Vector2f((xf + 1)* tileWidth, y0 * tileHeight);
-    quad[2].position = sf::Vector2f((xf + 1) * tileWidth, (y0 + yd) * tileHeight);
-    quad[3].position = sf::Vector2f((xf - xd + 1) * tileWidth, (y0 + yd) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[2 * 4];
+    quad[0].position = cpp3ds::Vector2f((xf - xd + 1) * tileWidth, y0 * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((xf + 1)* tileWidth, y0 * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((xf + 1) * tileWidth, (y0 + yd) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f((xf - xd + 1) * tileWidth, (y0 + yd) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, 0 * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f((xd + xd + 1) * tileBoxWidth, 0 * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f((xd + xd + 1) * tileBoxWidth, yd * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, yd * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, 0 * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f((xd + xd + 1) * tileBoxWidth, 0 * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f((xd + xd + 1) * tileBoxWidth, yd * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, yd * tileBoxHeight);
   }
   // left
   {
-    sf::Vertex* quad = &shadowVertices[3 * 4];
-    quad[0].position = sf::Vector2f(x0 * tileWidth, ym0 * tileHeight);
-    quad[1].position = sf::Vector2f((x0 + xd) * tileWidth, ym0 * tileHeight);
-    quad[2].position = sf::Vector2f((x0 + xd) * tileWidth, (ymf + 1) * tileHeight);
-    quad[3].position = sf::Vector2f(x0 * tileWidth, (ymf + 1) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[3 * 4];
+    quad[0].position = cpp3ds::Vector2f(x0 * tileWidth, ym0 * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((x0 + xd) * tileWidth, ym0 * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((x0 + xd) * tileWidth, (ymf + 1) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f(x0 * tileWidth, (ymf + 1) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f(0 * tileBoxWidth, yd * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f(xd * tileBoxWidth, yd * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f(xd * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f(0 * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f(0 * tileBoxWidth, yd * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, yd * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f(0 * tileBoxWidth, (yd + 1) * tileBoxHeight);
   }
   // right
   {
-    sf::Vertex* quad = &shadowVertices[4 * 4];
-    quad[0].position = sf::Vector2f((xf - xd + 1) * tileWidth, ym0 * tileHeight);
-    quad[1].position = sf::Vector2f((xf + 1) * tileWidth, ym0 * tileHeight);
-    quad[2].position = sf::Vector2f((xf + 1) * tileWidth, (ymf + 1) * tileHeight);
-    quad[3].position = sf::Vector2f((xf - xd + 1) * tileWidth, (ymf + 1) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[4 * 4];
+    quad[0].position = cpp3ds::Vector2f((xf - xd + 1) * tileWidth, ym0 * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((xf + 1) * tileWidth, ym0 * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((xf + 1) * tileWidth, (ymf + 1) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f((xf - xd + 1) * tileWidth, (ymf + 1) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, yd * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f((xd + xd + 1) * tileBoxWidth, yd * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f((xd + xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, yd * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f((xd + xd + 1) * tileBoxWidth, yd * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f((xd + xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
   }
   // bottom left
   {
-    sf::Vertex* quad = &shadowVertices[5 * 4];
-    quad[0].position = sf::Vector2f(x0 * tileWidth, (yf - yd + 1) * tileHeight);
-    quad[1].position = sf::Vector2f((x0 + xd)* tileWidth, (yf - yd + 1) * tileHeight);
-    quad[2].position = sf::Vector2f((x0 + xd) * tileWidth, (1 + yf) * tileHeight);
-    quad[3].position = sf::Vector2f(x0 * tileWidth, (1 + yf) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[5 * 4];
+    quad[0].position = cpp3ds::Vector2f(x0 * tileWidth, (yf - yd + 1) * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((x0 + xd)* tileWidth, (yf - yd + 1) * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((x0 + xd) * tileWidth, (1 + yf) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f(x0 * tileWidth, (1 + yf) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f(0 * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f(xd * tileBoxWidth, (yd + 1)  * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f(xd * tileBoxWidth, (yd + yd + 1)  * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f(0 * tileBoxWidth, (yd + yd + 1)  * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f(0 * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, (yd + 1)  * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, (yd + yd + 1)  * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f(0 * tileBoxWidth, (yd + yd + 1)  * tileBoxHeight);
   }
   // bottom
   {
-    sf::Vertex* quad = &shadowVertices[6 * 4];
-    quad[0].position = sf::Vector2f(xm0 * tileWidth, (yf - yd + 1) * tileHeight);
-    quad[1].position = sf::Vector2f((xmf + 1)* tileWidth, (yf - yd + 1) * tileHeight);
-    quad[2].position = sf::Vector2f((xmf + 1) * tileWidth, (1 + yf) * tileHeight);
-    quad[3].position = sf::Vector2f(xm0 * tileWidth, (1 + yf) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[6 * 4];
+    quad[0].position = cpp3ds::Vector2f(xm0 * tileWidth, (yf - yd + 1) * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((xmf + 1)* tileWidth, (yf - yd + 1) * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((xmf + 1) * tileWidth, (1 + yf) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f(xm0 * tileWidth, (1 + yf) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f(xd * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f(xd * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f(xd * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
   }
   // bottom right
   {
-    sf::Vertex* quad = &shadowVertices[7 * 4];
-    quad[0].position = sf::Vector2f((xf - xd + 1) * tileWidth, (yf - yd + 1) * tileHeight);
-    quad[1].position = sf::Vector2f((xf + 1)* tileWidth, (yf - yd + 1) * tileHeight);
-    quad[2].position = sf::Vector2f((xf + 1) * tileWidth, (1 + yf) * tileHeight);
-    quad[3].position = sf::Vector2f((xf - xd + 1) * tileWidth, (1 + yf) * tileHeight);
+    cpp3ds::Vertex* quad = &shadowVertices[7 * 4];
+    quad[0].position = cpp3ds::Vector2f((xf - xd + 1) * tileWidth, (yf - yd + 1) * tileHeight);
+    quad[1].position = cpp3ds::Vector2f((xf + 1)* tileWidth, (yf - yd + 1) * tileHeight);
+    quad[2].position = cpp3ds::Vector2f((xf + 1) * tileWidth, (1 + yf) * tileHeight);
+    quad[3].position = cpp3ds::Vector2f((xf - xd + 1) * tileWidth, (1 + yf) * tileHeight);
 
-    quad[0].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[1].texCoords = sf::Vector2f((xd + xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
-    quad[2].texCoords = sf::Vector2f((xd + xd + 1) * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
-    quad[3].texCoords = sf::Vector2f((xd + 1) * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
+    quad[0].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[1].texCoords = cpp3ds::Vector2f((xd + xd + 1) * tileBoxWidth, (yd + 1) * tileBoxHeight);
+    quad[2].texCoords = cpp3ds::Vector2f((xd + xd + 1) * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
+    quad[3].texCoords = cpp3ds::Vector2f((xd + 1) * tileBoxWidth, (yd + yd + 1) * tileBoxHeight);
   }
 }
 
 void DungeonMapEntity::computeBloodVertices()
 {
-  bloodVertices.setPrimitiveType(sf::Quads);
+  bloodVertices.setPrimitiveType(cpp3ds::Quads);
   bloodVertices.resize(blood.size() * 4);
 
   for (unsigned int i = 0; i < blood.size(); i++)
   {
     auto particle = blood[i];
 
-    sf::Vertex* quad = &bloodVertices[i * 4];
+    cpp3ds::Vertex* quad = &bloodVertices[i * 4];
 
     float middle = 8.0f * particle.scale;
     int nx = particle.frame % 6;
     int ny = particle.frame / 6;
 
-    quad[0].position = sf::Vector2f(particle.x - middle, particle.y - middle);
-    quad[1].position = sf::Vector2f(particle.x + middle, particle.y - middle);
-    quad[2].position = sf::Vector2f(particle.x + middle, particle.y + middle);
-    quad[3].position = sf::Vector2f(particle.x - middle, particle.y + middle);
+    quad[0].position = cpp3ds::Vector2f(particle.x - middle, particle.y - middle);
+    quad[1].position = cpp3ds::Vector2f(particle.x + middle, particle.y - middle);
+    quad[2].position = cpp3ds::Vector2f(particle.x + middle, particle.y + middle);
+    quad[3].position = cpp3ds::Vector2f(particle.x - middle, particle.y + middle);
 
-    quad[0].texCoords = sf::Vector2f(nx * 16, ny * 16);
-    quad[1].texCoords = sf::Vector2f((nx + 1) * 16, ny * 16);
-    quad[2].texCoords = sf::Vector2f((nx + 1) * 16, (ny + 1) * 16);
-    quad[3].texCoords = sf::Vector2f(nx * 16, (ny + 1) * 16);
+    quad[0].texCoords = cpp3ds::Vector2f(nx * 16, ny * 16);
+    quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * 16, ny * 16);
+    quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * 16, (ny + 1) * 16);
+    quad[3].texCoords = cpp3ds::Vector2f(nx * 16, (ny + 1) * 16);
   }
 }
 
 void DungeonMapEntity::computeBoltParticulesVertices()
 {
-  boltParticlesVertices.setPrimitiveType(sf::Quads);
+  boltParticlesVertices.setPrimitiveType(cpp3ds::Quads);
   boltParticlesVertices.resize(boltParticles.size() * 4);
 
   for (unsigned int i = 0; i < boltParticles.size(); i++)
   {
     auto particle = boltParticles[i];
 
-    sf::Vertex* quad = &boltParticlesVertices[i * 4];
+    cpp3ds::Vertex* quad = &boltParticlesVertices[i * 4];
 
     float middle = 12.0f * particle.scale;
     int nx = particle.frame % BOLT_PRO_LINE;
     int ny = particle.frame / BOLT_PRO_LINE;
 
-    quad[0].position = sf::Vector2f(particle.x - middle, particle.y - middle);
-    quad[1].position = sf::Vector2f(particle.x + middle, particle.y - middle);
-    quad[2].position = sf::Vector2f(particle.x + middle, particle.y + middle);
-    quad[3].position = sf::Vector2f(particle.x - middle, particle.y + middle);
+    quad[0].position = cpp3ds::Vector2f(particle.x - middle, particle.y - middle);
+    quad[1].position = cpp3ds::Vector2f(particle.x + middle, particle.y - middle);
+    quad[2].position = cpp3ds::Vector2f(particle.x + middle, particle.y + middle);
+    quad[3].position = cpp3ds::Vector2f(particle.x - middle, particle.y + middle);
 
-    quad[0].texCoords = sf::Vector2f(nx * 24, ny * 24);
-    quad[1].texCoords = sf::Vector2f((nx + 1) * 24, ny * 24);
-    quad[2].texCoords = sf::Vector2f((nx + 1) * 24, (ny + 1) * 24);
-    quad[3].texCoords = sf::Vector2f(nx * 24, (ny + 1) * 24);
+    quad[0].texCoords = cpp3ds::Vector2f(nx * 24, ny * 24);
+    quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * 24, ny * 24);
+    quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * 24, (ny + 1) * 24);
+    quad[3].texCoords = cpp3ds::Vector2f(nx * 24, (ny + 1) * 24);
 
     quad[0].color = particle.color;
     quad[1].color = particle.color;
@@ -1154,28 +1154,28 @@ void DungeonMapEntity::computeBoltParticulesVertices()
     quad[3].color = particle.color;
   }
 
-  backBoltParticlesVertices.setPrimitiveType(sf::Quads);
+  backBoltParticlesVertices.setPrimitiveType(cpp3ds::Quads);
   backBoltParticlesVertices.resize(backBoltParticles.size() * 4);
 
   for (unsigned int i = 0; i < backBoltParticles.size(); i++)
   {
     auto particle = backBoltParticles[i];
 
-    sf::Vertex* quad = &backBoltParticlesVertices[i * 4];
+    cpp3ds::Vertex* quad = &backBoltParticlesVertices[i * 4];
 
     float middle = 12.0f * particle.scale;
     int nx = particle.frame % BOLT_PRO_LINE;
     int ny = particle.frame / BOLT_PRO_LINE;
 
-    quad[0].position = sf::Vector2f(particle.x - middle, particle.y - middle);
-    quad[1].position = sf::Vector2f(particle.x + middle, particle.y - middle);
-    quad[2].position = sf::Vector2f(particle.x + middle, particle.y + middle);
-    quad[3].position = sf::Vector2f(particle.x - middle, particle.y + middle);
+    quad[0].position = cpp3ds::Vector2f(particle.x - middle, particle.y - middle);
+    quad[1].position = cpp3ds::Vector2f(particle.x + middle, particle.y - middle);
+    quad[2].position = cpp3ds::Vector2f(particle.x + middle, particle.y + middle);
+    quad[3].position = cpp3ds::Vector2f(particle.x - middle, particle.y + middle);
 
-    quad[0].texCoords = sf::Vector2f(nx * 24, ny * 24);
-    quad[1].texCoords = sf::Vector2f((nx + 1) * 24, ny * 24);
-    quad[2].texCoords = sf::Vector2f((nx + 1) * 24, (ny + 1) * 24);
-    quad[3].texCoords = sf::Vector2f(nx * 24, (ny + 1) * 24);
+    quad[0].texCoords = cpp3ds::Vector2f(nx * 24, ny * 24);
+    quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * 24, ny * 24);
+    quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * 24, (ny + 1) * 24);
+    quad[3].texCoords = cpp3ds::Vector2f(nx * 24, (ny + 1) * 24);
 
     quad[0].color = particle.color;
     quad[1].color = particle.color;
@@ -1186,50 +1186,50 @@ void DungeonMapEntity::computeBoltParticulesVertices()
 
 void DungeonMapEntity::computeCorpsesVertices()
 {
-  corpsesVertices.setPrimitiveType(sf::Quads);
+  corpsesVertices.setPrimitiveType(cpp3ds::Quads);
   corpsesVertices.resize(corpses.size() * 4);
   for (unsigned int i = 0; i < corpses.size(); i++)
   {
     auto particle = corpses[i];
 
-    sf::Vertex* quad = &corpsesVertices[i * 4];
+    cpp3ds::Vertex* quad = &corpsesVertices[i * 4];
 
     float middle = 32;
     int nx = particle.frame % 10;
     int ny = particle.frame / 10;
 
-    quad[0].position = sf::Vector2f(particle.x - middle, particle.y - middle);
-    quad[1].position = sf::Vector2f(particle.x + middle, particle.y - middle);
-    quad[2].position = sf::Vector2f(particle.x + middle, particle.y + middle);
-    quad[3].position = sf::Vector2f(particle.x - middle, particle.y + middle);
+    quad[0].position = cpp3ds::Vector2f(particle.x - middle, particle.y - middle);
+    quad[1].position = cpp3ds::Vector2f(particle.x + middle, particle.y - middle);
+    quad[2].position = cpp3ds::Vector2f(particle.x + middle, particle.y + middle);
+    quad[3].position = cpp3ds::Vector2f(particle.x - middle, particle.y + middle);
 
-    quad[0].texCoords = sf::Vector2f(nx * 64, ny * 64);
-    quad[1].texCoords = sf::Vector2f((nx + 1) * 64, ny * 64);
-    quad[2].texCoords = sf::Vector2f((nx + 1) * 64, (ny + 1) * 64);
-    quad[3].texCoords = sf::Vector2f(nx * 64, (ny + 1) * 64);
+    quad[0].texCoords = cpp3ds::Vector2f(nx * 64, ny * 64);
+    quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * 64, ny * 64);
+    quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * 64, (ny + 1) * 64);
+    quad[3].texCoords = cpp3ds::Vector2f(nx * 64, (ny + 1) * 64);
   }
 
-  corpsesLargeVertices.setPrimitiveType(sf::Quads);
+  corpsesLargeVertices.setPrimitiveType(cpp3ds::Quads);
   corpsesLargeVertices.resize(corpsesLarge.size() * 4);
   for (unsigned int i = 0; i < corpsesLarge.size(); i++)
   {
     auto particle = corpsesLarge[i];
 
-    sf::Vertex* quad = &corpsesLargeVertices[i * 4];
+    cpp3ds::Vertex* quad = &corpsesLargeVertices[i * 4];
 
     float middle = 64;
     int nx = (particle.frame - FRAME_CORPSE_KING_RAT) % 8;
     int ny = (particle.frame - FRAME_CORPSE_KING_RAT) / 8;
 
-    quad[0].position = sf::Vector2f(particle.x - middle, particle.y - middle);
-    quad[1].position = sf::Vector2f(particle.x + middle, particle.y - middle);
-    quad[2].position = sf::Vector2f(particle.x + middle, particle.y + middle);
-    quad[3].position = sf::Vector2f(particle.x - middle, particle.y + middle);
+    quad[0].position = cpp3ds::Vector2f(particle.x - middle, particle.y - middle);
+    quad[1].position = cpp3ds::Vector2f(particle.x + middle, particle.y - middle);
+    quad[2].position = cpp3ds::Vector2f(particle.x + middle, particle.y + middle);
+    quad[3].position = cpp3ds::Vector2f(particle.x - middle, particle.y + middle);
 
-    quad[0].texCoords = sf::Vector2f(nx * 128, ny * 128);
-    quad[1].texCoords = sf::Vector2f((nx + 1) * 128, ny * 128);
-    quad[2].texCoords = sf::Vector2f((nx + 1) * 128, (ny + 1) * 128);
-    quad[3].texCoords = sf::Vector2f(nx * 128, (ny + 1) * 128);
+    quad[0].texCoords = cpp3ds::Vector2f(nx * 128, ny * 128);
+    quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * 128, ny * 128);
+    quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * 128, (ny + 1) * 128);
+    quad[3].texCoords = cpp3ds::Vector2f(nx * 128, (ny + 1) * 128);
   }
 }
 
@@ -1265,7 +1265,7 @@ displayEntityStruct& DungeonMapEntity::generateBoltParticle(float x, float y, Ve
   partEntity.moving = true;
   partEntity.lifetime = lifetime;
   partEntity.age = 0;
-  partEntity.color = sf::Color::White;
+  partEntity.color = cpp3ds::Color::White;
 
   if (back) backBoltParticles.push_back(partEntity);
   else boltParticles.push_back(partEntity);
@@ -1330,7 +1330,7 @@ void DungeonMapEntityPost::animate(float delay)
 {
 }
 
-void DungeonMapEntityPost::render(sf::RenderTarget* app)
+void DungeonMapEntityPost::render(cpp3ds::RenderTarget* app)
 {
   parent->renderPost(app);
 }
@@ -1346,7 +1346,7 @@ void DungeonMapEntityOverlay::animate(float delay)
 {
 }
 
-void DungeonMapEntityOverlay::render(sf::RenderTarget* app)
+void DungeonMapEntityOverlay::render(cpp3ds::RenderTarget* app)
 {
   parent->renderOverlay(app);
 }

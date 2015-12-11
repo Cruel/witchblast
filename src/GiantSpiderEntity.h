@@ -9,7 +9,7 @@ class GiantSpiderEntity : public EnemyEntity
     GiantSpiderEntity(float x, float y);
     virtual void animate(float delay);
     virtual void calculateBB();
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual bool canCollide();
 
   protected:

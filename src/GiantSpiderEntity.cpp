@@ -233,7 +233,7 @@ void GiantSpiderEntity::calculateRotation()
   else if (state == 2) sprite.setRotation(0);
 }
 
-void GiantSpiderEntity::render(sf::RenderTarget* app)
+void GiantSpiderEntity::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying)
   {
@@ -254,17 +254,17 @@ void GiantSpiderEntity::render(sf::RenderTarget* app)
           if (fade < 0) fade = 0;
           else if (fade > 255) fade = 255;
         }
-        sprite.setColor(sf::Color(255, 255, 255, fade));
+        sprite.setColor(cpp3ds::Color(255, 255, 255, fade));
         sprite.setPosition(x, y);
-        sprite.setTextureRect(sf::IntRect(shadowFrame * width, 0, width, height));
+        sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width, 0, width, height));
         app->draw(sprite);
-        sprite.setColor(sf::Color(255, 255, 255, 255));
+        sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
       }
     }
     else
     {
       sprite.setPosition(x, y);
-      sprite.setTextureRect(sf::IntRect(shadowFrame * width, 0, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width, 0, width, height));
       app->draw(sprite);
     }
   }
@@ -278,15 +278,15 @@ void GiantSpiderEntity::render(sf::RenderTarget* app)
       int fade = 255;
       if (state == 1) fade = 255 * timer;
       else if (state == 3) fade = 255 * (1.0f - timer);
-      sf::RectangleShape line(sf::Vector2f(2, y - h));
+      cpp3ds::RectangleShape line(cpp3ds::Vector2f(2, y - h));
       line.setPosition(x - 1, 0);
-      line.setFillColor(sf::Color(255, 255, 255, fade));
+      line.setFillColor(cpp3ds::Color(255, 255, 255, fade));
       app->draw(line);
     }
   }
 
   sprite.setPosition(x, y - h);
-  sprite.setTextureRect(sf::IntRect(frame * width, 0, width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(frame * width, 0, width, height));
   app->draw(sprite);
 
   renderLifeBar(app, creatureName);

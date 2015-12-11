@@ -30,12 +30,12 @@ void Game::create(int screenWidth, int screenHeight, std::string windowsTitle, b
   this->screenWidth = screenWidth;
   this->screenHeight = screenHeight;
 
-  if (fullScreen)
-    app = new sf::RenderWindow(sf::VideoMode(this->screenWidth, this->screenHeight), windowsTitle, sf::Style::Fullscreen);
-  else
-    app = new sf::RenderWindow(sf::VideoMode(this->screenWidth, this->screenHeight), windowsTitle);
-  if (vsync) app->setVerticalSyncEnabled(true);
-  else app->setFramerateLimit(60);
+//  if (fullScreen)
+//    app = new cpp3ds::RenderWindow(cpp3ds::VideoMode(this->screenWidth, this->screenHeight), windowsTitle, cpp3ds::Style::Fullscreen);
+//  else
+//    app = new cpp3ds::RenderWindow(cpp3ds::VideoMode(this->screenWidth, this->screenHeight), windowsTitle);
+//  if (vsync) app->setVerticalSyncEnabled(true);
+//  else app->setFramerateLimit(60);
 }
 
 Game::~Game()
@@ -46,7 +46,7 @@ Game::~Game()
 
 float Game::getAbsolutTime()
 {
-  static sf::Clock clock;
+  static cpp3ds::Clock clock;
   return clock.getElapsedTime().asSeconds();
 }
 
@@ -58,12 +58,12 @@ void Game::startGame()
   while (app->isOpen())
   {
     // Process events
-    sf::Event event;
+    cpp3ds::Event event;
 
     while (app->pollEvent(event))
     {
       // Close window : exit
-      if (event.type == sf::Event::Closed)
+      if (event.type == cpp3ds::Event::Closed)
         app->close();
 
     }
@@ -82,7 +82,7 @@ void Game::quitGame()
 void Game::onRender()
 {
   // clear the view
-  app->clear(sf::Color(32, 32, 32));
+  app->clear(cpp3ds::Color(32, 32, 32));
 
   // render the game objects
   EntityManager::getInstance().render(app);
@@ -97,3 +97,22 @@ void Game::onUpdate()
   EntityManager::getInstance().animate(delta);
 }
 
+void Game::update(float delta)
+{
+
+}
+
+void Game::processEvent(cpp3ds::Event &event)
+{
+
+}
+
+void Game::renderTopScreen(cpp3ds::Window &window)
+{
+	app = &window;
+}
+
+void Game::renderBottomScreen(cpp3ds::Window &window)
+{
+
+}

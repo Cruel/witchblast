@@ -11,7 +11,7 @@ class SlimeEntity : public EnemyEntity
   public:
     SlimeEntity(float x, float y, slimeTypeEnum slimeType, bool invocated);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
 	  virtual bool canCollide();
 	  void makePet(int direction);

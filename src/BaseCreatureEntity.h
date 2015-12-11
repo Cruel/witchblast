@@ -177,28 +177,28 @@ const std::string specialStateToLabel[NB_SPECIAL_STATES] =
   "state_div_damage"
 };
 
-const sf::Color specialStateToColor[NB_SPECIAL_STATES] =
+const cpp3ds::Color specialStateToColor[NB_SPECIAL_STATES] =
 {
-  sf::Color(100, 200, 255),
-  sf::Color::Red,
-  sf::Color::White,
-  sf::Color::Green,
-  sf::Color::Red,
-  sf::Color::White,
-  sf::Color::White,
-  sf::Color::White,
-  sf::Color::Red,
+  cpp3ds::Color(100, 200, 255),
+  cpp3ds::Color::Red,
+  cpp3ds::Color::White,
+  cpp3ds::Color::Green,
+  cpp3ds::Color::Red,
+  cpp3ds::Color::White,
+  cpp3ds::Color::White,
+  cpp3ds::Color::White,
+  cpp3ds::Color::Red,
 
-  sf::Color::Yellow,
-  sf::Color::Yellow,
-  sf::Color::Yellow,
-  sf::Color::Yellow
+  cpp3ds::Color::Yellow,
+  cpp3ds::Color::Yellow,
+  cpp3ds::Color::Yellow,
+  cpp3ds::Color::Yellow
 };
 
 class BaseCreatureEntity : public CollidingSpriteEntity
 {
 public:
-  BaseCreatureEntity(sf::Texture* image, float x, float y, int spriteWidth, int spriteHeight);
+  BaseCreatureEntity(cpp3ds::Texture* image, float x, float y, int spriteWidth, int spriteHeight);
   int getHp();
   int getHpMax();
   void setHp(int hp);
@@ -213,7 +213,7 @@ public:
   virtual void animateColors(float delay);
   virtual void animateRecoil(float delay);
   virtual void animatePhysics(float delay);
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
   virtual void calculateBB();
   virtual bool collideWithMap(int direction);
   void displayFlyingText(float xText, float yText, int sizeText, std::string text, TextEntity::colorTypeEnum color);
@@ -307,7 +307,7 @@ protected:
     float timer;
   } recoil;
 
-  void generateStar(sf::Color starColor);
+  void generateStar(cpp3ds::Color starColor);
   virtual void makeExplode();
 
 private:

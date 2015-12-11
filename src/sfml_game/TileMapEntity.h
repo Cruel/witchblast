@@ -24,7 +24,7 @@
 class TileMapEntity : public GameEntity
 {
 public:
-  TileMapEntity(sf::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine);
+  TileMapEntity(cpp3ds::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine);
   ~TileMapEntity();
 
   	// mutators
@@ -35,7 +35,7 @@ public:
   void setTileBox(int tileBoxWidth, int tileBoxHeight);
   void setMap(GameMap* gameMap);
 
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
 	virtual void animate(float delay);
 	virtual void computeVertices();
 
@@ -48,10 +48,10 @@ protected:
   int tileBoxHeight;
   int tilesProLine;
 
-  sf::Texture* image;
+  cpp3ds::Texture* image;
   GameMap* gameMap;
 
-  sf::VertexArray vertices;
+  cpp3ds::VertexArray vertices;
   bool hasChanged;
 
   bool getChanged();

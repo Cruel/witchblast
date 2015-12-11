@@ -17,7 +17,7 @@
 #ifndef SOUNDMANAGER_H_INCLUDED
 #define SOUNDMANAGER_H_INCLUDED
 
-#include <SFML/Audio.hpp>
+#include <cpp3ds/Audio.hpp>
 
 class SoundManager
 {
@@ -36,8 +36,8 @@ private:
 
     void checkSoundStatus();
 
-    std::vector<sf::SoundBuffer*> soundBufferArray;
-    std::vector<sf::Sound*> soundArray;
+    std::vector<cpp3ds::SoundBuffer*> soundBufferArray;
+    std::vector<cpp3ds::Sound*> soundArray;
 
     bool mute;
     int volume;

@@ -87,7 +87,7 @@ void SpiderEggEntity::dyingFromAge()
   isDying = true;
 }
 
-void SpiderEggEntity::render(sf::RenderTarget* app)
+void SpiderEggEntity::render(cpp3ds::RenderTarget* app)
 {
   int nx = frame % imagesProLine;
   int ny = frame / imagesProLine;
@@ -98,15 +98,15 @@ void SpiderEggEntity::render(sf::RenderTarget* app)
     int f = 1600 - h;
     if (f > 255) f = 255;
 
-    sprite.setColor(sf::Color(255, 255, 255, f));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, f));
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect(4 * width, 0, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(4 * width, 0, width, height));
     app->draw(sprite);
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
   }
 
   sprite.setPosition(x, y - h);
-  sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
   app->draw(sprite);
 
   if (game().getShowLogical())

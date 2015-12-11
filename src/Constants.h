@@ -22,10 +22,10 @@
 const std::string APP_NAME =      "Witch Blast";
 const std::string APP_VERSION =   "0.7.5";
 
-const std::string CONFIG_FILE =     "config.dat";
-const std::string SAVE_FILE =       "game.sav";
-const std::string SAVE_DATA_FILE =  "data/data.sav";
-const std::string HISCORES_FILE =   "data/scores.dat";
+const std::string CONFIG_FILE =     "sdmc:/config.dat";
+const std::string SAVE_FILE =       "sdmc:/game.sav";
+const std::string SAVE_DATA_FILE =  "sdmc:/data/data.sav";
+const std::string HISCORES_FILE =   "sdmc:/data/scores.dat";
 
 const std::string SAVE_VERSION =    "SAVE_0.7";
 const std::string SCORE_VERSION =   "V075";
@@ -39,8 +39,10 @@ const unsigned int SCORES_MAX    = 10;
 const int LAST_LEVEL = 8;
 
 // Client size
-const int SCREEN_WIDTH = 970;
-const int SCREEN_HEIGHT = 720;
+//const int SCREEN_WIDTH = 970;
+//const int SCREEN_HEIGHT = 720;
+const int SCREEN_WIDTH = 400;
+const int SCREEN_HEIGHT = 240;
 
 // Tile set
 const int TILE_WIDTH = 64;

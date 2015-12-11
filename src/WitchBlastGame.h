@@ -79,6 +79,7 @@ const int NB_PLAYERS_MAX = 2;
 const std::string creditsCode[]  =
 {
   "Seby",
+  "Cruel (3ds port)",
   "END"
 };
 /** Credits: 2D artists */
@@ -164,7 +165,7 @@ enum EnumButtonType
 
 struct ButtonStruct
 {
-  sf::IntRect zone;
+  cpp3ds::IntRect zone;
   EnumButtonType type;
   int index;
 };
@@ -374,9 +375,9 @@ public:
    *  \param yShadow : offset of the shadow (y)
    *  \param maxWidth : max width of the text image (0 = no limit)
    */
-  void write(std::string str, int size, float x, float y, int align, sf::Color color, sf::RenderTarget* app, int xShadow = 0, int yShadow = 0, int maxWidth = 0);
+  void write(std::string str, int size, float x, float y, int align, cpp3ds::Color color, cpp3ds::RenderTarget* app, int xShadow = 0, int yShadow = 0, int maxWidth = 0);
 
-  void writeGraphic(std::string str, int size, float x, float y, int align, sf::Color color, sf::RenderTarget* app, int xShadow = 0, int yShadow = 0, int maxWidth = 0);
+  void writeGraphic(std::string str, int size, float x, float y, int align, cpp3ds::Color color, cpp3ds::RenderTarget* app, int xShadow = 0, int yShadow = 0, int maxWidth = 0);
 
   /*!
    *  \brief Save the game
@@ -488,7 +489,7 @@ public:
 
   void activateKeyRoomEffect(bool withColorEffect);
 
-  void generateStar(sf::Color starColor, float xStar, float yStar);
+  void generateStar(cpp3ds::Color starColor, float xStar, float yStar);
 
   void registerAchievement(enumAchievementType achievement);
 
@@ -560,7 +561,7 @@ protected:
    *
    *  \param app : Rendering target
    */
-  void renderHudShots(sf::RenderTarget* app);
+  void renderHudShots(cpp3ds::RenderTarget* app);
 
   void killArtefactDescription();
 
@@ -603,23 +604,23 @@ private:
   MiniMapEntity* miniMapEntity;
   // displaying objects
   DoorEntity* doorEntity[4];  /*!< Pointers to the door graphical entity */
-  sf::Font font;              /*!< The font used for displaying text */
-  sf::Font graphicsFont;      /*!< The font used for displaying "medieval" text */
-  sf::Text myText;            /*!< The text to be displayed */
-  sf::Sprite introScreenSprite;
-  sf::Sprite titleSprite;
+  cpp3ds::Font font;              /*!< The font used for displaying text */
+  cpp3ds::Font graphicsFont;      /*!< The font used for displaying "medieval" text */
+  cpp3ds::Text myText;            /*!< The text to be displayed */
+  cpp3ds::Sprite introScreenSprite;
+  cpp3ds::Sprite titleSprite;
 
   struct uiSpritesStruct
   {
-    sf::Sprite gui;
-    sf::Sprite keySprite;       /*!< A simple sprite with the boss key (displayed on the HUD) */
-    sf::Sprite shotsSprite;     /*!< A simple sprite for the available shot types (displayed on the HUD) */
-    sf::Sprite topLayer;
-    sf::Sprite msgBoxSprite;
-    sf::Sprite mapBgSprite;
-    sf::Sprite bagSprite;
-    sf::Sprite pauseSprite;
-    sf::Sprite numberSprite;
+    cpp3ds::Sprite gui;
+    cpp3ds::Sprite keySprite;       /*!< A simple sprite with the boss key (displayed on the HUD) */
+    cpp3ds::Sprite shotsSprite;     /*!< A simple sprite for the available shot types (displayed on the HUD) */
+    cpp3ds::Sprite topLayer;
+    cpp3ds::Sprite msgBoxSprite;
+    cpp3ds::Sprite mapBgSprite;
+    cpp3ds::Sprite bagSprite;
+    cpp3ds::Sprite pauseSprite;
+    cpp3ds::Sprite numberSprite;
   } uiSprites;
 
   struct lifeBarStruct
@@ -632,7 +633,7 @@ private:
 
   float xOffset, yOffset;     /*!< Main game client position in the GUI */
 
-  sf::Music music;            /*!< Current game music */
+  cpp3ds::Music music;            /*!< Current game music */
 
   /** Music enum
    *  Identify the various music tracks of the game.
@@ -720,12 +721,12 @@ private:
     "_fire_select"
   };
 
-  sf::Keyboard::Key input[NumberKeys];     /*!< Input key array */
+  cpp3ds::Keyboard::Key input[NumberKeys];     /*!< Input key array */
 
   struct JoystickInputStruct
   {
     bool isButton;
-    sf::Joystick::Axis axis;
+    cpp3ds::Joystick::Axis axis;
     int value;
   };
 
@@ -1153,7 +1154,7 @@ private:
   void randomizePotionMap();
 
   void addBonusScore(EnumScoreBonus bonusType, int points);
-  sf::Vector2i levelStrPosition;
+  cpp3ds::Vector2i levelStrPosition;
 
   std::vector<ButtonStruct> buttons;
   void tryToClick(int xMouse, int yMouse, int mouseButton);

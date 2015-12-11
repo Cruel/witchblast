@@ -103,7 +103,7 @@ void GameEntity::animate(float delay)
 	}
 }
 
-void GameEntity::render(sf::RenderTarget* app)
+void GameEntity::render(cpp3ds::RenderTarget* app)
 {
     if (app == NULL) return;
 }

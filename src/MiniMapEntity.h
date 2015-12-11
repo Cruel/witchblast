@@ -6,11 +6,11 @@
 class MiniMapEntity : public TileMapEntity
 {
   public:
-    MiniMapEntity(sf::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine);
+    MiniMapEntity(cpp3ds::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine);
     virtual ~MiniMapEntity();
 
-    virtual void render(sf::RenderTarget* app);
-    void display(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
+    void display(cpp3ds::RenderTarget* app);
   protected:
   private:
 };

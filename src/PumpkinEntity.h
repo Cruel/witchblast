@@ -9,7 +9,7 @@ class PumpkinEntity : public EnemyEntity
   public:
     PumpkinEntity(float x, float y, bool invocated);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
 
   protected:

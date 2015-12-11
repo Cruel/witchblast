@@ -211,19 +211,19 @@ void ItemEntity::animate(float delay)
   z = y + height / 2;
 }
 
-void ItemEntity::render(sf::RenderTarget* app)
+void ItemEntity::render(cpp3ds::RenderTarget* app)
 {
   // shadow
   if (itemType < FirstEquipItem)
   {
-    sprite.setTextureRect(sf::IntRect(9 * width, 3 * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(9 * width, 3 * height, width, height));
     sprite.setPosition(x, y + 3);
     app->draw(sprite);
     sprite.setPosition(x, y);
   }
   else
   {
-    sprite.setTextureRect(sf::IntRect(9 * width, 7 * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(9 * width, 7 * height, width, height));
     app->draw(sprite);
   }
 
@@ -232,9 +232,9 @@ void ItemEntity::render(sf::RenderTarget* app)
   {
     std::ostringstream oss;
     oss << getPrice();
-    sf::Color fontColor;
-    if (getPrice() > game().getPlayer()->getGold()) fontColor = sf::Color(215, 20, 20);
-    else fontColor = sf::Color(255, 255, 255);
+    cpp3ds::Color fontColor;
+    if (getPrice() > game().getPlayer()->getGold()) fontColor = cpp3ds::Color(215, 20, 20);
+    else fontColor = cpp3ds::Color(255, 255, 255);
     game().write(oss.str(), 16, x, y + 35.0f, ALIGN_CENTER, fontColor, app, 1 , 1, 0);
   }
 
@@ -245,17 +245,17 @@ void ItemEntity::render(sf::RenderTarget* app)
     int frameBottle = game().getPotion(itemType);
     sprite.setPosition(x, yItem);
 
-    sprite.setTextureRect(sf::IntRect(frameBottle % imagesProLine * width, frameBottle / imagesProLine * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(frameBottle % imagesProLine * width, frameBottle / imagesProLine * height, width, height));
     app->draw(sprite);
 
-    sprite.setTextureRect(sf::IntRect(frame % imagesProLine * width, frame / imagesProLine * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(frame % imagesProLine * width, frame / imagesProLine * height, width, height));
     app->draw(sprite);
 
     sprite.setPosition(x, y);
   }
   else if (h > 0.1f)
   {
-    sprite.setTextureRect(sf::IntRect(frame % imagesProLine * width, frame / imagesProLine * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(frame % imagesProLine * width, frame / imagesProLine * height, width, height));
     sprite.setPosition(x, y - h);
     app->draw(sprite);
     sprite.setPosition(x, y);

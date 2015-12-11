@@ -1,6 +1,6 @@
 #include "MiniMapEntity.h"
 
-MiniMapEntity::MiniMapEntity(sf::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine)
+MiniMapEntity::MiniMapEntity(cpp3ds::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine)
     : TileMapEntity(image, gameMap, tileWidth, tileHeight, tilesProLine)
 {
   //ctor
@@ -11,12 +11,12 @@ MiniMapEntity::~MiniMapEntity()
   //dtor
 }
 
-void MiniMapEntity::render(sf::RenderTarget* app)
+void MiniMapEntity::render(cpp3ds::RenderTarget* app)
 {
   // nothing
 }
 
-void MiniMapEntity::display(sf::RenderTarget* app)
+void MiniMapEntity::display(cpp3ds::RenderTarget* app)
 {
   TileMapEntity::render(app);
 }

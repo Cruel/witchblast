@@ -35,17 +35,17 @@ SausageEntity::SausageEntity(float x, float y, bool invocated)
   isNew = true;
 }
 
-void SausageEntity::render(sf::RenderTarget* app)
+void SausageEntity::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying && shadowFrame > -1)
   {
     // shadow
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect(shadowFrame * width, 0, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width, 0, width, height));
     app->draw(sprite);
   }
   sprite.setPosition(x, y - h);
-  sprite.setTextureRect(sf::IntRect(frame * width, 0, width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(frame * width, 0, width, height));
   app->draw(sprite);
 
   if (game().getShowLogical())

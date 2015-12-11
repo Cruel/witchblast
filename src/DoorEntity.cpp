@@ -46,12 +46,12 @@ void DoorEntity::openDoor()
   timer = DOOR_OPEN_TIME;
 }
 
-void DoorEntity::render(sf::RenderTarget* app)
+void DoorEntity::render(cpp3ds::RenderTarget* app)
 {
   return;
 }
 
-void DoorEntity::renderDoors(sf::RenderTarget* app)
+void DoorEntity::renderDoors(cpp3ds::RenderTarget* app)
 {
   if (!isVisible) return;
 
@@ -105,11 +105,11 @@ void DoorEntity::renderDoors(sf::RenderTarget* app)
     }
 
     // door
-    sprite.setTextureRect(sf::IntRect(x0 + 0.5f * width, y0,  width,  height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0 + 0.5f * width, y0,  width,  height));
     sprite.setPosition(xl, yl);
     app->draw(sprite);
 
-    sprite.setTextureRect(sf::IntRect(x0 + 1.5f * width, y0,  width,  height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0 + 1.5f * width, y0,  width,  height));
     sprite.setPosition(xr, yr);
     app->draw(sprite);
   }
@@ -150,11 +150,11 @@ void DoorEntity::renderDoors(sf::RenderTarget* app)
       }
     }
     // door
-    sprite.setTextureRect(sf::IntRect(x0, y0 + 0.5 * height,  width,  height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0, y0 + 0.5 * height,  width,  height));
     sprite.setPosition(xl, yl);
     app->draw(sprite);
 
-    sprite.setTextureRect(sf::IntRect(x0, y0 + 1.5 * height,  width,  height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0, y0 + 1.5 * height,  width,  height));
     sprite.setPosition(xr, yr);
     app->draw(sprite);
   }
@@ -196,11 +196,11 @@ void DoorEntity::renderDoors(sf::RenderTarget* app)
       }
     }
     // door
-    sprite.setTextureRect(sf::IntRect(x0 + 0.5f * width, y0 + height,  width,  -height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0 + 0.5f * width, y0 + height,  width,  -height));
     sprite.setPosition(xl, yl);
     app->draw(sprite);
 
-    sprite.setTextureRect(sf::IntRect(x0 + 1.5f * width,  y0 + height,  width, -height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0 + 1.5f * width,  y0 + height,  width, -height));
     sprite.setPosition(xr, yr);
     app->draw(sprite);
   }
@@ -240,11 +240,11 @@ void DoorEntity::renderDoors(sf::RenderTarget* app)
       }
     }
     // door
-    sprite.setTextureRect(sf::IntRect(x0 + width, y0 + 0.5 * height,  -width,  height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0 + width, y0 + 0.5 * height,  -width,  height));
     sprite.setPosition(xl, yl);
     app->draw(sprite);
 
-    sprite.setTextureRect(sf::IntRect(x0 + width, y0 + 1.5 * height,  -width,  height));
+    sprite.setTextureRect(cpp3ds::IntRect(x0 + width, y0 + 1.5 * height,  -width,  height));
     sprite.setPosition(xr, yr);
     app->draw(sprite);
   }

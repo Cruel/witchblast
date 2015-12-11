@@ -216,8 +216,8 @@ void VampireEntity::computeStates(float delay)
       state = 11; // giant bat
       for (int i = 0; i < 10; i++)
       {
-        game().generateStar(sf::Color(200, 0, 200), x - 60 + rand() % 121, y - 60 + rand() % 121);
-        game().generateStar(sf::Color(0, 0, 0), x - 60 + rand() % 121, y - 60 + rand() % 121);
+        game().generateStar(cpp3ds::Color(200, 0, 200), x - 60 + rand() % 121, y - 60 + rand() % 121);
+        game().generateStar(cpp3ds::Color(0, 0, 0), x - 60 + rand() % 121, y - 60 + rand() % 121);
       }
       SoundManager::getInstance().playSound(SOUND_VAMPIRE_TRANSFORM_BAT);
       timer = 1.0f;
@@ -234,8 +234,8 @@ void VampireEntity::computeStates(float delay)
 
       for (int i = 0; i < 10; i++)
       {
-        game().generateStar(sf::Color(200, 0, 200), x - 40 + rand() % 81, y - 40 + rand() % 81);
-        game().generateStar(sf::Color(0, 0, 0), x - 40 + rand() % 81, y - 40 + rand() % 81);
+        game().generateStar(cpp3ds::Color(200, 0, 200), x - 40 + rand() % 81, y - 40 + rand() % 81);
+        game().generateStar(cpp3ds::Color(0, 0, 0), x - 40 + rand() % 81, y - 40 + rand() % 81);
       }
       SoundManager::getInstance().playSound(SOUND_VAMPIRE_TRANSFORM_BAT);
     }
@@ -302,12 +302,12 @@ void VampireEntity::animate(float delay)
   }
   else if (state == 5 || state == 8)  // to bat cloud
   {
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
     if (timer > 0.2f)
     {
       frame = 0;
       float fade = (VAMPIRE_TRANSFORM_DELAY - timer) / VAMPIRE_TRANSFORM_DELAY;
-      sprite.setColor(sf::Color(255 - fade * 250, 255 - fade * 250, 255 - fade * 250, 255));
+      sprite.setColor(cpp3ds::Color(255 - fade * 250, 255 - fade * 250, 255 - fade * 250, 255));
       isMirroring = game().getPlayer()->getX() > x;
     }
     else if (timer > 0.15f) frame = 6;
@@ -317,13 +317,13 @@ void VampireEntity::animate(float delay)
   }
   else if (state == 7 || state == 10)  // to bat cloud
   {
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
 
     if (timer < 0.2f)
     {
       frame = 0;
       float fade = timer * 4;
-      sprite.setColor(sf::Color(255 - fade * 250, 255 - fade * 250, 255 - fade * 250, 255));
+      sprite.setColor(cpp3ds::Color(255 - fade * 250, 255 - fade * 250, 255 - fade * 250, 255));
       isMirroring = game().getPlayer()->getX() > x;
     }
     else if (timer < VAMPIRE_TRANSFORM_DELAY - 0.15f) frame = 6;
@@ -426,8 +426,8 @@ void VampireEntity::prepareDying()
   {
     for (int i = 0; i < 10; i++)
     {
-      game().generateStar(sf::Color(200, 0, 200), x - 40 + rand() % 81, y - 40 + rand() % 81);
-      game().generateStar(sf::Color(0, 0, 0), x - 40 + rand() % 81, y - 40 + rand() % 81);
+      game().generateStar(cpp3ds::Color(200, 0, 200), x - 40 + rand() % 81, y - 40 + rand() % 81);
+      game().generateStar(cpp3ds::Color(0, 0, 0), x - 40 + rand() % 81, y - 40 + rand() % 81);
     }
     SoundManager::getInstance().playSound(SOUND_VAMPIRE_TRANSFORM_BAT);
   }
@@ -481,54 +481,54 @@ void VampireEntity::drop()
   dropItem(ItemBossHeart);
 }
 
-void VampireEntity::render(sf::RenderTarget* app)
+void VampireEntity::render(cpp3ds::RenderTarget* app)
 {
   if (isAgonising)
   {
     sprite.setPosition(x - 48, y - 74);
-    if (isMirroring) sprite.setTextureRect(sf::IntRect(1 * width, 2 * height, -width, height));
-    else sprite.setTextureRect(sf::IntRect(0 * width, 2 * height, width, height));
+    if (isMirroring) sprite.setTextureRect(cpp3ds::IntRect(1 * width, 2 * height, -width, height));
+    else sprite.setTextureRect(cpp3ds::IntRect(0 * width, 2 * height, width, height));
     app->draw(sprite);
 
     float burnHeight = timer < 4.0f ? height * timer / 4.0f : height;
-    if (isMirroring) sprite.setTextureRect(sf::IntRect(2 * width, 2 * height, -width, burnHeight));
-    else sprite.setTextureRect(sf::IntRect(width, 2 * height, width, burnHeight));
+    if (isMirroring) sprite.setTextureRect(cpp3ds::IntRect(2 * width, 2 * height, -width, burnHeight));
+    else sprite.setTextureRect(cpp3ds::IntRect(width, 2 * height, width, burnHeight));
     app->draw(sprite);
 
-    if (isMirroring) sprite.setTextureRect(sf::IntRect(2 * width, 2 * height, -width, height));
-    else sprite.setTextureRect(sf::IntRect(1 * width, 2 * height, width, height));
+    if (isMirroring) sprite.setTextureRect(cpp3ds::IntRect(2 * width, 2 * height, -width, height));
+    else sprite.setTextureRect(cpp3ds::IntRect(1 * width, 2 * height, width, height));
 
     // fire
     if (timer > 0.1f && timer < 3.8f)
     {
-      sf::Sprite burn;
+      cpp3ds::Sprite burn;
       burn.setTexture(*ImageManager::getInstance().getImage(IMAGE_VAMPIRE));
 
-      if (isMirroring) burn.setTextureRect(sf::IntRect(5 * width, 2 * height + burnHeight - 4, -width, 6));
-      else burn.setTextureRect(sf::IntRect(4 * width, 2 * height + burnHeight - 4, width, 6));
+      if (isMirroring) burn.setTextureRect(cpp3ds::IntRect(5 * width, 2 * height + burnHeight - 4, -width, 6));
+      else burn.setTextureRect(cpp3ds::IntRect(4 * width, 2 * height + burnHeight - 4, width, 6));
       burn.setPosition(x - 48, y - 74 - 4 + burnHeight);
       app->draw(burn);
 
-      if (isMirroring) burn.setTextureRect(sf::IntRect(4 * width, 2 * height + burnHeight - 2, -width, 4));
-      else burn.setTextureRect(sf::IntRect(3 * width, 2 * height + burnHeight - 2, width, 4));
+      if (isMirroring) burn.setTextureRect(cpp3ds::IntRect(4 * width, 2 * height + burnHeight - 2, -width, 4));
+      else burn.setTextureRect(cpp3ds::IntRect(3 * width, 2 * height + burnHeight - 2, width, 4));
       burn.setPosition(x - 48, y - 74 - 2 + burnHeight);
       app->draw(burn);
 
       float fade = (cos(12.0f * game().getAbsolutTime()) + 1.0f) * 0.5f;
-      burn.setColor(sf::Color(255, 255, 255, 100 * fade));
-      app->draw(burn, sf::BlendAdd);
+      burn.setColor(cpp3ds::Color(255, 255, 255, 100 * fade));
+      app->draw(burn, cpp3ds::BlendAdd);
     }
 
     // cone
-    sf::Sprite cone;
+    cpp3ds::Sprite cone;
     cone.setTexture(*ImageManager::getInstance().getImage(IMAGE_LIGHT_CONE));
     cone.setPosition(x - 68, y - 600);
     int fade = 200;
     if (timer < 0.2f) fade = timer * 1000;
     else if (timer > VAMPIRE_DYING_TIME - 0.5f) fade = (VAMPIRE_DYING_TIME - timer) * 400;
     if (fade < 0) fade = 0;
-    cone.setColor(sf::Color(255, 255, 255, fade));
-    app->draw(cone, sf::BlendAdd);
+    cone.setColor(cpp3ds::Color(255, 255, 255, fade));
+    app->draw(cone, cpp3ds::BlendAdd);
   }
   else
   {
@@ -538,7 +538,7 @@ void VampireEntity::render(sf::RenderTarget* app)
       bodyFrame = (int)(age * 18) % 9;
       if (oldBodyFrame == 6 && bodyFrame == 7)
         SoundManager::getInstance().playSound(SOUND_VAMPIRE_FLAP);
-      batSprite.setTextureRect(sf::IntRect(418 * (bodyFrame % 3), 342 * (bodyFrame / 3), 418, 342));
+      batSprite.setTextureRect(cpp3ds::IntRect(418 * (bodyFrame % 3), 342 * (bodyFrame / 3), 418, 342));
       batSprite.setPosition(x - 209, y - 200);
       batSprite.setColor(sprite.getColor());
       app->draw(batSprite);
@@ -547,7 +547,7 @@ void VampireEntity::render(sf::RenderTarget* app)
       {
         frame = (int)(age * 4) % 9;
         if (frame >= 5) frame = 8 - frame;
-        sprite.setTextureRect(sf::IntRect(width * frame, 3 * height, width, height));
+        sprite.setTextureRect(cpp3ds::IntRect(width * frame, 3 * height, width, height));
 
         if (timer < 1.0f && (int)(timer * 20) % 3 == 0) renderRays(app, false);
       }
@@ -564,7 +564,7 @@ void VampireEntity::render(sf::RenderTarget* app)
         else if (timer < VAMPIRE_CRY_DELAY - 0.2f) frame = 3;
         else if (timer < VAMPIRE_CRY_DELAY - 0.1f) frame = 2;
         else frame = 1;
-        sprite.setTextureRect(sf::IntRect(width * frame, 4 * height, width, height));
+        sprite.setTextureRect(cpp3ds::IntRect(width * frame, 4 * height, width, height));
       }
 
       sprite.setPosition(x + cosf(age * 2) * 2, y + sinf(age * 2) * 6);
@@ -581,26 +581,26 @@ void VampireEntity::render(sf::RenderTarget* app)
       EnemyEntity::render(app);
       if (state == 1) // hypnose
       {
-        sf::Sprite eye;
+        cpp3ds::Sprite eye;
         eye.setOrigin(6, 6);
         eye.setTexture(*ImageManager::getInstance().getImage(IMAGE_VAMPIRE));
-        eye.setTextureRect(sf::IntRect(5 * width, 0, 12, 12));
+        eye.setTextureRect(cpp3ds::IntRect(5 * width, 0, 12, 12));
         eye.setRotation(age * 500);
         if (isMirroring) eye.setPosition(x + 10, y - 44);
         else  eye.setPosition(x - 10, y - 44);
         app->draw(eye);
 
         float fade = (cos(8.0f * game().getAbsolutTime()) + 1.0f) * 0.5f;
-        eye.setColor(sf::Color(255, 255, 255, 255 * fade));
-        app->draw(eye, sf::BlendAdd);
+        eye.setColor(cpp3ds::Color(255, 255, 255, 255 * fade));
+        app->draw(eye, cpp3ds::BlendAdd);
 
         if (isMirroring) eye.setPosition(x - 4, y - 44);
         else  eye.setPosition(x + 4, y - 44);
 
-        eye.setColor(sf::Color(255, 255, 255, 255 ));
+        eye.setColor(cpp3ds::Color(255, 255, 255, 255 ));
         app->draw(eye);
-        eye.setColor(sf::Color(255, 255, 255, 255 * fade));
-        app->draw(eye, sf::BlendAdd);
+        eye.setColor(cpp3ds::Color(255, 255, 255, 255 * fade));
+        app->draw(eye, cpp3ds::BlendAdd);
       }
     }
 
@@ -608,36 +608,36 @@ void VampireEntity::render(sf::RenderTarget* app)
   }
 }
 
-void VampireEntity::renderRays(sf::RenderTarget* app, bool isGhost)
+void VampireEntity::renderRays(cpp3ds::RenderTarget* app, bool isGhost)
 {
   // rays
-  sf::RectangleShape ray(sf::Vector2f(500, 4));
+  cpp3ds::RectangleShape ray(cpp3ds::Vector2f(500, 4));
   ray.setOrigin(0, 2);
   if (isGhost)
   {
-    ray.setFillColor(sf::Color(128, 50, 50, 200));
-    ray.setOutlineColor(sf::Color(128, 50, 50, 100));
+    ray.setFillColor(cpp3ds::Color(128, 50, 50, 200));
+    ray.setOutlineColor(cpp3ds::Color(128, 50, 50, 100));
   }
   else
   {
-    ray.setFillColor(sf::Color(255, 50, 50));
-    ray.setOutlineColor(sf::Color(255, 50, 50, 128));
+    ray.setFillColor(cpp3ds::Color(255, 50, 50));
+    ray.setOutlineColor(cpp3ds::Color(255, 50, 50, 128));
   }
 
   ray.setOutlineThickness(1);
   ray.setPosition(GAME_WIDTH / 2, GAME_HEIGHT / 2);
 
-  sf::RectangleShape rayLittle(sf::Vector2f(500, 2));
+  cpp3ds::RectangleShape rayLittle(cpp3ds::Vector2f(500, 2));
   rayLittle.setOrigin(0, 1);
   if (isGhost)
   {
-    rayLittle.setFillColor(sf::Color(128, 50, 50, 100));
-    rayLittle.setOutlineColor(sf::Color(128, 50, 50, 50));
+    rayLittle.setFillColor(cpp3ds::Color(128, 50, 50, 100));
+    rayLittle.setOutlineColor(cpp3ds::Color(128, 50, 50, 50));
   }
   else
   {
-    rayLittle.setFillColor(sf::Color(255, 50, 50, 150));
-    rayLittle.setOutlineColor(sf::Color(255, 50, 50, 75));
+    rayLittle.setFillColor(cpp3ds::Color(255, 50, 50, 150));
+    rayLittle.setOutlineColor(cpp3ds::Color(255, 50, 50, 75));
   }
   rayLittle.setOutlineThickness(1);
   rayLittle.setPosition(GAME_WIDTH / 2, GAME_HEIGHT / 2);

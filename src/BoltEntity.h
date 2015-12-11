@@ -17,7 +17,7 @@ class BoltEntity : public CollidingSpriteEntity
   public:
     BoltEntity(float x, float y, float boltLifeTime, enumShotType boltType, int level);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     void collide();
     void generateParticule(Vector2D vel);
 

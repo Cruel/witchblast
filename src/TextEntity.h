@@ -25,7 +25,7 @@ class TextEntity : public GameEntity
 public:
   TextEntity(std::string text, int size, float x = 0.0f, float y = 0.0f);
 
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
 	virtual void animate(float delay);
 
 	virtual void setText(std::string text);
@@ -50,7 +50,7 @@ protected:
   int size;
   int alignment;
   int colorType;
-  sf::Color color;
+  cpp3ds::Color color;
 };
 
 #endif // TEXTENTITY_H_INCLUDED

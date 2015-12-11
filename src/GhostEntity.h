@@ -8,7 +8,7 @@ class GhostEntity : public EnemyEntity
   public:
     GhostEntity(float x, float y);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
 
   protected:

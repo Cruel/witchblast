@@ -54,7 +54,7 @@ void SpiderWebEntity::animate(float delay)
     sprite.setScale(1.0f, 1.0f);
 
   int color = 177 + 78 * hp / hpMax;
-  sprite.setColor(sf::Color(color, color, color, 255));
+  sprite.setColor(cpp3ds::Color(color, color, color, 255));
 }
 
 void SpiderWebEntity::calculateBB()

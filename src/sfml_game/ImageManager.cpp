@@ -40,20 +40,20 @@ ImageManager& ImageManager::getInstance()
 
 void ImageManager::addImage(const char* fileName)
 {
-    sf::Texture* newImage = new sf::Texture;
+    cpp3ds::Texture* newImage = new cpp3ds::Texture;
     newImage->loadFromFile(fileName);
     imageArray.push_back(newImage);
 }
 
 bool ImageManager::reloadImage(int n, const char* fileName)
 {
-    sf::Texture* newImage = new sf::Texture;
+    cpp3ds::Texture* newImage = new cpp3ds::Texture;
     bool result = newImage->loadFromFile(fileName);
     imageArray[n] = newImage;
     return result;
 }
 
-sf::Texture* ImageManager::getImage(int n)
+cpp3ds::Texture* ImageManager::getImage(int n)
 {
     return imageArray[n];
 }

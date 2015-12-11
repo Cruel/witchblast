@@ -35,9 +35,9 @@ void EnemyBoltEntity::animate(float delay)
   if (boltType != ShotTypeBomb && (lifetime - age) < 0.2f)
   {
     if (age >= lifetime)
-      sprite.setColor(sf::Color(255, 255, 255, 0));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 0));
     else
-      sprite.setColor(sf::Color(255, 255, 255, (sf::Uint8)((lifetime - age) / 0.2f * 255)));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, (cpp3ds::Uint8)((lifetime - age) / 0.2f * 255)));
   }
 
   if (boltType == ShotTypeIllusion)

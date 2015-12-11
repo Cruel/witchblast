@@ -347,23 +347,23 @@ void LargeSlimeEntity::dying()
   star->setSpin(400.0f);
 }
 
-void LargeSlimeEntity::render(sf::RenderTarget* app)
+void LargeSlimeEntity::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying)
   {
     // shadow
     sprite.setPosition(x, y);
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect(shadowFrame * width + width, 0, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width + width, 0, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect(shadowFrame * width, 0, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width, 0, width, height));
     app->draw(sprite);
   }
   sprite.setPosition(x, y - h);
   if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (frame % 5) * width + width, (frame / 5) * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame % 5) * width + width, (frame / 5) * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect((frame % 5) * width, (frame / 5) * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect((frame % 5) * width, (frame / 5) * height, width, height));
   app->draw(sprite);
 
   if (game().getShowLogical())

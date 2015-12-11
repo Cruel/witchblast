@@ -12,7 +12,7 @@ class EvilFlowerEntity : public EnemyEntity
     EvilFlowerEntity(float x, float y, flowerTypeEnum flowerType);
     virtual void animate(float delay);
     virtual void calculateBB();
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     void fire();
     virtual bool canCollide();
     void setFireDelayMax(float fireDelayMax);

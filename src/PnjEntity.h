@@ -8,7 +8,7 @@ class PnjEntity : public SpriteEntity
   public:
     PnjEntity(float x, float y, int pnjType );
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
 
   protected:
     float x0, y0;

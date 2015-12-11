@@ -83,8 +83,8 @@ void EvilFlowerEntity::animate(float delay)
       SoundManager::getInstance().playSound(SOUND_INVOKE);
       for (int i = 0; i < 8; i++)
       {
-        game().generateStar(sf::Color::White, x, y);
-        game().generateStar(sf::Color(210, 210, 255), x, y);
+        game().generateStar(cpp3ds::Color::White, x, y);
+        game().generateStar(cpp3ds::Color(210, 210, 255), x, y);
       }
     }
   }
@@ -206,14 +206,14 @@ void EvilFlowerEntity::fire()
 
 }
 
-void EvilFlowerEntity::render(sf::RenderTarget* app)
+void EvilFlowerEntity::render(cpp3ds::RenderTarget* app)
 {
   sprite.setPosition(x, y);
   float savedAngle = sprite.getRotation();
   sprite.setRotation(0.0f);
 
   // shadow
-  sprite.setTextureRect(sf::IntRect(width * 4, 0,  width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(width * 4, 0,  width, height));
   if (ageFromGen > 1.0f)
   {
     if (ageFromGen >= 2.0f) app->draw(sprite);
@@ -230,7 +230,7 @@ void EvilFlowerEntity::render(sf::RenderTarget* app)
   int stemFrame = 14;
   if (ageFromGen < 1.0f) stemFrame = 5 + ageFromGen * 10;
 
-  sprite.setTextureRect(sf::IntRect(width * (stemFrame % imagesProLine), height * (stemFrame / imagesProLine),  width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(width * (stemFrame % imagesProLine), height * (stemFrame / imagesProLine),  width, height));
   app->draw(sprite);
 
   sprite.setRotation(savedAngle);

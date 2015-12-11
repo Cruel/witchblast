@@ -9,7 +9,7 @@ class FallingRockEntity : public EnemyEntity
     FallingRockEntity(float x, float y, int rockType, bool hurtAll);
     virtual void animate(float delay);
     virtual void calculateBB();
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual bool canCollide();
 
   protected:

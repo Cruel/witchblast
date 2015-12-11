@@ -314,11 +314,11 @@ void CyclopsEntity::drop()
   dropItem(ItemBossHeart);
 }
 
-void CyclopsEntity::render(sf::RenderTarget* app)
+void CyclopsEntity::render(cpp3ds::RenderTarget* app)
 {
   // shadow
   sprite.setPosition(x, y);
-  sprite.setTextureRect(sf::IntRect(8 * width, 0, width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(8 * width, 0, width, height));
   app->draw(sprite);
   sprite.setPosition(x, y);
 
@@ -329,7 +329,7 @@ void CyclopsEntity::render(sf::RenderTarget* app)
   {
     if (nextRockMissile == 0) // small rock
     {
-      sprite.setTextureRect(sf::IntRect(1152, 0,  64,  64));
+      sprite.setTextureRect(cpp3ds::IntRect(1152, 0,  64,  64));
       if (isMirroring)
         sprite.setPosition(x + 60, y + 45);
       else
@@ -337,7 +337,7 @@ void CyclopsEntity::render(sf::RenderTarget* app)
     }
     else // medium rock
     {
-      sprite.setTextureRect(sf::IntRect(1152, 64,  64,  64));
+      sprite.setTextureRect(cpp3ds::IntRect(1152, 64,  64,  64));
       if (isMirroring)
         sprite.setPosition(x + 60, y + 33);
       else

@@ -47,7 +47,7 @@ void ButcherEntity::animate(float delay)
 {
   if (age > 0.0f && !isAgonising)
   {
-    sprite.setColor(sf::Color(255,255,255,255));
+    sprite.setColor(cpp3ds::Color(255,255,255,255));
 
     timer = timer - delay;
     if (timer <= 0.0f)
@@ -138,7 +138,7 @@ void ButcherEntity::drop()
   }
 }
 
-void ButcherEntity::render(sf::RenderTarget* app)
+void ButcherEntity::render(cpp3ds::RenderTarget* app)
 {
     EnemyEntity::render(app);
 

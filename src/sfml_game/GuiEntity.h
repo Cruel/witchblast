@@ -29,10 +29,10 @@ public:
 
     void setActive(bool active);
 
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
 	virtual void animate(float delay);
 
-    virtual void onEvent(sf::Event event);
+    virtual void onEvent(cpp3ds::Event event);
 
 protected:
     bool isActive;

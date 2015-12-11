@@ -25,7 +25,7 @@ bool GuiEntity::getActive() { return isActive; }
 
 void GuiEntity::setActive(bool active) { isActive = active; }
 
-void GuiEntity::render(sf::RenderTarget* app)
+void GuiEntity::render(cpp3ds::RenderTarget* app)
 {
     if (app == NULL) return;
 }
@@ -35,7 +35,7 @@ void GuiEntity::animate(float delay)
     GameEntity::animate(delay);
 }
 
-void GuiEntity::onEvent(sf::Event event)
+void GuiEntity::onEvent(cpp3ds::Event event)
 {
-    if (event.type == sf::Event::Closed) return;
+    if (event.type == cpp3ds::Event::Closed) return;
 }

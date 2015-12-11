@@ -16,7 +16,7 @@
 
 #include "TileMapEntity.h"
 
-TileMapEntity::TileMapEntity(sf::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine)
+TileMapEntity::TileMapEntity(cpp3ds::Texture* image, GameMap* gameMap, int tileWidth, int tileHeight, int tilesProLine)
     : GameEntity(0.0f, 0.0f)
 {
     this->image = image;
@@ -75,7 +75,7 @@ bool TileMapEntity::getChanged()
 
 void TileMapEntity::computeVertices()
 {
-  vertices.setPrimitiveType(sf::Quads);
+  vertices.setPrimitiveType(cpp3ds::Quads);
   vertices.resize(gameMap->getWidth() * gameMap->getHeight() * 4);
 
   for (int i = 0; i < gameMap->getWidth(); i++)
@@ -84,21 +84,21 @@ void TileMapEntity::computeVertices()
       int nx = gameMap->getTile(i, j) % tilesProLine;
       int ny = gameMap->getTile(i, j) / tilesProLine;
 
-      sf::Vertex* quad = &vertices[(i + j * gameMap->getWidth()) * 4];
+      cpp3ds::Vertex* quad = &vertices[(i + j * gameMap->getWidth()) * 4];
 
-      quad[0].position = sf::Vector2f(x + i * tileWidth, y + j * tileHeight);
-      quad[1].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
-      quad[2].position = sf::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-      quad[3].position = sf::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+      quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
+      quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+      quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+      quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
 
-      quad[0].texCoords = sf::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
-      quad[1].texCoords = sf::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
-      quad[2].texCoords = sf::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
-      quad[3].texCoords = sf::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
+      quad[0].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
+      quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
+      quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
+      quad[3].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
     }
 }
 
-void TileMapEntity::render(sf::RenderTarget* app)
+void TileMapEntity::render(cpp3ds::RenderTarget* app)
 {
   app->draw(vertices, image);
 }

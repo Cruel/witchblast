@@ -101,7 +101,7 @@ void ObstacleEntity::animate(float delay)
   testSpriteCollisions();
 }
 
-void ObstacleEntity::render(sf::RenderTarget* app)
+void ObstacleEntity::render(cpp3ds::RenderTarget* app)
 {
   EnemyEntity::render(app);
 }

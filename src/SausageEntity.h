@@ -8,7 +8,7 @@ class SausageEntity : public EnemyEntity
   public:
     SausageEntity(float x, float y, bool invocated);
     virtual void animate(float delay) override;
-    virtual void render(sf::RenderTarget* app) override;
+    virtual void render(cpp3ds::RenderTarget* app) override;
     virtual void calculateBB() override;
     virtual bool canCollide() override;
 

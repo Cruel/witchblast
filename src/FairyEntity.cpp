@@ -131,8 +131,8 @@ void FairyEntity::animate(float delay)
 
         for(int i=0; i < 6; i++)
         {
-          game().generateStar(sf::Color(50, 50, 255, 255), x, y);
-          game().generateStar(sf::Color(200, 200, 255, 255), x, y);
+          game().generateStar(cpp3ds::Color(50, 50, 255, 255), x, y);
+          game().generateStar(cpp3ds::Color(200, 200, 255, 255), x, y);
         }
 
         x = TILE_WIDTH + rand() % (TILE_WIDTH * (MAP_WIDTH - 2));
@@ -140,8 +140,8 @@ void FairyEntity::animate(float delay)
 
         for(int i=0; i < 6; i++)
         {
-          game().generateStar(sf::Color(50, 50, 255, 255), x, y);
-          game().generateStar(sf::Color(200, 200, 255, 255), x, y);
+          game().generateStar(cpp3ds::Color(50, 50, 255, 255), x, y);
+          game().generateStar(cpp3ds::Color(200, 200, 255, 255), x, y);
         }
 
         if (rand() % 60 == 0) parentEntity->castTeleport();

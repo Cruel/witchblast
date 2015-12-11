@@ -9,7 +9,7 @@ class FranckyEntity : public EnemyEntity
   public:
     FranckyEntity(float x, float y);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
     virtual void inflictsRecoilTo(BaseCreatureEntity* targetEntity);
   protected:
@@ -57,7 +57,7 @@ class FranckyEntityHead : public EnemyEntity
   public:
     FranckyEntityHead(float x, float y);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
 
   protected:
@@ -82,7 +82,7 @@ class FranckyEntityFoot : public EnemyEntity
   public:
     FranckyEntityFoot(float x, float y);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
 
   protected:

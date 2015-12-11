@@ -9,7 +9,7 @@ class VampireEntity : public EnemyEntity
   public:
     VampireEntity(float x, float y);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
     virtual void inflictsRecoilTo(BaseCreatureEntity* targetEntity);
 
@@ -28,14 +28,14 @@ class VampireEntity : public EnemyEntity
     int targetPos;
     float xSource, ySource;
     int formState;
-    sf::Sprite batSprite;
+    cpp3ds::Sprite batSprite;
     int bodyFrame;
 
     int numberOfRays;
     int raySpeedFactor;
     int moveCounter;
 
-    void renderRays(sf::RenderTarget* app, bool isGhost);
+    void renderRays(cpp3ds::RenderTarget* app, bool isGhost);
     void testRaysCollision();
 
     void calculatePosition();

@@ -11,7 +11,7 @@ class ObstacleEntity : public EnemyEntity
     virtual void calculateBB();
     virtual void readCollidingEntity(CollidingSpriteEntity* entity);
 
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void dying();
     virtual int hurt(StructHurt hurtParam);
 

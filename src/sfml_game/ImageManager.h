@@ -17,7 +17,7 @@
 #ifndef IMAGEMANAGER_H_INCLUDED
 #define IMAGEMANAGER_H_INCLUDED
 
-#include <SFML/Graphics.hpp>
+#include <cpp3ds/Graphics.hpp>
 
 class ImageManager
 {
@@ -25,13 +25,13 @@ public:
     static ImageManager& getInstance();
     void addImage(const char *fileName);
     bool reloadImage(int n, const char* fileName);
-    sf::Texture* getImage(int n);
+    cpp3ds::Texture* getImage(int n);
 
 private:
     ImageManager();
     ~ImageManager();
 
-    std::vector<sf::Texture*> imageArray;
+    std::vector<cpp3ds::Texture*> imageArray;
 };
 
 #endif // IMAGEMANAGER_H_INCLUDED

@@ -212,15 +212,15 @@ void BogeymanEntity::fire()
   isFireType1 = !isFireType1;
 }
 
-void BogeymanEntity::render(sf::RenderTarget* app)
+void BogeymanEntity::render(cpp3ds::RenderTarget* app)
 {
   if (hurting && hp > 0)
   {
     if (hurtingDelay > 0.0f)
     {
-      int fadeColor = (sf::Uint8)((HURTING_DELAY - hurtingDelay) * 127);
+      int fadeColor = (cpp3ds::Uint8)((HURTING_DELAY - hurtingDelay) * 127);
       if (hurtingDelay > HURTING_DELAY) fadeColor = 0;
-      sprite.setColor(sf::Color(255, 255, 255, 128 + fadeColor )); // fade
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 128 + fadeColor )); // fade
     }
   }
 
@@ -241,7 +241,7 @@ void BogeymanEntity::render(sf::RenderTarget* app)
 
     int holeFrame = ((int)(age * 20.0f)) % 8;
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect(holeFrame * width, 5 * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(holeFrame * width, 5 * height, width, height));
     app->draw(sprite);
 
     sprite.setScale(1.0f, 1.0f);
@@ -269,7 +269,7 @@ void BogeymanEntity::render(sf::RenderTarget* app)
 
     int holeFrame = ((int)(age * 12.0f)) % 8;
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect(holeFrame * width, 5 * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(holeFrame * width, 5 * height, width, height));
     app->draw(sprite);
 
     sprite.setScale(1.0f, 1.0f);

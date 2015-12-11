@@ -81,7 +81,7 @@ void EntityManager::animate (float delay)
 	}
 }
 
-void EntityManager::render(sf::RenderTarget* app)
+void EntityManager::render(cpp3ds::RenderTarget* app)
 {
 	if (!isEmpty())
 	{
@@ -98,7 +98,7 @@ void EntityManager::render(sf::RenderTarget* app)
 	}
 }
 
-void EntityManager::renderUnder(sf::RenderTarget* app, int n)
+void EntityManager::renderUnder(cpp3ds::RenderTarget* app, int n)
 {
 	if (!isEmpty())
 	{
@@ -115,7 +115,7 @@ void EntityManager::renderUnder(sf::RenderTarget* app, int n)
 	}
 }
 
-void EntityManager::renderAfter(sf::RenderTarget* app, int n)
+void EntityManager::renderAfter(cpp3ds::RenderTarget* app, int n)
 {
 	if (!isEmpty())
 	{
@@ -132,7 +132,7 @@ void EntityManager::renderAfter(sf::RenderTarget* app, int n)
 	}
 }
 
-void EntityManager::onEvent(sf::Event event)
+void EntityManager::onEvent(cpp3ds::Event event)
 {
     if (!isEmpty())
 	{

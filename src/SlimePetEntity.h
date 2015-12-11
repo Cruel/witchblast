@@ -9,7 +9,7 @@ class SlimePetEntity : public BaseCreatureEntity
   public:
     SlimePetEntity();
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
 	  virtual bool canCollide();
 

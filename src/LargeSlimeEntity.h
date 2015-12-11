@@ -10,7 +10,7 @@ class LargeSlimeEntity : public EnemyEntity
   public:
     LargeSlimeEntity(float x, float y, slimeTypeEnum slimeType);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
     virtual void inflictsRecoilTo(BaseCreatureEntity* targetEntity);
     virtual bool canCollide();

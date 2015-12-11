@@ -26,10 +26,10 @@ TextEntity::TextEntity(std::string text, int size, float x, float y) : GameEntit
     alignment = ALIGN_LEFT;
     colorType = COLOR_WHITE;
 
-    color = sf::Color(255, 255, 255);
+    color = cpp3ds::Color(255, 255, 255);
 }
 
-void TextEntity::render(sf::RenderTarget* app)
+void TextEntity::render(cpp3ds::RenderTarget* app)
 {
   if (colorType == COLOR_FADING_RED)
   {
@@ -37,13 +37,13 @@ void TextEntity::render(sf::RenderTarget* app)
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
 
-    color = sf::Color(0, 0, 0, alpha );
+    color = cpp3ds::Color(0, 0, 0, alpha );
     game().write(text, size, x - 1, y - 1, alignment, color, app, 0 , 0, 0);
 
-    color = sf::Color(0, 0, 0, alpha );
+    color = cpp3ds::Color(0, 0, 0, alpha );
     game().write(text, size, x + 1, y + 1, alignment, color, app, 0 , 0, 0);
 
-    color = sf::Color(255, 50, 20, alpha );
+    color = cpp3ds::Color(255, 50, 20, alpha );
     game().write(text, size, x, y, alignment, color, app, 0 , 0, 0);
   }
   else if (colorType == COLOR_FADING_GREEN)
@@ -52,13 +52,13 @@ void TextEntity::render(sf::RenderTarget* app)
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
 
-    color = sf::Color(0, 0, 0, alpha );
+    color = cpp3ds::Color(0, 0, 0, alpha );
     game().write(text, size, x - 1, y - 1, alignment, color, app, 0 , 0, 0);
 
-    color = sf::Color(0, 0, 0, alpha );
+    color = cpp3ds::Color(0, 0, 0, alpha );
     game().write(text, size, x + 1, y + 1, alignment, color, app, 0 , 0, 0);
 
-    color = sf::Color(20, 255, 50, alpha );
+    color = cpp3ds::Color(20, 255, 50, alpha );
     game().write(text, size, x, y, alignment, color, app, 0 , 0, 0);
   }
   else if (colorType == COLOR_FADING_YELLOW)
@@ -67,13 +67,13 @@ void TextEntity::render(sf::RenderTarget* app)
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
 
-    color = sf::Color(0, 0, 0, alpha );
+    color = cpp3ds::Color(0, 0, 0, alpha );
     game().write(text, size, x - 1, y - 1, alignment, color, app, 0 , 0, 0);
 
-    color = sf::Color(0, 0, 0, alpha );
+    color = cpp3ds::Color(0, 0, 0, alpha );
     game().write(text, size, x + 1, y + 1, alignment, color, app, 0 , 0, 0);
 
-    color = sf::Color(255, 255, 128, alpha );
+    color = cpp3ds::Color(255, 255, 128, alpha );
     game().write(text, size, x, y, alignment, color, app, 0 , 0, 0);
   }
   else
@@ -90,28 +90,28 @@ void TextEntity::animate(float delay)
     int alpha = 255 * (lifetime - age) / lifetime;
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
-    color = sf::Color(255, 255, 255, alpha );
+    color = cpp3ds::Color(255, 255, 255, alpha );
   }
   else if (colorType == COLOR_FADING_GREEN)
   {
     int alpha = 255 * (lifetime - age) / lifetime;
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
-    color = sf::Color(0, 255, 0, alpha );
+    color = cpp3ds::Color(0, 255, 0, alpha );
   }
   else if (colorType == COLOR_FADING_RED)
   {
     int alpha = 255 * (lifetime - age) / lifetime;
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
-    color = sf::Color(255, 0, 0, alpha );
+    color = cpp3ds::Color(255, 0, 0, alpha );
   }
   else if (colorType == COLOR_FADING_YELLOW)
   {
     int alpha = 255 * (lifetime - age) / lifetime;
     if (alpha > 255) alpha = 255;
     else if (alpha < 0) alpha = 0;
-    color = sf::Color(255, 255, 0, alpha );
+    color = cpp3ds::Color(255, 255, 0, alpha );
   }
 }
 
@@ -127,13 +127,13 @@ void TextEntity::setColor(int colorType)
   this->colorType = colorType;
 
   if (colorType == COLOR_WHITE || colorType == COLOR_FADING_WHITE)
-    color = sf::Color(255, 255, 255);
+    color = cpp3ds::Color(255, 255, 255);
   else if (colorType == COLOR_GREEN || colorType == COLOR_FADING_GREEN)
-    color = sf::Color(0, 255, 0);
+    color = cpp3ds::Color(0, 255, 0);
   else if (colorType == COLOR_RED || colorType == COLOR_FADING_RED)
-    color = sf::Color(255, 0, 0);
+    color = cpp3ds::Color(255, 0, 0);
   else if (colorType == COLOR_YELLOW || colorType == COLOR_FADING_YELLOW)
-    color = sf::Color(255, 255, 0);
+    color = cpp3ds::Color(255, 255, 0);
 }
 
 void TextEntity::setAlignment(int alignment)

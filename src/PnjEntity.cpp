@@ -82,13 +82,13 @@ void PnjEntity::animate(float delay)
   SpriteEntity::animate(delay);
 }
 
-void PnjEntity::render(sf::RenderTarget* app)
+void PnjEntity::render(cpp3ds::RenderTarget* app)
 {
   SpriteEntity::render(app);
 
   if (isSpeaking)
   {
-    game().write(speech, 20, x0, y0 - 72.0f, ALIGN_CENTER, sf::Color(255, 255, 255), app, 0 , 0, 0);
+    game().write(speech, 20, x0, y0 - 72.0f, ALIGN_CENTER, cpp3ds::Color(255, 255, 255), app, 0 , 0, 0);
   }
 
   if (game().getShowLogical())

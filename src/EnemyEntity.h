@@ -8,10 +8,10 @@
 class EnemyEntity : public BaseCreatureEntity
 {
 public:
-  EnemyEntity(sf::Texture* image, float x, float y);
+  EnemyEntity(cpp3ds::Texture* image, float x, float y);
   virtual void animate(float delay);
   virtual void calculateBB();
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
   virtual int hurt(StructHurt hurtParam) override;
 
   virtual bool canCollide();
@@ -27,7 +27,7 @@ protected:
   virtual void collideMapTop();
   virtual void collideMapBottom();
 
-  void renderLifeBar(sf::RenderTarget* app, std::string label);
+  void renderLifeBar(cpp3ds::RenderTarget* app, std::string label);
 
   virtual void readCollidingEntity(CollidingSpriteEntity* entity);
   virtual void dying();

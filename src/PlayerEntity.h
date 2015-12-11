@@ -62,7 +62,7 @@ class PlayerEntity : public BaseCreatureEntity
      *
      *  \param app : Rendering target
      */
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
 
     /*!
      *  \brief Moves the player to another place
@@ -597,8 +597,8 @@ class PlayerEntity : public BaseCreatureEntity
     sourceTypeEnum lastHurtingSource;
 
     int spriteDy;
-    void renderPlayer(sf::RenderTarget* app);
-    void renderHalo(sf::RenderTarget* app);
+    void renderPlayer(cpp3ds::RenderTarget* app);
+    void renderHalo(cpp3ds::RenderTarget* app);
 
     divinityStruct divinity;
     bool shouldBeSavedFromDivinity;

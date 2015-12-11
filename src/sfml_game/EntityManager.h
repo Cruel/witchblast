@@ -30,10 +30,10 @@ public:
   void initIterator();
 	void add(GameEntity* g);
 	void animate (float delay);
-	void render (sf::RenderTarget* app);
-	void renderAfter (sf::RenderTarget* app, int n);
-	void renderUnder (sf::RenderTarget* app, int n);
-	void onEvent(sf::Event event);
+	void render (cpp3ds::RenderTarget* app);
+	void renderAfter (cpp3ds::RenderTarget* app, int n);
+	void renderUnder (cpp3ds::RenderTarget* app, int n);
+	void onEvent(cpp3ds::Event event);
 	void displayToConsole();
 
 	typedef std::list<GameEntity*> EntityList;

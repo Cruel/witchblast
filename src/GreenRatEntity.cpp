@@ -39,7 +39,7 @@ void GreenRatEntity::animate(float delay)
 
   if (age > 0.0f && !isAgonising)
   {
-    sprite.setColor(sf::Color(255,255,255,255));
+    sprite.setColor(cpp3ds::Color(255,255,255,255));
 
     timer = timer - delay;
     if (timer <= 0.0f)
@@ -64,7 +64,7 @@ void GreenRatEntity::animate(float delay)
   }
   else if (!isAgonising)
   {
-    sprite.setColor(sf::Color(255,255,255,255 * (1.0 + age)));
+    sprite.setColor(cpp3ds::Color(255,255,255,255 * (1.0 + age)));
   }
   else if (isAgonising)
   {
@@ -73,7 +73,7 @@ void GreenRatEntity::animate(float delay)
       int fade = h * 200 / 25;
       if (fade > 200) fade = 200;
       else if (fade < 0) fade = 0;
-      sprite.setColor(sf::Color(255, 255, 255, fade));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, fade));
     }
   }
 

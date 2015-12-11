@@ -19,13 +19,13 @@
 
 #include <stdio.h>
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
+#include <cpp3ds/Graphics.hpp>
+#include <cpp3ds/Window.hpp>
+#include <cpp3ds/Audio.hpp>
 
 //#include "Entity/EntityManager.h"
 
-class Game
+class Game : public cpp3ds::Game
 {
 public:
   Game();
@@ -37,6 +37,11 @@ public:
   static float getAbsolutTime();
   void create(int screenWidth, int screenHeight, std::string windowsTitle = "Generic sfmlGame", bool fullScreen = false, bool vsync = true);
 
+	virtual void update(float delta);
+	virtual void processEvent(cpp3ds::Event& event);
+	virtual void renderTopScreen(cpp3ds::Window& window);
+	virtual void renderBottomScreen(cpp3ds::Window& window);
+
 protected:
   virtual void onRender();     // screen and game items rendering
   virtual void onUpdate();
@@ -46,7 +51,7 @@ protected:
 
   float lastTime;
 
-  sf::RenderWindow* app;
+  cpp3ds::Window* app;
 };
 
 #endif // GAME_H_INCLUDED

@@ -40,7 +40,7 @@ SoundManager& SoundManager::getInstance()
 
 void SoundManager::addSound(const char* fileName)
 {
-  sf::SoundBuffer* newSoundBuffer = new sf::SoundBuffer;
+  cpp3ds::SoundBuffer* newSoundBuffer = new cpp3ds::SoundBuffer;
   newSoundBuffer->loadFromFile(fileName);
   soundBufferArray.push_back(newSoundBuffer);
 }
@@ -53,13 +53,13 @@ void SoundManager::playSound(int n, bool force)
 
   if (!force)
   {
-    for (sf::Sound* s: soundArray)
+    for (cpp3ds::Sound* s: soundArray)
       if (s->getBuffer() == soundBufferArray[n]) return;
   }
 
   stopSound(n);
 
-  sf::Sound* newSound = new sf::Sound;
+  cpp3ds::Sound* newSound = new cpp3ds::Sound;
   newSound->setBuffer(*soundBufferArray[n]);
   newSound->setVolume(volume);
   soundArray.push_back(newSound);
@@ -74,13 +74,13 @@ void SoundManager::playPitchModSound(int n, bool force)
 
   if (!force)
   {
-    for (sf::Sound* s: soundArray)
+    for (cpp3ds::Sound* s: soundArray)
       if (s->getBuffer() == soundBufferArray[n]) return;
   }
 
   stopSound(n);
 
-  sf::Sound* newSound = new sf::Sound;
+  cpp3ds::Sound* newSound = new cpp3ds::Sound;
   newSound->setBuffer(*soundBufferArray[n]);
   newSound->setVolume(volume);
 
@@ -93,7 +93,7 @@ void SoundManager::playPitchModSound(int n, bool force)
 void SoundManager::stopSound(int n)
 {
   {
-    for (sf::Sound* s: soundArray)
+    for (cpp3ds::Sound* s: soundArray)
       if (s->getBuffer() == soundBufferArray[n]) s->stop();
   }
 }
@@ -106,7 +106,7 @@ void SoundManager::setMute(bool mute)
 void SoundManager::setVolume(int volume)
 {
   this->volume = volume;
-  for (sf::Sound* s: soundArray)
+  for (cpp3ds::Sound* s: soundArray)
     s->setVolume(volume);
 }
 
@@ -114,8 +114,8 @@ void SoundManager::checkSoundStatus()
 {
   for (unsigned int i = 0; i < soundArray.size(); i++)
   {
-    sf::Sound* sound = soundArray[i];
-    if (sound->getStatus() == sf::Sound::Stopped)
+    cpp3ds::Sound* sound = soundArray[i];
+    if (sound->getStatus() == cpp3ds::Sound::Stopped)
     {
       delete sound;
       soundArray.erase(soundArray.begin() + i);

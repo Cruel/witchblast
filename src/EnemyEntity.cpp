@@ -9,7 +9,7 @@
 
 const float FACING_DELAY = 0.25f;
 
-EnemyEntity::EnemyEntity(sf::Texture* image, float x, float y)
+EnemyEntity::EnemyEntity(cpp3ds::Texture* image, float x, float y)
   : BaseCreatureEntity (image, x, y, 64, 64)
 {
   type = ENTITY_ENEMY;
@@ -147,7 +147,7 @@ void EnemyEntity::readCollidingEntity(CollidingSpriteEntity* entity)
             SoundManager::getInstance().playSound(SOUND_ELECTRIC_CHARGE);
 
             star->setScale(1.5f, 1.5f);
-            star->setColor(sf::Color(220, 180, 255));
+            star->setColor(cpp3ds::Color(220, 180, 255));
             star->setLifetime(1.3f);
             game().makeColorEffect(X_GAME_COLOR_VIOLET, 0.2f);
           }
@@ -338,7 +338,7 @@ bool EnemyEntity::canCollide()
   return (!isAgonising);
 }
 
-void EnemyEntity::render(sf::RenderTarget* app)
+void EnemyEntity::render(cpp3ds::RenderTarget* app)
 {
   if (isAgonising || (isDying && dyingFrame > -1))
   {
@@ -354,7 +354,7 @@ void EnemyEntity::render(sf::RenderTarget* app)
         ny = shadowFrame / imagesProLine;
       }
       sprite.setPosition(x, y);
-      sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
       app->draw(sprite);
     }
     int nx = dyingFrame;
@@ -366,9 +366,9 @@ void EnemyEntity::render(sf::RenderTarget* app)
     }
     sprite.setPosition(x, y - h);
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect(nx * width + width, ny * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(nx * width + width, ny * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
 
     app->draw(sprite);
   }
@@ -377,7 +377,7 @@ void EnemyEntity::render(sf::RenderTarget* app)
     BaseCreatureEntity::render(app);
 }
 
-void EnemyEntity::renderLifeBar(sf::RenderTarget* app, std::string label)
+void EnemyEntity::renderLifeBar(cpp3ds::RenderTarget* app, std::string label)
 {
   game().addLifeBarToDisplay(label, hpDisplay, hpMax);
 }

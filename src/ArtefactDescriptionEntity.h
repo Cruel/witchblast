@@ -11,9 +11,9 @@ class ArtefactDescriptionEntity : public SpriteEntity
     ~ArtefactDescriptionEntity();
 
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
   private:
-    sf::Sprite rectangle;
+    cpp3ds::Sprite rectangle;
 
     std::string artefactName;
     std::string artefactDescription;

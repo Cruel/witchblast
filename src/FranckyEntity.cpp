@@ -166,7 +166,7 @@ void FranckyEntity::drop()
   dropItem(ItemBossHeart);
 }
 
-void FranckyEntity::render(sf::RenderTarget* app)
+void FranckyEntity::render(cpp3ds::RenderTarget* app)
 {
   EnemyEntity::render(app);
   renderLifeBar(app, tools::getLabel("enemy_francky"));
@@ -201,7 +201,7 @@ void FranckyEntity::dying()
   // FX
   SpriteEntity* star = new SpriteEntity(ImageManager::getInstance().getImage(IMAGE_GIANT_SLIME), x, y, 128, 128, 8);
   star->setFrame(4);
-  star->setColor(sf::Color(230, 255, 255));
+  star->setColor(cpp3ds::Color(230, 255, 255));
   star->setFading(true);
   star->setZ(y+ 100);
   star->setAge(-0.4f);
@@ -429,20 +429,20 @@ void FranckyEntityHead::animate(float delay)
   z = y + 14;
 }
 
-void FranckyEntityHead::render(sf::RenderTarget* app)
+void FranckyEntityHead::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying && shadowFrame > -1)
   {
     // shadow
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect((shadowFrame % imagesProLine) * width, (shadowFrame / imagesProLine) * width, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect((shadowFrame % imagesProLine) * width, (shadowFrame / imagesProLine) * width, width, height));
     app->draw(sprite);
   }
   sprite.setPosition(x, y - h);
   if (isMirroring)
-    sprite.setTextureRect(sf::IntRect((frame % imagesProLine) * width + width, (frame / imagesProLine) * width, -width, height));
+    sprite.setTextureRect(cpp3ds::IntRect((frame % imagesProLine) * width + width, (frame / imagesProLine) * width, -width, height));
   else
-    sprite.setTextureRect(sf::IntRect((frame % imagesProLine) * width, (frame / imagesProLine) * width, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect((frame % imagesProLine) * width, (frame / imagesProLine) * width, width, height));
   app->draw(sprite);
 
   if (game().getShowLogical())
@@ -598,20 +598,20 @@ void FranckyEntityFoot::animate(float delay)
   z = y + 14;
 }
 
-void FranckyEntityFoot::render(sf::RenderTarget* app)
+void FranckyEntityFoot::render(cpp3ds::RenderTarget* app)
 {
   if (!isDying && shadowFrame > -1)
   {
     // shadow
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect((shadowFrame % imagesProLine) * width, (shadowFrame / imagesProLine) * width, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect((shadowFrame % imagesProLine) * width, (shadowFrame / imagesProLine) * width, width, height));
     app->draw(sprite);
   }
   sprite.setPosition(x, y - h);
   if (isMirroring)
-    sprite.setTextureRect(sf::IntRect((frame % imagesProLine) * width + width, (frame / imagesProLine) * width, -width, height));
+    sprite.setTextureRect(cpp3ds::IntRect((frame % imagesProLine) * width + width, (frame / imagesProLine) * width, -width, height));
   else
-    sprite.setTextureRect(sf::IntRect((frame % imagesProLine) * width, (frame / imagesProLine) * width, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect((frame % imagesProLine) * width, (frame / imagesProLine) * width, width, height));
   app->draw(sprite);
 
   if (game().getShowLogical())

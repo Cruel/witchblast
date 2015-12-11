@@ -323,7 +323,7 @@ void KingRatEntity::generateGreenRats()
   }
 }
 
-void KingRatEntity::render(sf::RenderTarget* app)
+void KingRatEntity::render(cpp3ds::RenderTarget* app)
 {
   EnemyEntity::render(app);
 
@@ -331,14 +331,14 @@ void KingRatEntity::render(sf::RenderTarget* app)
   {
     int r = ((int)(age *12.0f)) % 2;
     if (r == 0)
-      sprite.setTextureRect(sf::IntRect(1 * width, 1 * height,  width,  height));
+      sprite.setTextureRect(cpp3ds::IntRect(1 * width, 1 * height,  width,  height));
     else
-      sprite.setTextureRect(sf::IntRect(2 * width, 1 * height,  -width,  height));
+      sprite.setTextureRect(cpp3ds::IntRect(2 * width, 1 * height,  -width,  height));
 
     sprite.setPosition(x, y);
-    sprite.setColor(sf::Color(255, 255, 255, 190));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 190));
     app->draw(sprite);
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
   }
 
   renderLifeBar(app, tools::getLabel("enemy_rat_king"));

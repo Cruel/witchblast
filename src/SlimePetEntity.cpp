@@ -156,7 +156,7 @@ void SlimePetEntity::readCollidingEntity(CollidingSpriteEntity* entity)
   }
 }
 
-void SlimePetEntity::render(sf::RenderTarget* app)
+void SlimePetEntity::render(cpp3ds::RenderTarget* app)
 {
   // shadow
   if (h < 1055)
@@ -164,16 +164,16 @@ void SlimePetEntity::render(sf::RenderTarget* app)
     int fade = 255;
     if (h > 800)
       fade = - (h - 1055);
-    sprite.setColor(sf::Color(255, 255, 255, fade));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, fade));
     sprite.setPosition(x, y);
-    sprite.setTextureRect(sf::IntRect(shadowFrame * width, 0, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(shadowFrame * width, 0, width, height));
     app->draw(sprite);
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
   }
 
   // sprite
   sprite.setPosition(x, y - h);
-  sprite.setTextureRect(sf::IntRect(frame * width, 4 * height, width, height));
+  sprite.setTextureRect(cpp3ds::IntRect(frame * width, 4 * height, width, height));
   app->draw(sprite);
 
   if (game().getShowLogical())

@@ -24,14 +24,14 @@
 class CollidingSpriteEntity : public SpriteEntity
 {
 public:
-  CollidingSpriteEntity(sf::Texture* image, float x = 0.0f, float y = 0.0f, int width = -1, int height = -1);
+  CollidingSpriteEntity(cpp3ds::Texture* image, float x = 0.0f, float y = 0.0f, int width = -1, int height = -1);
   ~CollidingSpriteEntity();
 
   GameMap* getMap();
   virtual void setMap(GameMap* map, int tileWidth, int tileHeight, int offsetX, int offsetY);
   void setTileDimensions(int width, int height);
 
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
   virtual void animate(float delay);
 
   virtual void calculateBB();
@@ -41,8 +41,8 @@ public:
   virtual void stuck();
   virtual bool collideWithEntity(CollidingSpriteEntity* entity);
 
-  void displayBoundingBox(sf::RenderTarget* app);
-  sf::IntRect getBoundingBox();
+  void displayBoundingBox(cpp3ds::RenderTarget* app);
+  cpp3ds::IntRect getBoundingBox();
 
   enum directionEnum
   {
@@ -56,7 +56,7 @@ public:
 
 protected:
   GameMap* map;   // map to test collisions with
-  sf::IntRect boundingBox; // BoundingBox
+  cpp3ds::IntRect boundingBox; // BoundingBox
   int tileWidth;
   int tileHeight;
   int offsetX;

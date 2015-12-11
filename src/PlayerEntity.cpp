@@ -607,13 +607,13 @@ void PlayerEntity::animate(float delay)
   // key room collision
   if (game().getCurrentMap()->getRoomType() == roomTypeKey && !game().getCurrentMap()->isCleared())
   {
-    sf::IntRect col1;
+    cpp3ds::IntRect col1;
     col1.width = 198;
     col1.height = 68;
     col1.top = 254;
     col1.left = 380;
 
-    sf::IntRect col2;
+    cpp3ds::IntRect col2;
     col2.width = 68;
     col2.height = 198;
     col2.top = 189;
@@ -783,21 +783,21 @@ void PlayerEntity::setSpecialState(enumSpecialState state, bool active, float ti
   computePlayer();
 }
 
-void PlayerEntity::renderPlayer(sf::RenderTarget* app)
+void PlayerEntity::renderPlayer(cpp3ds::RenderTarget* app)
 {
   if (invincibleDelay > 0.0f)
   {
     if ((int)(age * 10.0f) % 2 == 0)return;
   }
 
-  sf::Color savedColor = sprite.getColor();
-  if (isPoisoned()) sprite.setColor(sf::Color(180, 255, 180, 255));
+  cpp3ds::Color savedColor = sprite.getColor();
+  if (isPoisoned()) sprite.setColor(cpp3ds::Color(180, 255, 180, 255));
 
   // body
   if (isMirroring)
-    sprite.setTextureRect(sf::IntRect( frame * width + width, spriteDy * height, -width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( frame * width + width, spriteDy * height, -width, height));
   else
-    sprite.setTextureRect(sf::IntRect( frame * width, spriteDy * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( frame * width, spriteDy * height, width, height));
   app->draw(sprite);
   sprite.setColor(savedColor);
 
@@ -806,18 +806,18 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_LEATHER_BOOTS] && playerStatus != playerStatusDead)
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -825,27 +825,27 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
 
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (15 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (15 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (15 + frame) * width, spriteDy * height, width, height));
-    sprite.setColor(sf::Color(255, 255, 255, 100 + 100 * cosf(game().getAbsolutTime() * 3.5f)));
-    app->draw(sprite, sf::BlendAdd);
-    sprite.setColor(sf::Color(255, 255, 255, 255));
+      sprite.setTextureRect(cpp3ds::IntRect( (15 + frame) * width, spriteDy * height, width, height));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 100 + 100 * cosf(game().getAbsolutTime() * 3.5f)));
+    app->draw(sprite, cpp3ds::BlendAdd);
+    sprite.setColor(cpp3ds::Color(255, 255, 255, 255));
 
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_MAGICIAN_ROBE])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -853,36 +853,36 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_DISPLACEMENT_GLOVES])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
   if (equip[EQUIP_CRITICAL_ADVANCED])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
   else if (equip[EQUIP_CRITICAL])
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
 
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
@@ -891,18 +891,18 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   if (equip[EQUIP_RAGE_AMULET])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
   else if (equip[EQUIP_AMULET_RETALIATION])
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_2));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -911,35 +911,35 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_LEATHER_BELT])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (15 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (15 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (15 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (15 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
   // staff
   int frameDx = equip[EQUIP_MAHOGANY_STAFF] ? 6 : 3;
   if (isMirroring)
-    sprite.setTextureRect(sf::IntRect( (frameDx + frame) * width + width, spriteDy * height, -width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( (frameDx + frame) * width + width, spriteDy * height, -width, height));
   else
-    sprite.setTextureRect(sf::IntRect( (frameDx + frame) * width, spriteDy * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( (frameDx + frame) * width, spriteDy * height, width, height));
   app->draw(sprite);
 
   if (equip[EQUIP_BLOOD_SNAKE])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -947,9 +947,9 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_2));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -957,9 +957,9 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -970,31 +970,31 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
     switch (getShotType())
     {
     case ShotTypeIce:
-      sprite.setColor(sf::Color(100, 220, 255, 255));
+      sprite.setColor(cpp3ds::Color(100, 220, 255, 255));
       break;
 
     case ShotTypeStone:
-      sprite.setColor(sf::Color(120, 120, 150, 255));
+      sprite.setColor(cpp3ds::Color(120, 120, 150, 255));
       break;
 
     case ShotTypeLightning:
-      sprite.setColor(sf::Color(255, 255, 0, 255));
+      sprite.setColor(cpp3ds::Color(255, 255, 0, 255));
       break;
 
     case ShotTypeIllusion:
-      sprite.setColor(sf::Color(240, 180, 250, 255));
+      sprite.setColor(cpp3ds::Color(240, 180, 250, 255));
       break;
 
     case ShotTypeStandard:
-      sprite.setColor(sf::Color(255, 255, 255, 0));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 0));
       break;
 
     case ShotTypeFire:
-      sprite.setColor(sf::Color(255, 180, 0, 255));
+      sprite.setColor(cpp3ds::Color(255, 180, 0, 255));
       break;
 
     case ShotTypePoison:
-      sprite.setColor(sf::Color(50, 255, 50, 255));
+      sprite.setColor(cpp3ds::Color(50, 255, 50, 255));
       break;
 
     default:
@@ -1003,9 +1003,9 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
 
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setColor(savedColor);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
@@ -1016,9 +1016,9 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -1026,22 +1026,22 @@ void PlayerEntity::renderPlayer(sf::RenderTarget* app)
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (6 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (6 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (6 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (6 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
 }
 
-void PlayerEntity::renderHalo(sf::RenderTarget* app)
+void PlayerEntity::renderHalo(cpp3ds::RenderTarget* app)
 {
   if (frame > 2 || spriteDy > 8) return;
   // gems
   if ((getShotType() == ShotTypeIce || getShotType() == ShotTypeLightning || getShotType() == ShotTypeFire || getShotType() == ShotTypePoison) && playerStatus != playerStatusDead)
   {
     int fade;
-    sf::Color savedColor = sprite.getColor();
+    cpp3ds::Color savedColor = sprite.getColor();
     if (getShotType() != ShotTypeIce || specialBoltTimer <= 0.0f) fade = 255;
     else fade = ((STATUS_FROZEN_BOLT_DELAY[getShotLevel()] - specialBoltTimer) / STATUS_FROZEN_BOLT_DELAY[getShotLevel()]) * 128;
 
@@ -1053,22 +1053,22 @@ void PlayerEntity::renderHalo(sf::RenderTarget* app)
       fade = 150 + rand() % 40;
 
     if (getShotType() == ShotTypeIce)
-      sprite.setTextureRect(sf::IntRect(448, 864, 20, 20));
+      sprite.setTextureRect(cpp3ds::IntRect(448, 864, 20, 20));
     else if (getShotType() == ShotTypeLightning)
-      sprite.setTextureRect(sf::IntRect(448 + 20, 864, 20, 20));
+      sprite.setTextureRect(cpp3ds::IntRect(448 + 20, 864, 20, 20));
     else if (getShotType() == ShotTypeFire)
-      sprite.setTextureRect(sf::IntRect(448 + 40, 864, 20, 20));
+      sprite.setTextureRect(cpp3ds::IntRect(448 + 40, 864, 20, 20));
     else if (getShotType() == ShotTypePoison)
-      sprite.setTextureRect(sf::IntRect(448, 864 + 20, 20, 20));
+      sprite.setTextureRect(cpp3ds::IntRect(448, 864 + 20, 20, 20));
 
-    sprite.setColor(sf::Color(255, 255, 255, fade));
+    sprite.setColor(cpp3ds::Color(255, 255, 255, fade));
     if (isMirroring)
       sprite.setPosition(x - 10 + 64 - xHalo[spriteDy][frame], y - 10 + yHalo[spriteDy][frame]);
     else
       sprite.setPosition(x - 10 + xHalo[spriteDy][frame], y - 10 + yHalo[spriteDy][frame]);
 
-    sf::RenderStates r;
-    r.blendMode = sf::BlendAdd;
+    cpp3ds::RenderStates r;
+    r.blendMode = cpp3ds::BlendAdd;
 
     app->draw(sprite, r);
 
@@ -1077,7 +1077,7 @@ void PlayerEntity::renderHalo(sf::RenderTarget* app)
   }
 }
 
-void PlayerEntity::render(sf::RenderTarget* app)
+void PlayerEntity::render(cpp3ds::RenderTarget* app)
 {
   sprite.setPosition(x, y);
 
@@ -1169,7 +1169,7 @@ void PlayerEntity::render(sf::RenderTarget* app)
     if (frame > 6) frame = 6;
     spriteDy = 9;
 
-    sprite.setTextureRect(sf::IntRect( frame * width, spriteDy * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( frame * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
   else
@@ -1182,7 +1182,7 @@ void PlayerEntity::render(sf::RenderTarget* app)
       else
         frame = ((int)(age * 18.0f)) % 2;
 
-      sf::Sprite fairySprite;
+      cpp3ds::Sprite fairySprite;
       fairySprite.setColor(sprite.getColor());
       fairySprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
       fairySprite.setPosition(sprite.getPosition());
@@ -1190,10 +1190,10 @@ void PlayerEntity::render(sf::RenderTarget* app)
 
       switch (facingDirection)
       {
-        case 8: fairySprite.setTextureRect(sf::IntRect( (2 + frame) * 48, 6 * 72, 48, 72)); break;
-        case 4: fairySprite.setTextureRect(sf::IntRect( (4 + frame) * 48, 6 * 72, 48, 72)); break;
-        case 6: fairySprite.setTextureRect(sf::IntRect( (5 + frame) * 48, 6 * 72, - 48, 72)); break;
-        default: fairySprite.setTextureRect(sf::IntRect( frame * 48, 6 * 72, 48, 72)); break;
+        case 8: fairySprite.setTextureRect(cpp3ds::IntRect( (2 + frame) * 48, 6 * 72, 48, 72)); break;
+        case 4: fairySprite.setTextureRect(cpp3ds::IntRect( (4 + frame) * 48, 6 * 72, 48, 72)); break;
+        case 6: fairySprite.setTextureRect(cpp3ds::IntRect( (5 + frame) * 48, 6 * 72, - 48, 72)); break;
+        default: fairySprite.setTextureRect(cpp3ds::IntRect( frame * 48, 6 * 72, 48, 72)); break;
       }
       app->draw(fairySprite);
     }
@@ -1210,12 +1210,12 @@ void PlayerEntity::render(sf::RenderTarget* app)
       if (specialState[DivineStateProtection].active && divinity.divinity == DivinityStone) firstFrame = 16;
       float timer = specialState[DivineStateProtection].active ? specialState[DivineStateProtection].timer : protection.timer;
 
-      sprite.setTextureRect(sf::IntRect( firstFrame * width, 9 * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( firstFrame * width, 9 * height, width, height));
       app->draw(sprite);
 
-      sf::Color savedColor = sprite.getColor();
-      sprite.setColor(sf::Color(255, 255, 255, 100 + cos(age * (timer < 2.0f ? 25 : 10)) * 30 ));
-      sprite.setTextureRect(sf::IntRect( (firstFrame + 1) * width, 9 * height, width, height));
+      cpp3ds::Color savedColor = sprite.getColor();
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 100 + cos(age * (timer < 2.0f ? 25 : 10)) * 30 ));
+      sprite.setTextureRect(cpp3ds::IntRect( (firstFrame + 1) * width, 9 * height, width, height));
       app->draw(sprite);
       sprite.setColor(savedColor);
     }
@@ -1277,21 +1277,21 @@ void PlayerEntity::render(sf::RenderTarget* app)
 
       if (displayField)
       {
-        sf::Color savedColor = sprite.getColor();
-        sprite.setColor(sf::Color(255, 255, 255, fieldFade ));
-        sprite.setTextureRect(sf::IntRect( fieldFrame * width, 9 * height, width, height));
+        cpp3ds::Color savedColor = sprite.getColor();
+        sprite.setColor(cpp3ds::Color(255, 255, 255, fieldFade ));
+        sprite.setTextureRect(cpp3ds::IntRect( fieldFrame * width, 9 * height, width, height));
         app->draw(sprite);
 
         if (divinity.divinity != DivinityStone && divinity.divinity != DivinityHealer)
         {
-          sprite.setColor(sf::Color(255, 255, 255, 2 + fieldFade / 2 + cos(age * 15) * fieldFade / 2 ));
-          sprite.setTextureRect(sf::IntRect( (fieldFrame + 1) * width, 9 * height, width, height));
+          sprite.setColor(cpp3ds::Color(255, 255, 255, 2 + fieldFade / 2 + cos(age * 15) * fieldFade / 2 ));
+          sprite.setTextureRect(cpp3ds::IntRect( (fieldFrame + 1) * width, 9 * height, width, height));
           app->draw(sprite);
           sprite.setColor(savedColor);
         }
         if (divinity.divinity == DivinityHealer && divineInterventionDelay > 0.0f && isRegeneration)
         {
-          sprite.setTextureRect(sf::IntRect( (fieldFrame + 1) * width, 9 * height, width, height));
+          sprite.setTextureRect(cpp3ds::IntRect( (fieldFrame + 1) * width, 9 * height, width, height));
           app->draw(sprite);
         }
         sprite.setColor(savedColor);
@@ -2907,8 +2907,8 @@ void PlayerEntity::donate(int n)
       isRegeneration = false;
       for (int i = 0; i < 8; i++)
       {
-        game().generateStar(sf::Color::White, xItem, yItem);
-        game().generateStar(sf::Color(255, 255, 210), xItem, yItem);
+        game().generateStar(cpp3ds::Color::White, xItem, yItem);
+        game().generateStar(cpp3ds::Color(255, 255, 210), xItem, yItem);
       }
 
       game().testAndAddMessageToQueue((EnumMessages)(MsgInfoDivGift));
@@ -3531,8 +3531,8 @@ void PlayerEntity::castTeleport()
 
   for(int i=0; i < 6; i++)
   {
-    generateStar(sf::Color(50, 50, 255, 255));
-    generateStar(sf::Color(200, 200, 255, 255));
+    generateStar(cpp3ds::Color(50, 50, 255, 255));
+    generateStar(cpp3ds::Color(200, 200, 255, 255));
   }
 
   int counter = 150;
@@ -3575,8 +3575,8 @@ void PlayerEntity::castTeleport()
 
   for(int i=0; i < 6; i++)
   {
-    generateStar(sf::Color(50, 50, 255, 255));
-    generateStar(sf::Color(200, 200, 255, 255));
+    generateStar(cpp3ds::Color(50, 50, 255, 255));
+    generateStar(cpp3ds::Color(200, 200, 255, 255));
   }
 }
 
@@ -3714,8 +3714,8 @@ void PlayerEntity::castTransmuteFairy()
       computePlayer();
       for(int i=0; i < 6; i++)
       {
-        generateStar(sf::Color(50, 50, 255, 255));
-        generateStar(sf::Color(200, 200, 255, 255));
+        generateStar(cpp3ds::Color(50, 50, 255, 255));
+        generateStar(cpp3ds::Color(200, 200, 255, 255));
       }
     }
   }
@@ -3726,8 +3726,8 @@ void PlayerEntity::castTransmuteFairy()
     computePlayer();
     for(int i=0; i < 6; i++)
     {
-      generateStar(sf::Color(50, 50, 255, 255));
-      generateStar(sf::Color(200, 200, 255, 255));
+      generateStar(cpp3ds::Color(50, 50, 255, 255));
+      generateStar(cpp3ds::Color(200, 200, 255, 255));
     }
   }
 }

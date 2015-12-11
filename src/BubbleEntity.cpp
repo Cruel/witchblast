@@ -106,13 +106,13 @@ void BubbleEntity::animate(float delay)
   EnemyEntity::animate(delay);
 }
 
-void BubbleEntity::render(sf::RenderTarget* app)
+void BubbleEntity::render(cpp3ds::RenderTarget* app)
 {
   if (bubbleType != BubbleIce)
   {
     // shadow
     sprite.setPosition(x, y + 5);
-    sprite.setTextureRect(sf::IntRect(11 * width, 1 * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(11 * width, 1 * height, width, height));
     app->draw(sprite);
 
     // eye
@@ -120,16 +120,16 @@ void BubbleEntity::render(sf::RenderTarget* app)
     sprite.setPosition(x, y);
     int nx = frame % imagesProLine;
     int ny = frame / imagesProLine;
-    sprite.setTextureRect(sf::IntRect(nx * width, ny * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(nx * width, ny * height, width, height));
     app->draw(sprite);
 
     // lightning
     sprite.setRotation(0);
-    sprite.setTextureRect(sf::IntRect(6 * width, height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(6 * width, height, width, height));
     app->draw(sprite);
 
     nx = 7 + (int)(age * 5) % 4;
-    sprite.setTextureRect(sf::IntRect(nx * width, height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect(nx * width, height, width, height));
     app->draw(sprite);
   }
   else

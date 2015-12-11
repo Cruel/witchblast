@@ -88,20 +88,20 @@ int GhostEntity::getGhostFade()
   return fade;
 }
 
-void GhostEntity::render(sf::RenderTarget* app)
+void GhostEntity::render(cpp3ds::RenderTarget* app)
 {
   int fade = getGhostFade();
   if (fade == 100) SoundManager::getInstance().playSound(SOUND_GHOST);
   if (fade == 100 || isAgonising)
   {
-    sf::Color color = sprite.getColor();
+    cpp3ds::Color color = sprite.getColor();
     color.a = 255;
     sprite.setColor(color);
     EnemyEntity::render(app);
   }
   else if (fade > 0)
   {
-    sf::Color color = sprite.getColor();
+    cpp3ds::Color color = sprite.getColor();
     color.a = fade * 255 / 100;
     sprite.setColor(color);
     EnemyEntity::render(app);

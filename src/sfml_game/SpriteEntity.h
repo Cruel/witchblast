@@ -24,7 +24,7 @@ class SpriteEntity : public GameEntity
 {
 public:
   // create a sprite with the entire image
-  SpriteEntity(sf::Texture* image, float x = 0.0f, float y = 0.0f, int width = -1, int height = -1, int imagesProLine = 0);
+  SpriteEntity(cpp3ds::Texture* image, float x = 0.0f, float y = 0.0f, int width = -1, int height = -1, int imagesProLine = 0);
 
 	int getFrame();
 	float getScaleX();
@@ -38,21 +38,21 @@ public:
   void setFrame(int frame);
   void setImagesProLine(int n);
   void setScale(float scx, float scy);
-  void setColor(sf::Color color);
-  void setTexture(sf::Texture* image);
+  void setColor(cpp3ds::Color color);
+  void setTexture(cpp3ds::Texture* image);
 
   void setRenderAdd();
 
   void removeCenter();
 
-  virtual void render(sf::RenderTarget* app);
+  virtual void render(cpp3ds::RenderTarget* app);
 	virtual void animate(float delay);
-	void displayCenterAndZ(sf::RenderTarget* app);
+	void displayCenterAndZ(cpp3ds::RenderTarget* app);
 
 protected:
-    sf::Sprite sprite;
-    sf::Texture* image;
-    sf::Color color;
+    cpp3ds::Sprite sprite;
+    cpp3ds::Texture* image;
+    cpp3ds::Color color;
     int width;
     int height;
     int frame;

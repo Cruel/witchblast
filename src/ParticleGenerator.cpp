@@ -51,11 +51,11 @@ void ParticleGenerator::RandomizeColor(SpriteEntity* particle)
 {
 	int myRandNumber = colorDistribution(randomGenerator);
 	if (myRandNumber < 3)
-		particle->setColor(sf::Color(200, 150, 200));
+		particle->setColor(cpp3ds::Color(200, 150, 200));
 	else if (myRandNumber<7)
-		particle->setColor(sf::Color(200, 200, 100));
+		particle->setColor(cpp3ds::Color(200, 200, 100));
 	else if (myRandNumber < 13)
-		particle->setColor(sf::Color(150, 200, 255));
+		particle->setColor(cpp3ds::Color(150, 200, 255));
 }
 
 void ParticleGenerator::GenerateBoltParticle(int frame, const Vector2D & velocity, float posX, float posY, float lifeTime, float scale)

@@ -9,7 +9,7 @@ class ButcherEntity : public EnemyEntity
   public:
     ButcherEntity(float x, float y);
     virtual void animate(float delay);
-    virtual void render(sf::RenderTarget* app);
+    virtual void render(cpp3ds::RenderTarget* app);
     virtual void calculateBB();
     virtual bool isAttacking();
   protected:

@@ -89,77 +89,84 @@ static std::string intToString(int n)
   return oss.str();
 }
 
-static std::string keyToString(sf::Keyboard::Key key)
+static std::string keyToString(cpp3ds::Keyboard::Key key)
 {
-  std::string s = "Unknown";
+  std::string s;
 
-  if (key >= sf::Keyboard::A && key <= sf::Keyboard::Z)
-  {
-    char c = 'A' + key - sf::Keyboard::A;
-    std::ostringstream oss;
-    oss << c;
-    s = oss.str();
-  }
-  else if (key >= sf::Keyboard::Num0 && key <= sf::Keyboard::Num9)
-  {
-    char c = '0' + key - sf::Keyboard::Num0;
-    std::ostringstream oss;
-    oss << c;
-    s = oss.str();
-  }
-  else if (key >= sf::Keyboard::Numpad0 && key <= sf::Keyboard::Numpad9)
-  {
-    char c = '0' + key - sf::Keyboard::Num0;
-    std::ostringstream oss;
-    oss << c << " (numpad)";
-    s = oss.str();
-  }
-  else if (key >= sf::Keyboard::F1 && key <= sf::Keyboard::F15)
-  {
-    std::ostringstream oss;
-    oss << "F" << (int)key - (int)sf::Keyboard::F1;
-    s = oss.str();
-  }
-  else if (key == sf::Keyboard::Escape) s = "Escape";
-  else if (key == sf::Keyboard::LControl) s = "Left Control";
-  else if (key == sf::Keyboard::LShift) s = "Left Shift";
-  else if (key == sf::Keyboard::LAlt) s = "Left Alt";
-  else if (key == sf::Keyboard::LSystem) s = "Left System";
-  else if (key == sf::Keyboard::RControl) s = "Right Control";
-  else if (key == sf::Keyboard::RShift) s = "Right Shift";
-  else if (key == sf::Keyboard::RAlt) s = "Right Alt";
-  else if (key == sf::Keyboard::RSystem) s = "Right System";
-  else if (key == sf::Keyboard::Space) s = "Space";
-  else if (key == sf::Keyboard::Tab) s = "Tab";
-  else if (key == sf::Keyboard::Left) s = "Left arrow";
-  else if (key == sf::Keyboard::Right) s = "Right arrow";
-  else if (key == sf::Keyboard::Up) s = "Up arrow";
-  else if (key == sf::Keyboard::Down) s = "Down arrow";
-  else if (key == sf::Keyboard::LBracket) s = "[";
-  else if (key == sf::Keyboard::RBracket) s = "]";
-  else if (key == sf::Keyboard::SemiColon) s = ";";
-  else if (key == sf::Keyboard::Comma) s = ",";
-  else if (key == sf::Keyboard::Period) s = ".";
-  else if (key == sf::Keyboard::Quote) s = "Quote";
-  else if (key == sf::Keyboard::Slash) s = "/";
-  else if (key == sf::Keyboard::BackSlash) s = "\\";
-  else if (key == sf::Keyboard::Tilde) s = "~";
-  else if (key == sf::Keyboard::Equal) s = "=";
-  else if (key == sf::Keyboard::Dash) s = "_";
-  else if (key == sf::Keyboard::Return) s = "Return";
-  else if (key == sf::Keyboard::BackSpace) s = "BackSpace";
-  else if (key == sf::Keyboard::PageUp) s = "Page Up";
-  else if (key == sf::Keyboard::PageDown) s = "Page Down";
-  else if (key == sf::Keyboard::End) s = "End";
-  else if (key == sf::Keyboard::Home) s = "Home";
-  else if (key == sf::Keyboard::Insert) s = "Insert";
-  else if (key == sf::Keyboard::Delete) s = "Delete";
-  else if (key == sf::Keyboard::Add) s = "+";
-  else if (key == sf::Keyboard::Subtract) s = "-";
-  else if (key == sf::Keyboard::Multiply) s = "*";
-  else if (key == sf::Keyboard::Divide) s = "/";
-  else if (key == sf::Keyboard::Pause) s = "Pause";
-  else if (key == sf::Keyboard::KeyCount) s = "Key Count";
+	switch (key) {
+		case cpp3ds::Keyboard::A: s = "A"; break;
+		case cpp3ds::Keyboard::B: s = "B"; break;
+		default:
+			s = "Unknown";
+	}
+
+//  if (key >= cpp3ds::Keyboard::A && key <= cpp3ds::Keyboard::Z)
+//  {
+//    char c = 'A' + key - cpp3ds::Keyboard::A;
+//    std::ostringstream oss;
+//    oss << c;
+//    s = oss.str();
+//  }
+//  else if (key >= cpp3ds::Keyboard::Num0 && key <= cpp3ds::Keyboard::Num9)
+//  {
+//    char c = '0' + key - cpp3ds::Keyboard::Num0;
+//    std::ostringstream oss;
+//    oss << c;
+//    s = oss.str();
+//  }
+//  else if (key >= cpp3ds::Keyboard::Numpad0 && key <= cpp3ds::Keyboard::Numpad9)
+//  {
+//    char c = '0' + key - cpp3ds::Keyboard::Num0;
+//    std::ostringstream oss;
+//    oss << c << " (numpad)";
+//    s = oss.str();
+//  }
+//  else if (key >= cpp3ds::Keyboard::F1 && key <= cpp3ds::Keyboard::F15)
+//  {
+//    std::ostringstream oss;
+//    oss << "F" << (int)key - (int)cpp3ds::Keyboard::F1;
+//    s = oss.str();
+//  }
+//  else if (key == cpp3ds::Keyboard::Escape) s = "Escape";
+//  else if (key == cpp3ds::Keyboard::LControl) s = "Left Control";
+//  else if (key == cpp3ds::Keyboard::LShift) s = "Left Shift";
+//  else if (key == cpp3ds::Keyboard::LAlt) s = "Left Alt";
+//  else if (key == cpp3ds::Keyboard::LSystem) s = "Left System";
+//  else if (key == cpp3ds::Keyboard::RControl) s = "Right Control";
+//  else if (key == cpp3ds::Keyboard::RShift) s = "Right Shift";
+//  else if (key == cpp3ds::Keyboard::RAlt) s = "Right Alt";
+//  else if (key == cpp3ds::Keyboard::RSystem) s = "Right System";
+//  else if (key == cpp3ds::Keyboard::Space) s = "Space";
+//  else if (key == cpp3ds::Keyboard::Tab) s = "Tab";
+//  else if (key == cpp3ds::Keyboard::Left) s = "Left arrow";
+//  else if (key == cpp3ds::Keyboard::Right) s = "Right arrow";
+//  else if (key == cpp3ds::Keyboard::Up) s = "Up arrow";
+//  else if (key == cpp3ds::Keyboard::Down) s = "Down arrow";
+//  else if (key == cpp3ds::Keyboard::LBracket) s = "[";
+//  else if (key == cpp3ds::Keyboard::RBracket) s = "]";
+//  else if (key == cpp3ds::Keyboard::SemiColon) s = ";";
+//  else if (key == cpp3ds::Keyboard::Comma) s = ",";
+//  else if (key == cpp3ds::Keyboard::Period) s = ".";
+//  else if (key == cpp3ds::Keyboard::Quote) s = "Quote";
+//  else if (key == cpp3ds::Keyboard::Slash) s = "/";
+//  else if (key == cpp3ds::Keyboard::BackSlash) s = "\\";
+//  else if (key == cpp3ds::Keyboard::Tilde) s = "~";
+//  else if (key == cpp3ds::Keyboard::Equal) s = "=";
+//  else if (key == cpp3ds::Keyboard::Dash) s = "_";
+//  else if (key == cpp3ds::Keyboard::Return) s = "Return";
+//  else if (key == cpp3ds::Keyboard::BackSpace) s = "BackSpace";
+//  else if (key == cpp3ds::Keyboard::PageUp) s = "Page Up";
+//  else if (key == cpp3ds::Keyboard::PageDown) s = "Page Down";
+//  else if (key == cpp3ds::Keyboard::End) s = "End";
+//  else if (key == cpp3ds::Keyboard::Home) s = "Home";
+//  else if (key == cpp3ds::Keyboard::Insert) s = "Insert";
+//  else if (key == cpp3ds::Keyboard::Delete) s = "Delete";
+//  else if (key == cpp3ds::Keyboard::Add) s = "+";
+//  else if (key == cpp3ds::Keyboard::Subtract) s = "-";
+//  else if (key == cpp3ds::Keyboard::Multiply) s = "*";
+//  else if (key == cpp3ds::Keyboard::Divide) s = "/";
+//  else if (key == cpp3ds::Keyboard::Pause) s = "Pause";
+//  else if (key == cpp3ds::Keyboard::KeyCount) s = "Key Count";
 
   return s;
 }
@@ -186,7 +193,7 @@ std::map<EnumWorldEvents, EnumMessages> eventToMessage =
 
 // author: AFS
 // source: https://github.com/LaurentGomila/SFML/wiki/Source:-Letterbox-effect-using-a-view
-static sf::View getLetterboxView(sf::View view, int windowWidth, int windowHeight)
+static cpp3ds::View getLetterboxView(cpp3ds::View view, int windowWidth, int windowHeight)
 {
 
   // Compares the aspect ratio of the window to the aspect ratio of the view,
@@ -219,14 +226,14 @@ static sf::View getLetterboxView(sf::View view, int windowWidth, int windowHeigh
     posY = (1 - sizeY) / 2.0;
   }
 
-  view.setViewport( sf::FloatRect(posX, posY, sizeX, sizeY) );
+  view.setViewport( cpp3ds::FloatRect(posX, posY, sizeX, sizeY) );
 
   return view;
 }
 
-static sf::View getFullScreenLetterboxView(sf::View view, int clientWidth, int clientHeight)
+static cpp3ds::View getFullScreenLetterboxView(cpp3ds::View view, int clientWidth, int clientHeight)
 {
-  sf::View returnView(sf::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
+  cpp3ds::View returnView(cpp3ds::FloatRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
 
   float clientRatio = clientWidth / (float) clientHeight;
   float viewRatio = view.getSize().x / (float) view.getSize().y;
@@ -254,7 +261,7 @@ static sf::View getFullScreenLetterboxView(sf::View view, int clientWidth, int c
     posY = (1 - sizeY) / 2.0;
   }
 
-  returnView.setViewport( sf::FloatRect(posX, posY, sizeX, sizeY) );
+  returnView.setViewport( cpp3ds::FloatRect(posX, posY, sizeX, sizeY) );
 
   return returnView;
 }
@@ -281,7 +288,7 @@ WitchBlastGame::WitchBlastGame()
   if (parameters.fullscreen)
   {
     create(SCREEN_WIDTH, SCREEN_HEIGHT, APP_NAME + " V" + APP_VERSION, true, parameters.vsync);
-    sf::View view = app->getDefaultView();
+    cpp3ds::View view = app->getDefaultView();
     view = getFullScreenLetterboxView( view, SCREEN_WIDTH, SCREEN_HEIGHT );
     app->setView(view);
   }
@@ -502,10 +509,10 @@ WitchBlastGame::WitchBlastGame()
 
   // click zones
   for (int i = 0; i < 4; i++)
-    buttons.push_back(ButtonStruct { sf::IntRect(161 + 36 * i, 615, 32, 32), ButtonConsumable, i });
+    buttons.push_back(ButtonStruct { cpp3ds::IntRect(161 + 36 * i, 615, 32, 32), ButtonConsumable, i });
 
   for (int i = 0; i < 5; i++)
-    buttons.push_back(ButtonStruct { sf::IntRect(124 + 55 * i, 655, 48, 48), ButtonShotType, i });
+    buttons.push_back(ButtonStruct { cpp3ds::IntRect(124 + 55 * i, 655, 48, 48), ButtonShotType, i });
 }
 
 void WitchBlastGame::enableAA(bool enable)
@@ -744,7 +751,7 @@ void WitchBlastGame::startNewGame(bool fromSaveFile, int startingLevel)
 
   // key symbol on the interface
   uiSprites.keySprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
-  uiSprites.keySprite.setTextureRect(sf::IntRect(ITEM_WIDTH * EQUIP_BOSS_KEY, 0,  ITEM_WIDTH, ITEM_HEIGHT));
+  uiSprites.keySprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * EQUIP_BOSS_KEY, 0,  ITEM_WIDTH, ITEM_HEIGHT));
   uiSprites.keySprite.setPosition(582, 612);
 
   miniMap = new GameMap(FLOOR_WIDTH, FLOOR_HEIGHT);
@@ -1072,28 +1079,28 @@ void WitchBlastGame::updateIntro()
     }
   }
 
-  sf::Event event;
+  cpp3ds::Event event;
   bool stopDemo = false;
   while (app->pollEvent(event))
   {
     // Close window : exit
-    if (event.type == sf::Event::Closed)
+    if (event.type == cpp3ds::Event::Closed)
     {
       //saveGameData();
       app->close();
     }
 
-    if (event.type == sf::Event::Resized)
+    if (event.type == cpp3ds::Event::Resized)
     {
       enableAA(true);
-      sf::View view = app->getDefaultView();
+      cpp3ds::View view = app->getDefaultView();
       view = getLetterboxView( view, event.size.width, event.size.height );
       app->setView(view);
     }
 
-    if (event.type == sf::Event::KeyPressed)
+    if (event.type == cpp3ds::Event::KeyPressed)
     {
-      if (event.key.code == sf::Keyboard::Escape) stopDemo = true;
+      if (event.key.code == cpp3ds::Keyboard::Select) stopDemo = true;
     }
   }
   if (isPressing(0, KeyFireDown, true)) stopDemo = true;
@@ -1137,52 +1144,52 @@ void WitchBlastGame::updateRunningGame()
   bool escape = false;
 
   // Process events
-  sf::Event event;
+  cpp3ds::Event event;
   while (app->pollEvent(event))
   {
     // Close window : exit
-    if (event.type == sf::Event::Closed)
+    if (event.type == cpp3ds::Event::Closed)
     {
       if ((gameState == gameStatePlaying && !player->isDead()) || gameState == gameStatePlayingPause) saveGame();
       saveGameData();
       app->close();
     }
 
-    if (event.type == sf::Event::Resized)
+    if (event.type == cpp3ds::Event::Resized)
     {
       enableAA(true);
-      sf::View view = app->getDefaultView();
+      cpp3ds::View view = app->getDefaultView();
       view = getLetterboxView( view, event.size.width, event.size.height );
       app->setView(view);
     }
 
-    if (event.type == sf::Event::MouseWheelMoved)
+    if (event.type == cpp3ds::Event::MouseWheelMoved)
     {
       if (gameState == gameStatePlaying) player->selectNextShotType();
     }
 
-    if (event.type == sf::Event::MouseButtonPressed)
+    if (event.type == cpp3ds::Event::MouseButtonPressed)
     {
       if (gameState == gameStatePlaying)
       {
-        sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(*app);
-        sf::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
+        cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
+        cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
 
         int mouseButton = 1;
-        if (event.mouseButton.button == sf::Mouse::Left) mouseButton = 0;
+        if (event.mouseButton.button == cpp3ds::Mouse::Left) mouseButton = 0;
 
         tryToClick(mousePosition.x, mousePosition.y, mouseButton);
       }
     }
 
-    if (event.type == sf::Event::KeyPressed)
+    if (event.type == cpp3ds::Event::KeyPressed)
     {
-      if (event.key.code == sf::Keyboard::Escape)
+      if (event.key.code == cpp3ds::Keyboard::Escape)
       {
         escape = true;
       }
 
-      if (event.key.code == sf::Keyboard::Return && gameState == gameStatePlaying)
+      if (event.key.code == cpp3ds::Keyboard::Return && gameState == gameStatePlaying)
       {
         if (!achievementsQueue.empty())
         {
@@ -1196,32 +1203,32 @@ void WitchBlastGame::updateRunningGame()
         }
       }
 
-      if (event.key.code == sf::Keyboard::X)
+      if (event.key.code == cpp3ds::Keyboard::X)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) startNewGame(false, 1);
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift)) startNewGame(false, 1);
       }
 
-      if (event.key.code >= sf::Keyboard::Num1 && event.key.code <= sf::Keyboard::Num8)
+      if (event.key.code >= cpp3ds::Keyboard::Num1 && event.key.code <= cpp3ds::Keyboard::Num8)
       {
 #ifdef LEVEL_TEST_MODE
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt) && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LControl))
         {
-          startNewGame(false, event.key.code - sf::Keyboard::Num1 + 1);
+          startNewGame(false, event.key.code - cpp3ds::Keyboard::Num1 + 1);
         }
         else
 #endif
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)
-            || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift)
+            || cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::RShift))
         {
-          player->dropConsumables(event.key.code - sf::Keyboard::Num1);
+          player->dropConsumables(event.key.code - cpp3ds::Keyboard::Num1);
         }
         else
         {
-          player->tryToConsume(event.key.code - sf::Keyboard::Num1);
+          player->tryToConsume(event.key.code - cpp3ds::Keyboard::Num1);
         }
       }
 
-      if (event.key.code == sf::Keyboard::F1)
+      if (event.key.code == cpp3ds::Keyboard::F1)
       {
         if (!isPlayerAlive && player->getEndAge() > 3.5f)
         {
@@ -1233,18 +1240,18 @@ void WitchBlastGame::updateRunningGame()
         }
       }
 
-      if (event.key.code == sf::Keyboard::F2)
+      if (event.key.code == cpp3ds::Keyboard::F2)
       {
         showLogical = !showLogical;
       }
-      if (event.key.code == sf::Keyboard::F3)
+      if (event.key.code == cpp3ds::Keyboard::F3)
       {
         showGameTime = !showGameTime;
       }
 
       // DEBUG
 #ifdef TEST_MODE
-      /*if (event.key.code == sf::Keyboard::Delete)
+      /*if (event.key.code == cpp3ds::Keyboard::Delete)
       {
         StructHurt hurt;
         hurt.critical = false;
@@ -1256,9 +1263,9 @@ void WitchBlastGame::updateRunningGame()
         hurt.sourceType = SourceTypeMelee;
         player->hurt(hurt);
       }*/
-      if (event.key.code == sf::Keyboard::F5)
+      if (event.key.code == cpp3ds::Keyboard::F5)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new BubbleEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2 + 70,
                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2, BubbleTriple, 0);
@@ -1275,9 +1282,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeRatBlackHelmet, 1);
         }
       }
-      if (event.key.code == sf::Keyboard::F6)
+      if (event.key.code == cpp3ds::Keyboard::F6)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new ButcherEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                             OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1291,9 +1298,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeImpRed, 1);
         }
       }
-      if (event.key.code == sf::Keyboard::F7)
+      if (event.key.code == cpp3ds::Keyboard::F7)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new GiantSlimeEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                                OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1307,9 +1314,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypePumpkin, 1);
         }
       }
-      if (event.key.code == sf::Keyboard::F8)
+      if (event.key.code == cpp3ds::Keyboard::F8)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new CyclopsEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                             OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1323,9 +1330,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeSlimeViolet, 1);
         }
       }
-      if (event.key.code == sf::Keyboard::F9)
+      if (event.key.code == cpp3ds::Keyboard::F9)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new KingRatEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                             OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1337,9 +1344,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeSnakeBlood, 2);
         }
       }
-      if (event.key.code == sf::Keyboard::F10)
+      if (event.key.code == cpp3ds::Keyboard::F10)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new GiantSpiderEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                                 OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1353,9 +1360,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeCauldronElemental, 1);
         }
       }
-      if (event.key.code == sf::Keyboard::F11)
+      if (event.key.code == cpp3ds::Keyboard::F11)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new FranckyEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                             OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1368,9 +1375,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeSpiderTarantula, 2);
         }
       }
-      if (event.key.code == sf::Keyboard::F12)
+      if (event.key.code == cpp3ds::Keyboard::F12)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
         {
           new VampireEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
                             OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
@@ -1385,9 +1392,9 @@ void WitchBlastGame::updateRunningGame()
           findPlaceMonsters(EnemyTypeBogeyman, 2);
         }
       }
-      if (event.key.code == sf::Keyboard::F4)
+      if (event.key.code == cpp3ds::Keyboard::F4)
       {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift))
           for (int i = 0; i < NUMBER_ITEMS - NUMBER_EQUIP_ITEMS; i++)
             new ItemEntity((enumItemType)i, 100 + (i % 14) * 58, 100 + (i / 14) * 60);
         else
@@ -1529,10 +1536,10 @@ void WitchBlastGame::updateRunningGame()
       player->fire(firingDirection);
     }
     // alternative "firing with the mouse" gameplay
-    else if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    else if (cpp3ds::Mouse::isButtonPressed(cpp3ds::Mouse::Left))
     {
-      sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(*app);
-      sf::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
+      cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
+      cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
 
       int xm = mousePosition.x - player->getX();
       int ym = mousePosition.y - player->getY();
@@ -1554,10 +1561,10 @@ void WitchBlastGame::updateRunningGame()
     }
 
     // spell (right click)
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && (gameState == gameStatePlaying))
+    if (cpp3ds::Mouse::isButtonPressed(cpp3ds::Mouse::Right) && (gameState == gameStatePlaying))
     {
-      sf::Vector2i mousePositionInWindow = sf::Mouse::getPosition(*app);
-      sf::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
+      cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
+      cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
 
       if (mousePosition.x >= xOffset && mousePosition.x <= xOffset + GAME_WIDTH
           && mousePosition.y >= yOffset && mousePosition.y <= yOffset + GAME_HEIGHT)
@@ -1783,10 +1790,10 @@ void WitchBlastGame::renderBossPortrait()
     }
 
     // background
-    sf::RectangleShape rectangle;
-    rectangle.setFillColor(sf::Color(0, 0, 0, fade));
-    rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-    rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT));
+    cpp3ds::RectangleShape rectangle;
+    rectangle.setFillColor(cpp3ds::Color(0, 0, 0, fade));
+    rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+    rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT));
     app->draw(rectangle);
 
     // boss
@@ -1795,7 +1802,7 @@ void WitchBlastGame::renderBossPortrait()
       EnemyEntity* boss = getBoss();
       if (boss)
       {
-        sf::View view = app->getView();
+        cpp3ds::View view = app->getView();
         view.move(-5, -5);
         app->setView(view);
         boss->render(app);
@@ -1805,13 +1812,13 @@ void WitchBlastGame::renderBossPortrait()
 
       /*if (bossDisplayTimer < transitionTime + 1.5f)
       {
-        rectangle.setFillColor(sf::Color(0, 0, 0, (1.5 - (bossDisplayTimer - transitionTime)) * 510));
+        rectangle.setFillColor(cpp3ds::Color(0, 0, 0, (1.5 - (bossDisplayTimer - transitionTime)) * 510));
         app->draw(rectangle);
         std::cout << 1.5 - (bossDisplayTimer - transitionTime) << " ";
       }*/
       //if (bossDisplayTimer < transitionTime + 2.0f)
       {
-        //rectangle.setFillColor(sf::Color(0, 0, 0, (2.0 - (bossDisplayTimer - transitionTime)) * 255));
+        //rectangle.setFillColor(cpp3ds::Color(0, 0, 0, (2.0 - (bossDisplayTimer - transitionTime)) * 255));
         //app->draw(rectangle);
         //std::cout << 1.5 - (bossDisplayTimer - transitionTime) << " ";
       }
@@ -1820,7 +1827,7 @@ void WitchBlastGame::renderBossPortrait()
     // boss portrait
     if (bossDisplayTimer < transitionTime)
     {
-      sf::Sprite bossSprite;
+      cpp3ds::Sprite bossSprite;
       bossSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_BOSS_PICTURES));
       bossSprite.setPosition(xBoss, 0);
 
@@ -1843,8 +1850,8 @@ void WitchBlastGame::renderBossPortrait()
           spriteStar->setVelocity(Vector2D(400 + rand()%800));
           spriteStar->setFading(true);
           spriteStar->setLifetime(4.1f + (rand() % 100) * 0.003f );
-          spriteStar->setColor(sf::Color(rand() % 255, rand() % 255, 255, 128));
-          spriteStar->setColor(sf::Color(40, 4, 40, 128));
+          spriteStar->setColor(cpp3ds::Color(rand() % 255, rand() % 255, 255, 128));
+          spriteStar->setColor(cpp3ds::Color(40, 4, 40, 128));
           spriteStar->setType(ENTITY_EFFECT);
           if (rand()% 2 == 0) spriteStar->setRenderAdd();
         }
@@ -1865,8 +1872,8 @@ void WitchBlastGame::renderBossPortrait()
           spriteStar->setVelocity(Vector2D(400 + rand()%800));
           spriteStar->setFading(true);
           spriteStar->setLifetime(4.1f + (rand() % 100) * 0.003f );
-          spriteStar->setColor(sf::Color(rand() % 255, rand() % 255, 255, 128));
-          spriteStar->setColor(sf::Color(20, 2, 20, 128));
+          spriteStar->setColor(cpp3ds::Color(rand() % 255, rand() % 255, 255, 128));
+          spriteStar->setColor(cpp3ds::Color(20, 2, 20, 128));
           spriteStar->setType(ENTITY_EFFECT);
           spriteStar->setRenderAdd();
         }
@@ -1885,8 +1892,8 @@ void WitchBlastGame::renderBossPortrait()
           spriteStar->setVelocity(Vector2D(400 + rand()%800));
           spriteStar->setFading(true);
           spriteStar->setLifetime(4.1f + (rand() % 100) * 0.003f );
-          spriteStar->setColor(sf::Color(rand() % 255, rand() % 255, 255, 128));
-          spriteStar->setColor(sf::Color(20, 2, 20, 128));
+          spriteStar->setColor(cpp3ds::Color(rand() % 255, rand() % 255, 255, 128));
+          spriteStar->setColor(cpp3ds::Color(20, 2, 20, 128));
           spriteStar->setType(ENTITY_EFFECT);
           spriteStar->setRenderAdd();
         }
@@ -1932,20 +1939,20 @@ void WitchBlastGame::renderHud()
   if (interaction.active)
   {
     if (interaction.type == InteractionTypeTemple)
-      write(interaction.label, 20, GAME_WIDTH / 2, 480, ALIGN_CENTER,sf::Color::White, app, 2, 2, 0);
+      write(interaction.label, 20, GAME_WIDTH / 2, 480, ALIGN_CENTER,cpp3ds::Color::White, app, 2, 2, 0);
     else if (interaction.type == InteractionTypeMerchandise)
-      write(interaction.label, 20, GAME_WIDTH / 2, 480, ALIGN_CENTER,sf::Color::White, app, 2, 2, 0);
+      write(interaction.label, 20, GAME_WIDTH / 2, 480, ALIGN_CENTER,cpp3ds::Color::White, app, 2, 2, 0);
   }
 
   // light cone ?
   float fade = player->getFadingDivinity(true);
   if (fade > 0.0f)
   {
-    sf::Sprite cone;
+    cpp3ds::Sprite cone;
     cone.setTexture(*ImageManager::getInstance().getImage(IMAGE_LIGHT_CONE));
     cone.setPosition(player->getX() - 64, player->getY() - 580);
-    cone.setColor(sf::Color(255, 255, 255, 255 * fade));
-    app->draw(cone, sf::BlendAdd);
+    cone.setColor(cpp3ds::Color(255, 255, 255, 255 * fade));
+    app->draw(cone, cpp3ds::BlendAdd);
   }
 
   app->draw(uiSprites.gui);
@@ -1965,7 +1972,7 @@ void WitchBlastGame::renderHud()
       if (fade < 0) fade = 0;
     }
 
-    write("THE COOK", 27, GAME_WIDTH / 2, 540, ALIGN_CENTER, sf::Color(255, 255, 255, fade), app, 0, 0, 0);
+    write("THE COOK", 27, GAME_WIDTH / 2, 540, ALIGN_CENTER, cpp3ds::Color(255, 255, 255, fade), app, 0, 0, 0);
   }
 }
 
@@ -1977,39 +1984,39 @@ void WitchBlastGame::renderScore()
   float x = 24, y = 19;
   int scoretemp = scoreDisplayed;
   int n = scoretemp / 10000;
-  uiSprites.numberSprite.setTextureRect(sf::IntRect(n * 20, 0, 20, 28));
+  uiSprites.numberSprite.setTextureRect(cpp3ds::IntRect(n * 20, 0, 20, 28));
   uiSprites.numberSprite.setPosition(x , y);
   app->draw(uiSprites.numberSprite);
 
   scoretemp %= 10000;
   n = scoretemp / 1000;
-  uiSprites.numberSprite.setTextureRect(sf::IntRect(n * 20, 0, 20, 28));
+  uiSprites.numberSprite.setTextureRect(cpp3ds::IntRect(n * 20, 0, 20, 28));
   uiSprites.numberSprite.setPosition(x + 17, y);
   app->draw(uiSprites.numberSprite);
 
   scoretemp %= 1000;
   n = scoretemp / 100;
-  uiSprites.numberSprite.setTextureRect(sf::IntRect(n * 20, 0, 20, 28));
+  uiSprites.numberSprite.setTextureRect(cpp3ds::IntRect(n * 20, 0, 20, 28));
   uiSprites.numberSprite.setPosition(x + 2 * 17, y);
   app->draw(uiSprites.numberSprite);
 
   scoretemp %= 100;
   n = scoretemp / 10;
-  uiSprites.numberSprite.setTextureRect(sf::IntRect(n * 20, 0, 20, 28));
+  uiSprites.numberSprite.setTextureRect(cpp3ds::IntRect(n * 20, 0, 20, 28));
   uiSprites.numberSprite.setPosition(x + 3 * 17, y);
   app->draw(uiSprites.numberSprite);
 
   scoretemp %= 10;
   n = scoretemp;
-  uiSprites.numberSprite.setTextureRect(sf::IntRect(n * 20, 0, 20, 28));
+  uiSprites.numberSprite.setTextureRect(cpp3ds::IntRect(n * 20, 0, 20, 28));
   uiSprites.numberSprite.setPosition(x + 4 * 17, y);
   app->draw(uiSprites.numberSprite);
 
   if (scoreBonusTimer > 0.0f)
   {
-    sf::Color color;
-    if (scoreBonusTimer < 1.0f) color = sf::Color(255, 255, 255, 255 * scoreBonusTimer);
-    else color = sf::Color::White;
+    cpp3ds::Color color;
+    if (scoreBonusTimer < 1.0f) color = cpp3ds::Color(255, 255, 255, 255 * scoreBonusTimer);
+    else color = cpp3ds::Color::White;
     write(scoreBonus, 13, 116, 51, ALIGN_RIGHT,color, app, 0, 0, 116);
     scoreBonusTimer -= deltaTime;
   }
@@ -2023,17 +2030,17 @@ void WitchBlastGame::renderLifeBar()
     int xBarOffset = 100;
     float l = lifeBar.hp * ((MAP_WIDTH - 1) * TILE_WIDTH - xBarOffset) / lifeBar.hpMax;
 
-    sf::RectangleShape rectangle(sf::Vector2f((MAP_WIDTH - 1) * TILE_WIDTH - xBarOffset, 24));
-    rectangle.setFillColor(sf::Color(0, 0, 0,128));
-    rectangle.setPosition(sf::Vector2f(TILE_WIDTH / 2 + xBarOffset, label_dy + 22));
+    cpp3ds::RectangleShape rectangle(cpp3ds::Vector2f((MAP_WIDTH - 1) * TILE_WIDTH - xBarOffset, 24));
+    rectangle.setFillColor(cpp3ds::Color(0, 0, 0,128));
+    rectangle.setPosition(cpp3ds::Vector2f(TILE_WIDTH / 2 + xBarOffset, label_dy + 22));
     rectangle.setOutlineThickness(1);
-    rectangle.setOutlineColor(sf::Color(200, 200, 200, 200));
+    rectangle.setOutlineColor(cpp3ds::Color(200, 200, 200, 200));
     app->draw(rectangle);
 
-    rectangle.setSize(sf::Vector2f(l, 24));
-    rectangle.setFillColor(sf::Color(190, 20, 20));
+    rectangle.setSize(cpp3ds::Vector2f(l, 24));
+    rectangle.setFillColor(cpp3ds::Color(190, 20, 20));
     rectangle.setOutlineThickness(0);
-    //rectangle.setPosition(sf::Vector2f(TILE_WIDTH / 2, label_dy + 22));
+    //rectangle.setPosition(cpp3ds::Vector2f(TILE_WIDTH / 2, label_dy + 22));
     app->draw(rectangle);
 
     game().write(           lifeBar.label,
@@ -2041,7 +2048,7 @@ void WitchBlastGame::renderLifeBar()
                             TILE_WIDTH / 2 + 10.0f + xBarOffset,
                             label_dy + 22,
                             ALIGN_LEFT,
-                            sf::Color(255, 255, 255),
+                            cpp3ds::Color(255, 255, 255),
                             app, 0 , 0, 0);
   }
 }
@@ -2053,8 +2060,8 @@ void WitchBlastGame::renderRunningGame()
 
   if (!isPlayerAlive)
   {
-    sf::View view = app->getView();
-    sf::View viewSave = app->getView();
+    cpp3ds::View view = app->getView();
+    cpp3ds::View viewSave = app->getView();
 
     float endAge = player->getEndAge();
 
@@ -2094,8 +2101,8 @@ void WitchBlastGame::renderRunningGame()
   }
   else if (parameters.zoom && gameTime < 1.0f)
   {
-    sf::View view = app->getView();
-    sf::View viewSave = app->getView();
+    cpp3ds::View view = app->getView();
+    cpp3ds::View viewSave = app->getView();
 
     view.zoom(0.25f + 0.75f * (gameTime));
 
@@ -2109,8 +2116,8 @@ void WitchBlastGame::renderRunningGame()
   }
   else if (xGame[xGameTypeShake].active)
   {
-    sf::View view = app->getView();
-    sf::View viewSave = app->getView();
+    cpp3ds::View view = app->getView();
+    cpp3ds::View viewSave = app->getView();
 
     view.move(-4 + rand() % 9, -4 + rand() % 9);
     app->setView(view);
@@ -2122,8 +2129,8 @@ void WitchBlastGame::renderRunningGame()
   }
   else
   {
-    sf::View view = app->getView();
-    sf::View viewSave = app->getView();
+    cpp3ds::View view = app->getView();
+    cpp3ds::View viewSave = app->getView();
 
     view.move(-OFFSET_X, -OFFSET_Y);
     app->setView(view);
@@ -2134,13 +2141,13 @@ void WitchBlastGame::renderRunningGame()
     renderHud();
   }
 
-  sf::RectangleShape rectangle(sf::Vector2f(200, 25));
+  cpp3ds::RectangleShape rectangle(cpp3ds::Vector2f(200, 25));
 
   // effects
   if (player->isSpecialStateActive(SpecialStateTime))
   {
-    sf::RectangleShape whiteLine = sf::RectangleShape(sf::Vector2f(GAME_WIDTH, 2));
-    whiteLine.setFillColor(sf::Color(255, 255, 255, 32));
+    cpp3ds::RectangleShape whiteLine = cpp3ds::RectangleShape(cpp3ds::Vector2f(GAME_WIDTH, 2));
+    whiteLine.setFillColor(cpp3ds::Color(255, 255, 255, 32));
     for (int i = 0; i < 8; i++)
     {
       whiteLine.setPosition(xOffset, yOffset + rand() % GAME_HEIGHT);
@@ -2151,28 +2158,28 @@ void WitchBlastGame::renderRunningGame()
   {
     // effect
     int effectFade = 10 + 20 * (1.0f + cos(12.0f * getAbsolutTime())) * 0.5f;
-    rectangle.setFillColor(sf::Color(0, 255, 255, effectFade));
-    rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-    rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
-    sf::RenderStates r;
-    r.blendMode = sf::BlendAlpha ;
+    rectangle.setFillColor(cpp3ds::Color(0, 255, 255, effectFade));
+    rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+    rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+    cpp3ds::RenderStates r;
+    r.blendMode = cpp3ds::BlendAlpha ;
     app->draw(rectangle, r);
   }
 
   if (xGame[xGameTypeFade].active && xGame[xGameTypeFade].param == X_GAME_FADE_IN)
   {
     // fade in
-    rectangle.setFillColor(sf::Color(0, 0, 0, 255 - ((FADE_IN_DELAY - xGame[xGameTypeFade].timer) / FADE_IN_DELAY) * 255));
-    rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-    rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+    rectangle.setFillColor(cpp3ds::Color(0, 0, 0, 255 - ((FADE_IN_DELAY - xGame[xGameTypeFade].timer) / FADE_IN_DELAY) * 255));
+    rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+    rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
     app->draw(rectangle);
   }
   else if (xGame[xGameTypeFade].active && xGame[xGameTypeFade].param == X_GAME_FADE_OUT)
   {
     // fade out
-    rectangle.setFillColor(sf::Color(0, 0, 0, ((FADE_IN_DELAY - xGame[xGameTypeFade].timer) / FADE_IN_DELAY) * 255));
-    rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-    rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+    rectangle.setFillColor(cpp3ds::Color(0, 0, 0, ((FADE_IN_DELAY - xGame[xGameTypeFade].timer) / FADE_IN_DELAY) * 255));
+    rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+    rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
     app->draw(rectangle);
   }
   if (player->isSpecialStateActive(SpecialStateConfused))
@@ -2193,11 +2200,11 @@ void WitchBlastGame::renderRunningGame()
 
     fade *= 1.5f;
 
-    rectangle.setFillColor(sf::Color(255 - effectFade, 0, effectFade, fade));
-    rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-    rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
-    sf::RenderStates r;
-    r.blendMode = sf::BlendAlpha ;
+    rectangle.setFillColor(cpp3ds::Color(255 - effectFade, 0, effectFade, fade));
+    rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+    rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+    cpp3ds::RenderStates r;
+    r.blendMode = cpp3ds::BlendAlpha ;
     app->draw(rectangle, r);
   }
   else if (xGame[xGameTypeFadeColor].active)
@@ -2233,10 +2240,10 @@ void WitchBlastGame::renderRunningGame()
     }
     int alpha = xGame[xGameTypeFadeColor].timer * 200.0f /  xGame[xGameTypeFadeColor].duration;
 
-    rectangle.setFillColor(sf::Color(r, g, b, alpha));
-    rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-    rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
-    app->draw(rectangle, sf::BlendAdd);
+    rectangle.setFillColor(cpp3ds::Color(r, g, b, alpha));
+    rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+    rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+    app->draw(rectangle, cpp3ds::BlendAdd);
   }
 
   if (gameState != gameStatePlayingDisplayBoss) renderMessages();
@@ -2245,59 +2252,59 @@ void WitchBlastGame::renderRunningGame()
 
   std::ostringstream oss;
   oss << player->getGold();
-  write(oss.str(), 18, 367, 619, ALIGN_CENTER, sf::Color::White, app, 0, 0, 0);
+  write(oss.str(), 18, 367, 619, ALIGN_CENTER, cpp3ds::Color::White, app, 0, 0, 0);
 
-  myText.setColor(sf::Color(0, 0, 0, 255));
+  myText.setColor(cpp3ds::Color(0, 0, 0, 255));
   myText.setCharacterSize(16);
 
   oss.str("");
   oss << tools::getLabel("level") << " " << level;
 
-  writeGraphic(oss.str(), 16, levelStrPosition.x, levelStrPosition.y, ALIGN_CENTER, sf::Color::Black, app, 0, 0, 0);
+  writeGraphic(oss.str(), 16, levelStrPosition.x, levelStrPosition.y, ALIGN_CENTER, cpp3ds::Color::Black, app, 0, 0, 0);
 
   //if (gameState == gameStatePlaying)
   {
-    sf::Sprite hpSprite;
+    cpp3ds::Sprite hpSprite;
     hpSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_UI_LIFE));
     int hpFade = 88.0f * (float)player->getHpDisplay() / (float)player->getHpMax();
     if (hpFade < 0) hpFade = 0;
     else if (hpFade > 88) hpFade = 88;
     hpSprite.setPosition(477, 619 + 88 - hpFade);
-    hpSprite.setTextureRect(sf::IntRect(0, 88 - hpFade, 88, hpFade));
+    hpSprite.setTextureRect(cpp3ds::IntRect(0, 88 - hpFade, 88, hpFade));
     app->draw(hpSprite);
 
     oss.str("");
     oss << player->getHp() << "/" << player->getHpMax();
-    write(oss.str(), 16, 521, 654, ALIGN_CENTER, sf::Color::White, app, 0, 0, 0);
+    write(oss.str(), 16, 521, 654, ALIGN_CENTER, cpp3ds::Color::White, app, 0, 0, 0);
 
     // mana
-    sf::Sprite manaSprite;
+    cpp3ds::Sprite manaSprite;
     manaSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_UI_MANA));
     int manaFade = player->getPercentFireDelay() * 98;
     manaSprite.setPosition(10, 614 + 98 - manaFade);
-    manaSprite.setTextureRect(sf::IntRect(0, 98 - manaFade, 98, manaFade));
+    manaSprite.setTextureRect(cpp3ds::IntRect(0, 98 - manaFade, 98, manaFade));
     app->draw(manaSprite);
 
 
     if (player->getActiveSpell().spell != SpellNone)
     {
-      sf::Sprite spellSprite;
+      cpp3ds::Sprite spellSprite;
       spellSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_UI_SPELLS));
       spellSprite.setPosition(20, 624);
       int frame = player->getActiveSpell().spell;
-      spellSprite.setTextureRect(sf::IntRect(frame * 78, 78, 78, 78));
+      spellSprite.setTextureRect(cpp3ds::IntRect(frame * 78, 78, 78, 78));
       app->draw(spellSprite);
 
       int spellFade = player->getPercentSpellDelay() * 78;
       spellSprite.setPosition(20, 624 + 78 - spellFade);
-      spellSprite.setTextureRect(sf::IntRect(frame * 78, 78 - spellFade, 78, spellFade));
+      spellSprite.setTextureRect(cpp3ds::IntRect(frame * 78, 78 - spellFade, 78, spellFade));
       app->draw(spellSprite);
 
       if (player->canCastSpell())
       {
         float fade = (cos(8.0f * getAbsolutTime()) + 1.0f) * 0.5f;
-        spellSprite .setColor(sf::Color(255, 255, 255, 255 * fade));
-        app->draw(spellSprite, sf::BlendAdd);
+        spellSprite .setColor(cpp3ds::Color(255, 255, 255, 255 * fade));
+        app->draw(spellSprite, cpp3ds::BlendAdd);
       }
     }
 
@@ -2306,42 +2313,42 @@ void WitchBlastGame::renderRunningGame()
     // drawing the level items
     if (player->isEquiped(EQUIP_FLOOR_MAP))
     {
-      sf::Sprite mapSprite;
+      cpp3ds::Sprite mapSprite;
       mapSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
-      mapSprite.setTextureRect(sf::IntRect(ITEM_WIDTH * 3, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
+      mapSprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * 3, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
       mapSprite.setPosition(582, 647);
       app->draw(mapSprite);
     }
     if (player->isEquiped(EQUIP_ALCOHOL))
     {
-      sf::Sprite alcSprite;
+      cpp3ds::Sprite alcSprite;
       alcSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
-      alcSprite.setTextureRect(sf::IntRect(ITEM_WIDTH * 4, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
+      alcSprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * 4, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
       alcSprite.setPosition(582, 680);
       app->draw(alcSprite);
     }
     if (player->isEquiped(EQUIP_LUCK))
     {
-      sf::Sprite alcSprite;
+      cpp3ds::Sprite alcSprite;
       alcSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
-      alcSprite.setTextureRect(sf::IntRect(ITEM_WIDTH * 5, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
+      alcSprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * 5, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
       alcSprite.setPosition(615, 680);
       app->draw(alcSprite);
     }
     if (player->isEquiped(EQUIP_FAIRY_POWDER))
     {
-      sf::Sprite alcSprite;
+      cpp3ds::Sprite alcSprite;
       alcSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
-      alcSprite.setTextureRect(sf::IntRect(ITEM_WIDTH * 6, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
+      alcSprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * 6, ITEM_HEIGHT * 4,  ITEM_WIDTH, ITEM_HEIGHT));
       alcSprite.setPosition(648, 680);
       app->draw(alcSprite);
     }
     // drawing the consumable
     if (!player->isEquiped(EQUIP_BAG))
     {
-      sf::RectangleShape shadow(sf::Vector2f(70, 33));
-      shadow.setFillColor(sf::Color(0, 0, 0, 128));
-      shadow.setPosition(sf::Vector2f(231, 614));
+      cpp3ds::RectangleShape shadow(cpp3ds::Vector2f(70, 33));
+      shadow.setFillColor(cpp3ds::Color(0, 0, 0, 128));
+      shadow.setPosition(cpp3ds::Vector2f(231, 614));
       app->draw(shadow);
     }
     else
@@ -2353,18 +2360,18 @@ void WitchBlastGame::renderRunningGame()
       int item = player->getConsumable(i);
       if (item > -1)
       {
-        sf::Sprite consSprite;
+        cpp3ds::Sprite consSprite;
         consSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS));
         consSprite.setPosition(161 + 36 * i, 615);
 
         if (item < FirstEquipItem && item >= ItemPotion01 + NUMBER_UNIDENTIFIED)
         {
           int bottle = (int)(getPotion((enumItemType)item));
-          consSprite.setTextureRect(sf::IntRect(ITEM_WIDTH * (bottle % 10), ITEM_HEIGHT * (bottle / 10),  ITEM_WIDTH, ITEM_HEIGHT));
+          consSprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * (bottle % 10), ITEM_HEIGHT * (bottle / 10),  ITEM_WIDTH, ITEM_HEIGHT));
           app->draw(consSprite);
         }
 
-        consSprite.setTextureRect(sf::IntRect(ITEM_WIDTH * (item % 10), ITEM_HEIGHT * (item / 10),  ITEM_WIDTH, ITEM_HEIGHT));
+        consSprite.setTextureRect(cpp3ds::IntRect(ITEM_WIDTH * (item % 10), ITEM_HEIGHT * (item / 10),  ITEM_WIDTH, ITEM_HEIGHT));
         app->draw(consSprite);
       }
     }
@@ -2372,17 +2379,17 @@ void WitchBlastGame::renderRunningGame()
     // drawing the divinity
     if (player->getDivinity().divinity >= 0)
     {
-      sf::Sprite divSprite;
+      cpp3ds::Sprite divSprite;
       divSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_DIVINITY));
       divSprite.setPosition(405, 616);
-      divSprite.setTextureRect(sf::IntRect(player->getDivinity().divinity * 48, 0, 48, 85));
+      divSprite.setTextureRect(cpp3ds::IntRect(player->getDivinity().divinity * 48, 0, 48, 85));
       app->draw(divSprite);
 
       float fade = player->getFadingDivinity(false);
       if (fade > 0.0f && player->getPlayerStatus() != PlayerEntity::playerStatusPraying)
       {
-        divSprite.setTextureRect(sf::IntRect(player->getDivinity().divinity * 48, 85, 48, 85));
-        divSprite.setColor(sf::Color(255, 255, 255, 255 * fade));
+        divSprite.setTextureRect(cpp3ds::IntRect(player->getDivinity().divinity * 48, 85, 48, 85));
+        divSprite.setColor(cpp3ds::Color(255, 255, 255, 255 * fade));
         app->draw(divSprite);
       }
 
@@ -2390,20 +2397,20 @@ void WitchBlastGame::renderRunningGame()
       if (player->getDivinity().interventions + 1 < player->getDivinity().level)
       {
         int fade = 50 + 50 * cosf(game().getAbsolutTime() * 8);
-        rectangle.setFillColor(sf::Color(100 + fade, 100 + fade, 200 + fade / 2, 255));
+        rectangle.setFillColor(cpp3ds::Color(100 + fade, 100 + fade, 200 + fade / 2, 255));
       }
 
       else
-        rectangle.setFillColor(sf::Color(100, 100, 200, 255));
+        rectangle.setFillColor(cpp3ds::Color(100, 100, 200, 255));
 
-      rectangle.setPosition(sf::Vector2f(407, 692));
-      rectangle.setSize(sf::Vector2f(45 * player->getDivinity().percentsToNextLevels, 8));
+      rectangle.setPosition(cpp3ds::Vector2f(407, 692));
+      rectangle.setSize(cpp3ds::Vector2f(45 * player->getDivinity().percentsToNextLevels, 8));
       app->draw(rectangle);
 
       std::ostringstream oss;
       if (player->getDivinity().level == MAX_DIVINITY_LEVEL + 1) oss << "MAX";
       else oss << "lvl " << player->getDivinity().level;
-      write(oss.str(), 11, 429, 702, ALIGN_CENTER, sf::Color::White, app, 0, 0, 0);
+      write(oss.str(), 11, 429, 702, ALIGN_CENTER, cpp3ds::Color::White, app, 0, 0, 0);
     }
 
     // render the shots
@@ -2413,9 +2420,9 @@ void WitchBlastGame::renderRunningGame()
     if (gameState == gameStatePlayingPause)
     {
       // background
-      rectangle.setFillColor(sf::Color(0, 0, 0, 200));
-      rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-      rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT));
+      rectangle.setFillColor(cpp3ds::Color(0, 0, 0, 200));
+      rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+      rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH, MAP_HEIGHT * TILE_HEIGHT));
       app->draw(rectangle);
 
       app->draw(uiSprites.pauseSprite);
@@ -2423,7 +2430,7 @@ void WitchBlastGame::renderRunningGame()
       float x = 588;
       float y = 388;
       // items
-      //write(tools::getLabel("inventory"), 16, x, y, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+      //write(tools::getLabel("inventory"), 16, x, y, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
       int n = 0;
 
       for (auto i: sortedEquipement)
@@ -2432,10 +2439,10 @@ void WitchBlastGame::renderRunningGame()
             i != EQUIP_LUCK && i != EQUIP_ALCOHOL &&
             i != EQUIP_FAIRY_POWDER && player->isEquiped(i))
         {
-          sf::Sprite itemSprite;
+          cpp3ds::Sprite itemSprite;
           itemSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
           itemSprite.setPosition(x + (n % 8) * 40, y + (n / 8) * 40);
-          itemSprite.setTextureRect(sf::IntRect((i % 10) * 32, (i / 10) * 32, 32, 32));
+          itemSprite.setTextureRect(cpp3ds::IntRect((i % 10) * 32, (i / 10) * 32, 32, 32));
           app->draw(itemSprite);
           n++;
         }
@@ -2445,7 +2452,7 @@ void WitchBlastGame::renderRunningGame()
       // texts in the right UI part
 
       // player name
-      writeGraphic(parameters.playerName, 32, 734, 52, ALIGN_CENTER, sf::Color::Black, app);
+      writeGraphic(parameters.playerName, 32, 734, 52, ALIGN_CENTER, cpp3ds::Color::Black, app);
 
       // game time
       std::ostringstream oss;
@@ -2464,28 +2471,28 @@ void WitchBlastGame::renderRunningGame()
       oss << ":";
       if (time < 10) oss << "0";
       oss << time;
-      writeGraphic(oss.str(), 18, 734, 143, ALIGN_CENTER, sf::Color::Black, app);
+      writeGraphic(oss.str(), 18, 734, 143, ALIGN_CENTER, cpp3ds::Color::Black, app);
 
       oss.str("");
       oss << tools::getLabel("ui_base_damage") << ": " << player->getDamage();
-      writeGraphic(oss.str(), 17, 588, 190, ALIGN_LEFT, sf::Color::Black, app);
+      writeGraphic(oss.str(), 17, 588, 190, ALIGN_LEFT, cpp3ds::Color::Black, app);
 
       oss.str("");
       oss << tools::getLabel("ui_fire_rate") << ": " << std::fixed << std::setprecision(1) << player->getFireRate()
         << " / " << tools::getLabel("ui_second");
-      writeGraphic(oss.str(), 17, 588, 222, ALIGN_LEFT, sf::Color::Black, app);
+      writeGraphic(oss.str(), 17, 588, 222, ALIGN_LEFT, cpp3ds::Color::Black, app);
 
       oss.str("");
       oss << tools::getLabel("dc_killed_monsters") << ": " << bodyCount;
-      writeGraphic(oss.str(), 17, 588, 254, ALIGN_LEFT, sf::Color::Black, app);
+      writeGraphic(oss.str(), 17, 588, 254, ALIGN_LEFT, cpp3ds::Color::Black, app);
 
       oss.str("");
       oss << tools::getLabel("dc_challenges") << ": " << challengeLevel - 1;
-      writeGraphic(oss.str(), 17, 588, 286, ALIGN_LEFT, sf::Color::Black, app);
+      writeGraphic(oss.str(), 17, 588, 286, ALIGN_LEFT, cpp3ds::Color::Black, app);
 
       oss.str("");
       oss << tools::getLabel("ui_temple_donation") << ": " << player->getDonation();
-      writeGraphic(oss.str(), 17, 588, 318, ALIGN_LEFT, sf::Color::Black, app);
+      writeGraphic(oss.str(), 17, 588, 318, ALIGN_LEFT, cpp3ds::Color::Black, app);
 
       // potions
       int iPotion = 0;
@@ -2500,23 +2507,23 @@ void WitchBlastGame::renderRunningGame()
           {
             int xPotion = 40;
             int yPotion = 440 + 30 * iPotion;
-            sf::Sprite itemSprite;
+            cpp3ds::Sprite itemSprite;
             itemSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS));
             itemSprite.setPosition(xPotion, yPotion);
 
             if (currentPotion >= ItemPotion01 + NUMBER_UNIDENTIFIED )
             {
               int basisPotion = getPotion(enumItemType(currentPotion));
-              itemSprite.setTextureRect(sf::IntRect((basisPotion % 10) * 32, (basisPotion / 10) * 32, 32, 32));
+              itemSprite.setTextureRect(cpp3ds::IntRect((basisPotion % 10) * 32, (basisPotion / 10) * 32, 32, 32));
               app->draw(itemSprite);
             }
 
-            itemSprite.setTextureRect(sf::IntRect((currentPotion % 10) * 32, (currentPotion / 10) * 32, 32, 32));
+            itemSprite.setTextureRect(cpp3ds::IntRect((currentPotion % 10) * 32, (currentPotion / 10) * 32, 32, 32));
             app->draw(itemSprite);
 
-            // write(tools::getLabel(items[currentPotion].name), 13, xPotion + 37, yPotion + 11, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
-            // write(tools::getLabel(items[currentPotion].description), 12, xPotion + 3, yPotion + 36, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
-            write(tools::getLabel(items[currentPotion].description), 12, xPotion + 37, yPotion + 11, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+            // write(tools::getLabel(items[currentPotion].name), 13, xPotion + 37, yPotion + 11, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
+            // write(tools::getLabel(items[currentPotion].description), 12, xPotion + 3, yPotion + 36, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
+            write(tools::getLabel(items[currentPotion].description), 12, xPotion + 37, yPotion + 11, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
 
             iPotion++;
           }
@@ -2532,29 +2539,29 @@ void WitchBlastGame::renderRunningGame()
 
       if (deathAge > DEATH_CERTIFICATE_DELAY)
       {
-        rectangle.setFillColor(sf::Color(0, 0, 0, 180));
-        rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-        rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+        rectangle.setFillColor(cpp3ds::Color(0, 0, 0, 180));
+        rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+        rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
         app->draw(rectangle);
 
         renderDeathScreen(80, 110);
 
         if (scoreSaveFile.compare("") == 0)
         {
-          write(tools::getLabel("certificate_capture"), 16, 80, 430, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+          write(tools::getLabel("certificate_capture"), 16, 80, 430, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
         }
         else
         {
           std::stringstream ss;
           ss << tools::getLabel("certificate_saved") << " " << scoreSaveFile;
-          write(ss.str(), 16, 80, 430, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+          write(ss.str(), 16, 80, 430, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
         }
       }
       else if (deathAge > DEATH_CERTIFICATE_DELAY - 1.0f)
       {
-        rectangle.setFillColor(sf::Color(0, 0, 0, 180 * (deathAge - 2.5f)));
-        rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-        rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+        rectangle.setFillColor(cpp3ds::Color(0, 0, 0, 180 * (deathAge - 2.5f)));
+        rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+        rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
         app->draw(rectangle);
 
         renderDeathScreen(80 + (DEATH_CERTIFICATE_DELAY - deathAge) * 1000, 110);
@@ -2565,29 +2572,29 @@ void WitchBlastGame::renderRunningGame()
     {
       if (player->getEndAge() > 2.0f)
       {
-        rectangle.setFillColor(sf::Color(0, 0, 0, 180));
-        rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-        rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+        rectangle.setFillColor(cpp3ds::Color(0, 0, 0, 180));
+        rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+        rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
         app->draw(rectangle);
 
         renderDeathScreen(80, 110);
 
         if (scoreSaveFile.compare("") == 0)
         {
-          write(tools::getLabel("certificate_capture"), 16, 80, 430, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+          write(tools::getLabel("certificate_capture"), 16, 80, 430, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
         }
         else
         {
           std::stringstream ss;
           ss << tools::getLabel("certificate_saved") << " " << scoreSaveFile;
-          write(ss.str(), 16, 80, 430, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+          write(ss.str(), 16, 80, 430, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
         }
       }
       else
       {
-        rectangle.setFillColor(sf::Color(0, 0, 0, 90 * (player->getEndAge())));
-        rectangle.setPosition(sf::Vector2f(xOffset, yOffset));
-        rectangle.setSize(sf::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
+        rectangle.setFillColor(cpp3ds::Color(0, 0, 0, 90 * (player->getEndAge())));
+        rectangle.setPosition(cpp3ds::Vector2f(xOffset, yOffset));
+        rectangle.setSize(cpp3ds::Vector2f(MAP_WIDTH * TILE_WIDTH , MAP_HEIGHT * TILE_HEIGHT));
         app->draw(rectangle);
 
         renderDeathScreen(80 + (2.0f - player->getEndAge() ) * 1000, 110);
@@ -2597,9 +2604,9 @@ void WitchBlastGame::renderRunningGame()
     {
       float x0 = (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2;
 
-      write(tools::getLabel("congratulations_1"), 25, x0, 220, ALIGN_CENTER, sf::Color::White, app, 2, 2, 0);
-      write(tools::getLabel("congratulations_2"), 23, x0, 250, ALIGN_CENTER, sf::Color::White, app, 2, 2, 0);
-      write(tools::getLabel("congratulations_3"), 23, x0, 280, ALIGN_CENTER, sf::Color::White, app, 2, 2, 0);
+      write(tools::getLabel("congratulations_1"), 25, x0, 220, ALIGN_CENTER, cpp3ds::Color::White, app, 2, 2, 0);
+      write(tools::getLabel("congratulations_2"), 23, x0, 250, ALIGN_CENTER, cpp3ds::Color::White, app, 2, 2, 0);
+      write(tools::getLabel("congratulations_3"), 23, x0, 280, ALIGN_CENTER, cpp3ds::Color::White, app, 2, 2, 0);
 
       registerAchievement(AchievementWin);
       if (endingTimer < 0.0f)
@@ -2621,7 +2628,7 @@ void WitchBlastGame::renderRunningGame()
     ss << ":";
     if (secondes < 10) ss << "0";
     ss << secondes;
-    write(ss.str(), 14, 4, 4, ALIGN_LEFT, sf::Color::Green, app, 0, 0, 0);
+    write(ss.str(), 14, 4, 4, ALIGN_LEFT, cpp3ds::Color::Green, app, 0, 0, 0);
   }
 
 // achievements ?
@@ -2650,7 +2657,7 @@ void WitchBlastGame::renderRunningGame()
     int yPos = 4;
     int opening = 384;
     float achievAge = ACHIEVEMENT_DELAY_MAX - achievementsQueue.front().timer;
-    sf::Sprite spriteScroll;
+    cpp3ds::Sprite spriteScroll;
     if (achievAge < 1.0f)
       opening = 32;
     else if (achievAge < 2.0f)
@@ -2658,46 +2665,46 @@ void WitchBlastGame::renderRunningGame()
     else if (achievAge > ACHIEVEMENT_DELAY_MAX - 1.0f)
       opening = 32 + (ACHIEVEMENT_DELAY_MAX - achievAge) * (384 - 32);
     if (achievAge < 0.5f)
-      spriteScroll.setColor(sf::Color(255, 255, 255, 500 * achievAge));
+      spriteScroll.setColor(cpp3ds::Color(255, 255, 255, 500 * achievAge));
     else if (achievAge > ACHIEVEMENT_DELAY_MAX - 0.5f)
-      spriteScroll.setColor(sf::Color(255, 255, 255, 500 * (ACHIEVEMENT_DELAY_MAX - achievAge)));
+      spriteScroll.setColor(cpp3ds::Color(255, 255, 255, 500 * (ACHIEVEMENT_DELAY_MAX - achievAge)));
 
     spriteScroll.setTexture(*ImageManager::getInstance().getImage(IMAGE_UI_ACHIEV));
-    spriteScroll.setTextureRect(sf::IntRect(128 + 384 - opening, 0, opening, 64));
+    spriteScroll.setTextureRect(cpp3ds::IntRect(128 + 384 - opening, 0, opening, 64));
     spriteScroll.setPosition(xPos + 384 - opening, yPos);
     app->draw(spriteScroll);
 
     if ((achievAge > 1.0f && achievAge < 2.0f) || achievAge > ACHIEVEMENT_DELAY_MAX - 1.0f)
-      spriteScroll.setTextureRect(sf::IntRect(32 * ((int)(achievAge * 8) % 4), 0, 32, 64));
+      spriteScroll.setTextureRect(cpp3ds::IntRect(32 * ((int)(achievAge * 8) % 4), 0, 32, 64));
     else
-      spriteScroll.setTextureRect(sf::IntRect(0, 0, 32, 64));
+      spriteScroll.setTextureRect(cpp3ds::IntRect(0, 0, 32, 64));
     spriteScroll.setPosition(xPos + 394 - opening - 16, yPos);
     app->draw(spriteScroll);
 
     if (achievAge > 2.0f && achievAge < ACHIEVEMENT_DELAY_MAX - 1.0f)
     {
-      sf::Sprite icon;
+      cpp3ds::Sprite icon;
       icon.setTexture(*ImageManager::getInstance().getImage(IMAGE_ACHIEVEMENTS));
-      icon.setTextureRect(sf::IntRect( ((achievementsQueue.front().type + 1) % 10) * 64,
+      icon.setTextureRect(cpp3ds::IntRect( ((achievementsQueue.front().type + 1) % 10) * 64,
                                        ((achievementsQueue.front().type + 1) / 10) * 64, 64, 64));
 
       icon.setPosition(xPos + 308, yPos + 9);
       icon.setScale(0.7f, 0.7f);
       app->draw(icon);
-      icon.setColor(sf::Color(255, 255, 255, 50 + 50 * cosf(getAbsolutTime() * 4)));
-      app->draw(icon, sf::BlendAdd);
+      icon.setColor(cpp3ds::Color(255, 255, 255, 50 + 50 * cosf(getAbsolutTime() * 4)));
+      app->draw(icon, cpp3ds::BlendAdd);
 
-      game().write(achievementsQueue.front().message, 13, xPos + 34, yPos + 10, ALIGN_LEFT, sf::Color::Black, app, 0, 0, 0);
+      game().write(achievementsQueue.front().message, 13, xPos + 34, yPos + 10, ALIGN_LEFT, cpp3ds::Color::Black, app, 0, 0, 0);
 
       if (achievements[achievementsQueue.front().type].unlockType == UnlockItem)
       {
         game().write(tools::getLabel(items[achievements[achievementsQueue.front().type].unlock].name),
-                     13, xPos + 70, yPos + 34, ALIGN_LEFT, sf::Color::Black, app, 0, 0, 0);
+                     13, xPos + 70, yPos + 34, ALIGN_LEFT, cpp3ds::Color::Black, app, 0, 0, 0);
       }
       else if (achievements[achievementsQueue.front().type].unlockType == UnlockFunctionality)
       {
         game().write(tools::getLabel(functionalityLabel[achievements[achievementsQueue.front().type].unlock]),
-                     13, xPos + 70, yPos + 34, ALIGN_LEFT, sf::Color::Black, app, 0, 0, 0);
+                     13, xPos + 70, yPos + 34, ALIGN_LEFT, cpp3ds::Color::Black, app, 0, 0, 0);
       }
     }
 
@@ -2768,7 +2775,7 @@ void WitchBlastGame::renderMessages()
       dy *= (2 * (messagesQueue.front().timerMax - messagesQueue.front().timer));
     }
 
-    uiSprites.msgBoxSprite.setTextureRect(sf::IntRect(0, 0, 970, dy + 2));
+    uiSprites.msgBoxSprite.setTextureRect(cpp3ds::IntRect(0, 0, 970, dy + 2));
     uiSprites.msgBoxSprite.setPosition(0, 600 - dy);
     app->draw(uiSprites.msgBoxSprite);
 
@@ -2780,7 +2787,7 @@ void WitchBlastGame::renderMessages()
     ss << messagesQueue.front().message[2];
 
 
-    write(ss.str(), 16, 10, 602 - dy, ALIGN_LEFT, sf::Color::White, app, 0, 0, 0);
+    write(ss.str(), 16, 10, 602 - dy, ALIGN_LEFT, cpp3ds::Color::White, app, 0, 0, 0);
   }
 
   // show player effects
@@ -2836,10 +2843,10 @@ void WitchBlastGame::saveDeathScreen()
 
   int width = 810, height = 300, border = 4;
   int x = 80, y = 110;
-  sf::Image screenShot(app->capture());
-  sf::Image savedImage;
+  cpp3ds::Image screenShot(app->capture());
+  cpp3ds::Image savedImage;
   savedImage.create(width + border * 2, height + border * 2);
-  savedImage.copy(screenShot,0 , 0, sf::IntRect( x - border, y - border, width + border * 2, height + border * 2));
+  savedImage.copy(screenShot,0 , 0, cpp3ds::IntRect( x - border, y - border, width + border * 2, height + border * 2));
   savedImage.saveToFile(ss.str());
 }
 
@@ -2863,7 +2870,7 @@ void WitchBlastGame::saveScreen()
   ss << (now->tm_sec);
   ss << ".png";
 
-  sf::Image screenShot(app->capture());
+  cpp3ds::Image screenShot(app->capture());
   screenShot.saveToFile(ss.str());
 }
 
@@ -2871,7 +2878,7 @@ void WitchBlastGame::renderDeathScreen(float x, float y)
 {
   int xRect = 810;
 
-  sf::Sprite rectangle;
+  cpp3ds::Sprite rectangle;
   rectangle.setTexture(*ImageManager::getInstance().getImage(IMAGE_DEATH_CERTIFICATE));
   rectangle.setPosition(x - 4, y - 4);
   app->draw(rectangle);
@@ -2883,13 +2890,13 @@ void WitchBlastGame::renderDeathScreen(float x, float y)
   {
     ss << parameters.playerName << " - " << tools::getLabel("dc_victory");
 
-    sf::Sprite seal;
+    cpp3ds::Sprite seal;
     seal.setTexture(*ImageManager::getInstance().getImage(IMAGE_WIN_SEAL));
     seal.setPosition(x + 650, y + 50);
     app->draw(seal);
   }
 
-  write(ss.str(), 18, x + xRect / 2, y + 5, ALIGN_CENTER, sf::Color::Black, app, 0, 0, 0);
+  write(ss.str(), 18, x + xRect / 2, y + 5, ALIGN_CENTER, cpp3ds::Color::Black, app, 0, 0, 0);
 
   ss.str(std::string());
   ss.clear();
@@ -2911,22 +2918,22 @@ void WitchBlastGame::renderDeathScreen(float x, float y)
   ss << tools::getLabel("dc_gold") << ": " << player->getGold() << std::endl;
   ss << tools::getLabel("dc_challenges") << ": " << challengeLevel - 1 << std::endl;
 
-  write(ss.str(), 16, x + 112, y + 50, ALIGN_LEFT, sf::Color::Black, app, 0, 0, 0);
+  write(ss.str(), 16, x + 112, y + 50, ALIGN_LEFT, cpp3ds::Color::Black, app, 0, 0, 0);
 
   // player
   renderPlayer(x + 40, y + 48, player->getEquipment(), player->getShotType(), 1, 0);
 
   // items
-  write(tools::getLabel("inventory"), 16, x + 14, y + 165, ALIGN_LEFT, sf::Color::Black, app, 0, 0, 0);
+  write(tools::getLabel("inventory"), 16, x + 14, y + 165, ALIGN_LEFT, cpp3ds::Color::Black, app, 0, 0, 0);
   int n = 0;
   for (auto i: sortedEquipement)
   {
     if (i != EQUIP_BOSS_KEY && player->isEquiped(i))
     {
-      sf::Sprite itemSprite;
+      cpp3ds::Sprite itemSprite;
       itemSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ITEMS_EQUIP));
       itemSprite.setPosition(x + 14 + n * 32, y + 183);
-      itemSprite.setTextureRect(sf::IntRect((i % 10) * 32, (i / 10) * 32, 32, 32));
+      itemSprite.setTextureRect(cpp3ds::IntRect((i % 10) * 32, (i / 10) * 32, 32, 32));
       app->draw(itemSprite);
       n++;
     }
@@ -2935,7 +2942,7 @@ void WitchBlastGame::renderDeathScreen(float x, float y)
   ss.str("");
   ss.clear();
   ss << "Score: " << score;
-  write(ss.str(), 24, x + xRect / 2, y + 240, ALIGN_CENTER, sf::Color::Black, app, 0, 0, 0);
+  write(ss.str(), 24, x + xRect / 2, y + 240, ALIGN_CENTER, cpp3ds::Color::Black, app, 0, 0, 0);
 
 }
 
@@ -3042,25 +3049,25 @@ void WitchBlastGame::updateMenu()
   }
 
   // Process events
-  sf::Event event;
+  cpp3ds::Event event;
   while (app->pollEvent(event))
   {
     // Close window : exit
-    if (event.type == sf::Event::Closed)
+    if (event.type == cpp3ds::Event::Closed)
     {
       saveGameData();
       app->close();
     }
 
-    if (event.type == sf::Event::Resized)
+    if (event.type == cpp3ds::Event::Resized)
     {
       enableAA(true);
-      sf::View view = app->getDefaultView();
+      cpp3ds::View view = app->getDefaultView();
       view = getLetterboxView( view, event.size.width, event.size.height );
       app->setView(view);
     }
 
-    if (event.type == sf::Event::TextEntered)
+    if (event.type == cpp3ds::Event::TextEntered)
     {
       if (menuState == MenuStateChangeName)
       {
@@ -3074,10 +3081,10 @@ void WitchBlastGame::updateMenu()
       }
     }
 
-    if (event.type == sf::Event::KeyPressed && menuState == MenuStateKeys)
+    if (event.type == cpp3ds::Event::KeyPressed && menuState == MenuStateKeys)
     {
       bool alreadyUsed = false;
-      if (event.key.code == sf::Keyboard::Escape) alreadyUsed = true;
+      if (event.key.code == cpp3ds::Keyboard::Escape) alreadyUsed = true;
       for (unsigned int i = 0; i < menuKeyIndex; i++)
         if (input[i] == event.key.code) alreadyUsed = true;
 
@@ -3096,13 +3103,13 @@ void WitchBlastGame::updateMenu()
     else if (menuState == MenuStateJoystick)
     {
       bool alreadyUsed = false;
-      int nbButtons = sf::Joystick::getButtonCount(0);
+      int nbButtons = cpp3ds::Joystick::getButtonCount(0);
 
       bool found = false;
       JoystickInputStruct jInput;
 
       // Escape = out
-      if (event.key.code == sf::Keyboard::Escape)
+      if (event.key.code == cpp3ds::Keyboard::Escape)
       {
         menuState = MenuStateConfig;
         saveConfigurationToFile();
@@ -3112,11 +3119,11 @@ void WitchBlastGame::updateMenu()
       // button pressed ?
       for (int i = 0; !found && i < nbButtons; i++)
       {
-        if (sf::Joystick::isButtonPressed(0, i))
+        if (cpp3ds::Joystick::isButtonPressed(0, i))
         {
           jInput.isButton = true;
           jInput.value = i;
-          jInput.axis = sf::Joystick::X;
+          jInput.axis = cpp3ds::Joystick::X;
           found = true;
         }
       }
@@ -3124,22 +3131,22 @@ void WitchBlastGame::updateMenu()
       if (!found)
       {
         // axis ?
-        for (int i = sf::Joystick::X; i <= sf::Joystick::PovY; i++)
+        for (int i = cpp3ds::Joystick::X; i <= cpp3ds::Joystick::PovY; i++)
         {
-          if (sf::Joystick::hasAxis(0, (sf::Joystick::Axis)i))
+          if (cpp3ds::Joystick::hasAxis(0, (cpp3ds::Joystick::Axis)i))
           {
-            if (sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)i) < -50)
+            if (cpp3ds::Joystick::getAxisPosition(0, (cpp3ds::Joystick::Axis)i) < -50)
             {
               jInput.isButton = false;
               jInput.value = -1;
-              jInput.axis = (sf::Joystick::Axis)i;
+              jInput.axis = (cpp3ds::Joystick::Axis)i;
               found = true;
             }
-            else if (sf::Joystick::getAxisPosition(0, (sf::Joystick::Axis)i) > 50)
+            else if (cpp3ds::Joystick::getAxisPosition(0, (cpp3ds::Joystick::Axis)i) > 50)
             {
               jInput.isButton = false;
               jInput.value = 1;
-              jInput.axis = (sf::Joystick::Axis)i;
+              jInput.axis = (cpp3ds::Joystick::Axis)i;
               found = true;
             }
           }
@@ -3176,26 +3183,26 @@ void WitchBlastGame::updateMenu()
 
     else
     {
-      if (event.type == sf::Event::KeyPressed)
+      if (event.type == cpp3ds::Event::KeyPressed)
       {
-        if (event.key.code == sf::Keyboard::F1)
+        if (event.key.code == cpp3ds::Keyboard::F1)
         {
             saveScreen();
         }
         if (menuState == MenuStateChangeName)
         {
-          if (event.key.code == sf::Keyboard::Escape || event.key.code == sf::Keyboard::Return)
+          if (event.key.code == cpp3ds::Keyboard::Escape || event.key.code == cpp3ds::Keyboard::Return)
           {
             saveConfigurationToFile();
             menuState = MenuStateMain;
           }
-          else if (event.key.code == sf::Keyboard::BackSpace)
+          else if (event.key.code == cpp3ds::Keyboard::BackSpace)
           {
             if (parameters.playerName.size() > 0)
               parameters.playerName.erase(parameters.playerName.size() - 1);
           }
         }
-        else if (event.key.code == sf::Keyboard::Escape)
+        else if (event.key.code == cpp3ds::Keyboard::Escape)
         {
           escape = true;
         }
@@ -3305,7 +3312,7 @@ void WitchBlastGame::updateMenu()
       {
         nbPlayers++;
         if (nbPlayers > NB_PLAYERS_MAX) nbPlayers = 1;
-        if (nbPlayers > 1 && !sf::Joystick::isConnected(0)) nbPlayers = 1;
+        if (nbPlayers > 1 && !cpp3ds::Joystick::isConnected(0)) nbPlayers = 1;
         SoundManager::getInstance().playSound(SOUND_SHOT_SELECT);
         buildMenu(true);
       }
@@ -3341,7 +3348,7 @@ void WitchBlastGame::updateMenu()
       {
         nbPlayers--;
         if (nbPlayers <= 0) nbPlayers = NB_PLAYERS_MAX;
-        if (nbPlayers > 1 && !sf::Joystick::isConnected(0)) nbPlayers = 1;
+        if (nbPlayers > 1 && !cpp3ds::Joystick::isConnected(0)) nbPlayers = 1;
         SoundManager::getInstance().playSound(SOUND_SHOT_SELECT);
         buildMenu(true);
       }
@@ -3362,7 +3369,7 @@ void WitchBlastGame::updateMenu()
         menuKeyIndex = 0;
         break;
       case MenuJoystick:
-        if (sf::Joystick::isConnected(0))
+        if (cpp3ds::Joystick::isConnected(0))
         {
           buildMenu(true);
           menuState = MenuStateJoystick;
@@ -3476,14 +3483,14 @@ void WitchBlastGame::renderMenu()
   {
     // menu keys
     if (config.configFileExists())
-      write(tools::getLabel("key_configuration"), 18, xAlign, 295, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+      write(tools::getLabel("key_configuration"), 18, xAlign, 295, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
     else
-      write(tools::getLabel("key_configuration_desc"), 18, xAlign, 295, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+      write(tools::getLabel("key_configuration_desc"), 18, xAlign, 295, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
     for (unsigned int i = 0; i < NumberKeys; i++)
     {
-      sf::Color itemColor;
-      if (menuKeyIndex == i) itemColor = sf::Color(255, 255, 255, 255);
-      else itemColor = sf::Color(180, 180, 180, 255);
+      cpp3ds::Color itemColor;
+      if (menuKeyIndex == i) itemColor = cpp3ds::Color(255, 255, 255, 255);
+      else itemColor = cpp3ds::Color(180, 180, 180, 255);
       std::ostringstream oss;
       oss << tools::getLabel(inputKeyString[i]) << ": ";
       if (menuKeyIndex == i) oss << tools::getLabel("key_configuration_insert");
@@ -3496,14 +3503,14 @@ void WitchBlastGame::renderMenu()
   {
     // menu keys
     if (config.configFileExists())
-      write(tools::getLabel("joystick_configuration"), 18, xAlign, 295, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+      write(tools::getLabel("joystick_configuration"), 18, xAlign, 295, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
     else
-      write(tools::getLabel("joystick_configuration_desc"), 18, xAlign, 295, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+      write(tools::getLabel("joystick_configuration_desc"), 18, xAlign, 295, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
     for (unsigned int i = 0; i < NumberKeys; i++)
     {
-      sf::Color itemColor;
-      if (menuKeyIndex == i) itemColor = sf::Color(255, 255, 255, 255);
-      else itemColor = sf::Color(180, 180, 180, 255);
+      cpp3ds::Color itemColor;
+      if (menuKeyIndex == i) itemColor = cpp3ds::Color(255, 255, 255, 255);
+      else itemColor = cpp3ds::Color(180, 180, 180, 255);
       std::ostringstream oss;
       oss << tools::getLabel(inputKeyString[i]) << ": ";
       if (menuKeyIndex == i) oss << tools::getLabel("joystick_configuration_insert");
@@ -3517,18 +3524,18 @@ void WitchBlastGame::renderMenu()
     // menu
     for (unsigned int i = 0; i < menu->items.size(); i++)
     {
-      sf::Color itemColor;
+      cpp3ds::Color itemColor;
       if (menu->index == i)
       {
-        itemColor = sf::Color(255, 255, 255, 255);
+        itemColor = cpp3ds::Color(255, 255, 255, 255);
 
-        sf::Sprite fairySprite;
+        cpp3ds::Sprite fairySprite;
         fairySprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-        fairySprite.setTextureRect(sf::IntRect( 48 * ((int)(20 *getAbsolutTime()) % 2), fairySpriteOffsetY, 48, 48));
+        fairySprite.setTextureRect(cpp3ds::IntRect( 48 * ((int)(20 *getAbsolutTime()) % 2), fairySpriteOffsetY, 48, 48));
         fairySprite.setPosition(xAlign - 60, yTop - 10 + i * yStep + 5 * cos( 6 * getAbsolutTime()));
         app->draw(fairySprite);
       }
-      else itemColor = sf::Color(120, 120, 120, 255);
+      else itemColor = cpp3ds::Color(120, 120, 120, 255);
 
       std::string label = menu->items[i].label;
       if (menu->items[i].id == MenuLanguage)
@@ -3565,7 +3572,7 @@ void WitchBlastGame::renderMenu()
       write(label, 21, xAlign, yTop + i * yStep, ALIGN_LEFT, itemColor, app, 1, 1, 0);
     }
     write(menu->items[menu->index].description, 18, xAlign,
-          yTop + menu->items.size() * yStep + 8, ALIGN_LEFT, sf::Color(60, 80, 220), app, 0, 0, 0);
+          yTop + menu->items.size() * yStep + 8, ALIGN_LEFT, cpp3ds::Color(60, 80, 220), app, 0, 0, 0);
 
     // Keys
     if (menuState == MenuStateFirst)
@@ -3573,7 +3580,7 @@ void WitchBlastGame::renderMenu()
       // displaying the standard key configuration
       int xKeys = 270;
       int yKeys = 380;
-      sf::Sprite keysSprite;
+      cpp3ds::Sprite keysSprite;
       if (parameters.language == 1) // french
         keysSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_KEYS_AZER));
       else
@@ -3582,20 +3589,20 @@ void WitchBlastGame::renderMenu()
       app->draw(keysSprite);
 
       // legend
-      write(tools::getLabel("keys_move"), 16, xKeys + 190, yKeys + 10, ALIGN_LEFT, sf::Color::White, app, 1, 1, 0);
-      write(tools::getLabel("keys_time"), 16, xKeys + 295, yKeys + 14, ALIGN_LEFT, sf::Color::White, app, 1, 1, 0);
-      write(tools::getLabel("keys_fire"), 16, xKeys + 360, yKeys + 54, ALIGN_LEFT, sf::Color::White, app, 1, 1, 0);
-      write(tools::getLabel("key_spell"), 16, xKeys + 148, yKeys + 184, ALIGN_CENTER, sf::Color::White, app, 1, 1, 0);
+      write(tools::getLabel("keys_move"), 16, xKeys + 190, yKeys + 10, ALIGN_LEFT, cpp3ds::Color::White, app, 1, 1, 0);
+      write(tools::getLabel("keys_time"), 16, xKeys + 295, yKeys + 14, ALIGN_LEFT, cpp3ds::Color::White, app, 1, 1, 0);
+      write(tools::getLabel("keys_fire"), 16, xKeys + 360, yKeys + 54, ALIGN_LEFT, cpp3ds::Color::White, app, 1, 1, 0);
+      write(tools::getLabel("key_spell"), 16, xKeys + 148, yKeys + 184, ALIGN_CENTER, cpp3ds::Color::White, app, 1, 1, 0);
       // TODO key interact
       std::ostringstream oss;
       oss << tools::getLabel("keys_select_1") << std::endl << tools::getLabel("keys_select_2");
-      write(oss.str(), 16, xKeys + 4, yKeys + 100, ALIGN_LEFT, sf::Color::White, app, 1, 1, 0);
+      write(oss.str(), 16, xKeys + 4, yKeys + 100, ALIGN_LEFT, cpp3ds::Color::White, app, 1, 1, 0);
     }
   }
 
   std::ostringstream oss;
   oss << APP_NAME << " v" << APP_VERSION << "  - 2014-2015 - " << " Seby (code), Pierre \"dejam0rt\" Baron (2D art)";
-  write(oss.str(), 17, 5, 680, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+  write(oss.str(), 17, 5, 680, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
 }
 
 void WitchBlastGame::renderAchievements()
@@ -3606,20 +3613,20 @@ void WitchBlastGame::renderAchievements()
   app->draw(titleSprite);
 
   // achievements
-  write(tools::getLabel("menu_achievements"), 30, 485, 280, ALIGN_CENTER, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+  write(tools::getLabel("menu_achievements"), 30, 485, 280, ALIGN_CENTER, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
 
   int achWidth = 64, achHeight = 64, x0 = 180, y0 = 380, xStep = 16, yStep = 16, nbProLine = 8;
 
   if (menuAchIndex / 8 < ACHIEV_LINES)
   {
-    sf::RectangleShape rectangle(sf::Vector2f(achWidth, achHeight));
+    cpp3ds::RectangleShape rectangle(cpp3ds::Vector2f(achWidth, achHeight));
     rectangle.setPosition(x0 + (menuAchIndex % nbProLine) * (achWidth + xStep), y0 + (menuAchIndex / nbProLine) * (achHeight + yStep));
     rectangle.setOutlineThickness(3);
-    rectangle.setOutlineColor(sf::Color(50, 255, 50));
+    rectangle.setOutlineColor(cpp3ds::Color(50, 255, 50));
     app->draw(rectangle);
   }
 
-  sf::Sprite sprite;
+  cpp3ds::Sprite sprite;
   sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_ACHIEVEMENTS));
 
   for (int k : sortedAchievements)
@@ -3628,24 +3635,24 @@ void WitchBlastGame::renderAchievements()
     sprite.setPosition(x0 + (k % nbProLine) * (achWidth + xStep), y0 + (k / nbProLine) * (achHeight + yStep));
     if (achievementState[i] == AchievementDone)
     {
-      sprite.setTextureRect(sf::IntRect( ((i + 1) % 10) * achWidth, ((i + 1) / 10) * achHeight, achWidth, achHeight));
+      sprite.setTextureRect(cpp3ds::IntRect( ((i + 1) % 10) * achWidth, ((i + 1) / 10) * achHeight, achWidth, achHeight));
     }
     else
     {
-      sprite.setTextureRect(sf::IntRect(0, 0, achWidth, achHeight));
+      sprite.setTextureRect(cpp3ds::IntRect(0, 0, achWidth, achHeight));
     }
     app->draw(sprite);
   }
 
   if (menuAchIndex / 8 >= ACHIEV_LINES)
   {
-    write(tools::getLabel("config_back"), 17, 485, 620, ALIGN_CENTER, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+    write(tools::getLabel("config_back"), 17, 485, 620, ALIGN_CENTER, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
   }
   else
   {
-    write(tools::getLabel("config_back"), 17, 485, 620, ALIGN_CENTER, sf::Color(180, 180, 180, 255), app, 1, 1, 0);
+    write(tools::getLabel("config_back"), 17, 485, 620, ALIGN_CENTER, cpp3ds::Color(180, 180, 180, 255), app, 1, 1, 0);
 
-    sf::Color fontColor = sf::Color::White;
+    cpp3ds::Color fontColor = cpp3ds::Color::White;
     std::stringstream oss;
     int achIndex = sortedAchievements[menuAchIndex];
 
@@ -3675,10 +3682,10 @@ void WitchBlastGame::renderAchievements()
         oss << "???";
       else
         oss << tools::getLabel(achievements[achIndex].label + "_desc");
-      fontColor = sf::Color(150, 150, 150);
+      fontColor = cpp3ds::Color(150, 150, 150);
     }
 
-    write(oss.str(), 19, 100, 650, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+    write(oss.str(), 19, 100, 650, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
   }
 }
 
@@ -3690,7 +3697,7 @@ void WitchBlastGame::renderCredits()
   app->draw(titleSprite);
 
   // credits
-  write(tools::getLabel("credits"), 30, 485, 275, ALIGN_CENTER, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+  write(tools::getLabel("credits"), 30, 485, 275, ALIGN_CENTER, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
 
   int yCursorInit = 365;
   int yStep = 30;
@@ -3699,34 +3706,34 @@ void WitchBlastGame::renderCredits()
   int xMarging = 20;
 
   int yCursor = yCursorInit;
-  write("Code", 22, xLeft, yCursor, ALIGN_LEFT, sf::Color(210, 210, 255, 255), app, 0, 0, 0);
+  write("Code", 22, xLeft, yCursor, ALIGN_LEFT, cpp3ds::Color(210, 210, 255, 255), app, 0, 0, 0);
   yCursor += yStep;
   int i = 0;
   while (creditsCode[i] != "END")
   {
-    write(creditsCode[i], 19, xLeft + xMarging, yCursor, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 0, 0, 0);
+    write(creditsCode[i], 19, xLeft + xMarging, yCursor, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 0, 0, 0);
     yCursor += yStep;
     i++;
   }
   yCursor += yStep;
 
-  write("2D Art", 22, xLeft, yCursor, ALIGN_LEFT, sf::Color(210, 210, 255, 255), app, 0, 0, 0);
+  write("2D Art", 22, xLeft, yCursor, ALIGN_LEFT, cpp3ds::Color(210, 210, 255, 255), app, 0, 0, 0);
   yCursor += yStep;
   i = 0;
   while (credits2D[i] != "END")
   {
-    write(credits2D[i], 19, xLeft + xMarging, yCursor, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 0, 0, 0);
+    write(credits2D[i], 19, xLeft + xMarging, yCursor, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 0, 0, 0);
     yCursor += yStep;
     i++;
   }
   yCursor += yStep;
 
-  write("Sound", 22, xLeft, yCursor, ALIGN_LEFT, sf::Color(210, 210, 255, 255), app, 0, 0, 0);
+  write("Sound", 22, xLeft, yCursor, ALIGN_LEFT, cpp3ds::Color(210, 210, 255, 255), app, 0, 0, 0);
   yCursor += yStep;
   i = 0;
   while (creditsSound[i] != "END")
   {
-    write(creditsSound[i], 19, xLeft + xMarging, yCursor, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 0, 0, 0);
+    write(creditsSound[i], 19, xLeft + xMarging, yCursor, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 0, 0, 0);
     yCursor += yStep;
     i++;
   }
@@ -3736,23 +3743,23 @@ void WitchBlastGame::renderCredits()
   ////// RIGHT
 
   yCursor = yCursorInit + yStep;
-  write("Music", 22, xRight, yCursor, ALIGN_LEFT, sf::Color(210, 210, 255, 255), app, 0, 0, 0);
+  write("Music", 22, xRight, yCursor, ALIGN_LEFT, cpp3ds::Color(210, 210, 255, 255), app, 0, 0, 0);
   yCursor += yStep;
   i = 0;
   while (creditsMusic[i] != "END")
   {
-    write(creditsMusic[i], 19, xRight + xMarging, yCursor, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 0, 0, 0);
+    write(creditsMusic[i], 19, xRight + xMarging, yCursor, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 0, 0, 0);
     yCursor += yStep;
     i++;
   }
   yCursor += yStep;
 
-  write("Translation", 22, xRight, yCursor, ALIGN_LEFT, sf::Color(210, 210, 255, 255), app, 0, 0, 0);
+  write("Translation", 22, xRight, yCursor, ALIGN_LEFT, cpp3ds::Color(210, 210, 255, 255), app, 0, 0, 0);
   yCursor += yStep;
   i = 0;
   while (creditsTranslate[i] != "END")
   {
-    write(creditsTranslate[i], 19, xRight + xMarging, yCursor, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 0, 0, 0);
+    write(creditsTranslate[i], 19, xRight + xMarging, yCursor, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 0, 0, 0);
     yCursor += yStep;
     i++;
   }
@@ -3761,12 +3768,12 @@ void WitchBlastGame::renderCredits()
 
 void WitchBlastGame::renderScores(std::vector <StructScore> scoresToRender, std::string title, bool blinkingName)
 {
-  sf::Sprite bgSprite;
+  cpp3ds::Sprite bgSprite;
   bgSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_HALL_OF_FAME));
   app->draw(bgSprite);
 
   // hi-scores-title
-  writeGraphic(title, 30, 485, 60, ALIGN_CENTER, sf::Color(0, 0, 0, 255), app, 0, 0, 0);
+  writeGraphic(title, 30, 485, 60, ALIGN_CENTER, cpp3ds::Color(0, 0, 0, 255), app, 0, 0, 0);
 
   int xEquip = 540;
   //int yEquip = 360;
@@ -3782,23 +3789,23 @@ void WitchBlastGame::renderScores(std::vector <StructScore> scoresToRender, std:
   int y0 = 130;
   int yStep = 50;
 
-  sf::Sprite itemSprite;
+  cpp3ds::Sprite itemSprite;
 
   for (unsigned int i = 0; i < scoresToRender.size() && i < SCORES_MAX; i++)
   {
-    sf::Color color = sf::Color( 15, 15, 15);
+    cpp3ds::Color color = cpp3ds::Color( 15, 15, 15);
     if (scoresToRender[i].score == lastScore.score
         && scoresToRender[i].level == lastScore.level
         && scoresToRender[i].name == lastScore.name
         && scoresToRender[i].time == lastScore.time)
     {
       int fade = 1 + cosf(getAbsolutTime() * 8) * 63;
-      color = sf::Color(255 - fade, 128, 255 - fade);
+      color = cpp3ds::Color(255 - fade, 128, 255 - fade);
     }
     else if (blinkingName && scoresToRender[i].name == parameters.playerName)
     {
       int fade = 70 + sinf(getAbsolutTime() * 4) * 70;
-      color = sf::Color(fade * 1.5, fade, 0);
+      color = cpp3ds::Color(fade * 1.5, fade, 0);
     }
 
     // equipment
@@ -3817,7 +3824,7 @@ void WitchBlastGame::renderScores(std::vector <StructScore> scoresToRender, std:
       if (ii != EQUIP_BOSS_KEY && scoresToRender[i].equip[ii])
       {
         itemSprite.setPosition(xEquip + n * dx, y0 + 22 + yStep * i);
-        itemSprite.setTextureRect(sf::IntRect((ii % 10) * 32, (ii / 10) * 32, 32, 32));
+        itemSprite.setTextureRect(cpp3ds::IntRect((ii % 10) * 32, (ii / 10) * 32, 32, 32));
         app->draw(itemSprite);
         n++;
       }
@@ -3835,7 +3842,7 @@ void WitchBlastGame::renderScores(std::vector <StructScore> scoresToRender, std:
     if (scoresToRender[i].level == -1)
     {
       itemSprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_WIN_SEAL_HOF));
-      itemSprite.setTextureRect(sf::IntRect(0, 0, 48, 48));
+      itemSprite.setTextureRect(cpp3ds::IntRect(0, 0, 48, 48));
       itemSprite.setPosition(475, y0 + 20 + yStep * i);
       app->draw(itemSprite);
     }
@@ -3874,7 +3881,7 @@ void WitchBlastGame::renderScores(std::vector <StructScore> scoresToRender, std:
     else if (n == 1) oss << "..";
     else oss << "...";
 
-    write(oss.str(), 15, 20, 20, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 1, 1, 0);
+    write(oss.str(), 15, 20, 20, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 1, 1, 0);
   }
 }
 
@@ -3889,18 +3896,18 @@ void WitchBlastGame::renderInGameMenu()
     // menu
     for (unsigned int i = 0; i < menu->items.size(); i++)
     {
-      sf::Color itemColor;
+      cpp3ds::Color itemColor;
       if (menu->index == i)
       {
-        itemColor = sf::Color(255, 255, 255, 255);
+        itemColor = cpp3ds::Color(255, 255, 255, 255);
 
-        sf::Sprite fairySprite;
+        cpp3ds::Sprite fairySprite;
         fairySprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-        fairySprite.setTextureRect(sf::IntRect( 48 * ((int)(8 *getAbsolutTime()) % 2), fairySpriteOffsetY, 48, 48));
+        fairySprite.setTextureRect(cpp3ds::IntRect( 48 * ((int)(8 *getAbsolutTime()) % 2), fairySpriteOffsetY, 48, 48));
         fairySprite.setPosition(xAlign - 60, yAlign + i * 90 + 5 * cos( 6 * getAbsolutTime()));
         app->draw(fairySprite);
       }
-      else itemColor = sf::Color(120, 120, 120, 255);
+      else itemColor = cpp3ds::Color(120, 120, 120, 255);
 
       std::string label = menu->items[i].label;
       write(label, 23, xAlign, yAlign + 10 + i * 90, ALIGN_LEFT, itemColor, app, 1, 1, 0);
@@ -3922,7 +3929,7 @@ void WitchBlastGame::startGame()
     if (deltaTime < 0.008f)
     {
       float sleepTime = 1.0f / 60.0f - deltaTime;
-      sf::sleep(sf::seconds(sleepTime));
+      cpp3ds::sleep(cpp3ds::seconds(sleepTime));
       deltaTime = getAbsolutTime() - lastTime;
     }
 
@@ -3954,17 +3961,17 @@ void WitchBlastGame::startGame()
     else
     {
       // Process events
-      sf::Event event;
+      cpp3ds::Event event;
       while (app->pollEvent(event))
       {
         // Close window : exit
-        if (event.type == sf::Event::Closed)
+        if (event.type == cpp3ds::Event::Closed)
         {
           saveGameData();
           app->close();
         }
 
-        if (event.type == sf::Event::LostFocus)
+        if (event.type == cpp3ds::Event::LostFocus)
         {
           if (parameters.pauseOnFocusLost && gameState == gameStatePlaying && !player->isDead())
             gameState = gameStatePlayingPause;
@@ -4513,7 +4520,7 @@ void WitchBlastGame::moveToOtherMap(int direction)
 void WitchBlastGame::onRender()
 {
   // clear the view
-  app->clear(sf::Color::Black);
+  app->clear(cpp3ds::Color::Black);
 
   switch (gameState)
   {
@@ -4536,7 +4543,7 @@ void WitchBlastGame::onRender()
   app->display();
 }
 
-void WitchBlastGame::renderHudShots(sf::RenderTarget* app)
+void WitchBlastGame::renderHudShots(cpp3ds::RenderTarget* app)
 {
   int xHud = 124;
   int yHud = 655;
@@ -4550,10 +4557,10 @@ void WitchBlastGame::renderHudShots(sf::RenderTarget* app)
       uiSprites.shotsSprite.setPosition(xHud + 55 * index, yHud);
       if (index == player->getShotIndex())
       {
-        uiSprites.shotsSprite.setTextureRect(sf::IntRect(0, 0,  48, 48));
+        uiSprites.shotsSprite.setTextureRect(cpp3ds::IntRect(0, 0,  48, 48));
         app->draw(uiSprites.shotsSprite);
       }
-      uiSprites.shotsSprite.setTextureRect(sf::IntRect(48 * ( 1 + type_shot), 0,  48, 48));
+      uiSprites.shotsSprite.setTextureRect(cpp3ds::IntRect(48 * ( 1 + type_shot), 0,  48, 48));
       app->draw(uiSprites.shotsSprite);
 
       // level
@@ -4561,7 +4568,7 @@ void WitchBlastGame::renderHudShots(sf::RenderTarget* app)
       {
         std::ostringstream oss;
         oss << "lvl " << player->getShotLevel(i) + 1;
-        write(oss.str(), 10, xHud + 55 * index + 10, yHud + 48, ALIGN_LEFT, sf::Color(255, 255, 255, 255), app, 0, 0, 0);
+        write(oss.str(), 10, xHud + 55 * index + 10, yHud + 48, ALIGN_LEFT, cpp3ds::Color(255, 255, 255, 255), app, 0, 0, 0);
       }
 
       index++;
@@ -4921,10 +4928,10 @@ void WitchBlastGame::generateMap()
     currentMap->randomize(currentMap->getRoomType());
 }
 
-void WitchBlastGame::write(std::string str, int size, float x, float y, int align, sf::Color color, sf::RenderTarget* app, int xShadow, int yShadow, int maxWidth)
+void WitchBlastGame::write(std::string str, int size, float x, float y, int align, cpp3ds::Color color, cpp3ds::RenderTarget* app, int xShadow, int yShadow, int maxWidth)
 {
   myText.setString(str);
-  myText.setString(sf::String::fromUtf8(str.begin(), str.end()));
+  myText.setString(cpp3ds::String::fromUtf8(str.begin(), str.end()));
   myText.setCharacterSize(size);
 
   if (maxWidth > 0)
@@ -4945,7 +4952,7 @@ void WitchBlastGame::write(std::string str, int size, float x, float y, int alig
   if (xShadow != 0 && yShadow != 0)
   {
     myText.setPosition(xFont + xShadow, y + yShadow);
-    myText.setColor(sf::Color(0, 0, 0, 255));
+    myText.setColor(cpp3ds::Color(0, 0, 0, 255));
     app->draw(myText);
   }
 
@@ -4954,7 +4961,7 @@ void WitchBlastGame::write(std::string str, int size, float x, float y, int alig
   app->draw(myText);
 }
 
-void WitchBlastGame::writeGraphic(std::string str, int size, float x, float y, int align, sf::Color color, sf::RenderTarget* app, int xShadow, int yShadow, int maxWidth)
+void WitchBlastGame::writeGraphic(std::string str, int size, float x, float y, int align, cpp3ds::Color color, cpp3ds::RenderTarget* app, int xShadow, int yShadow, int maxWidth)
 {
   if (parameters.language == 4) // russian
   {
@@ -5586,7 +5593,7 @@ void WitchBlastGame::resumeMusic()
 
 void WitchBlastGame::updateMusicVolume()
 {
-  if (music.getStatus() == sf::Music::Playing)
+  if (music.getStatus() == cpp3ds::Music::Playing)
   {
     if (parameters.musicVolume == 0)
       music.stop();
@@ -6252,7 +6259,7 @@ void WitchBlastGame::addKey(int logicInput, std::string key)
   int iKey = config.findInt(key);
   if (iKey >= 0)
   {
-    sf::Keyboard::Key k = (sf::Keyboard::Key)iKey;
+    cpp3ds::Keyboard::Key k = (cpp3ds::Keyboard::Key)iKey;
     input[logicInput] = k;
   }
 }
@@ -6329,41 +6336,41 @@ void WitchBlastGame::configureFromFile()
   parameters.playerName = "";
   parameters.displayBossPortrait = false;
 
-  input[KeyUp]    = sf::Keyboard::W;
-  input[KeyDown]  = sf::Keyboard::S;
-  input[KeyLeft]  = sf::Keyboard::A;
-  input[KeyRight] = sf::Keyboard::D;
-  input[KeyFireUp]    = sf::Keyboard::Up;
-  input[KeyFireDown]  = sf::Keyboard::Down;
-  input[KeyFireLeft]  = sf::Keyboard::Left;
-  input[KeyFireRight] = sf::Keyboard::Right;
-  input[KeyFire] = sf::Keyboard::RControl;
-  input[KeySpell] = sf::Keyboard::Space;
-  input[KeyInteract] = sf::Keyboard::E;
-  input[KeyFireSelect] = sf::Keyboard::Tab;
-  input[KeyTimeControl] = sf::Keyboard::RShift;
+  input[KeyUp]    = cpp3ds::Keyboard::W;
+  input[KeyDown]  = cpp3ds::Keyboard::S;
+  input[KeyLeft]  = cpp3ds::Keyboard::A;
+  input[KeyRight] = cpp3ds::Keyboard::D;
+  input[KeyFireUp]    = cpp3ds::Keyboard::Up;
+  input[KeyFireDown]  = cpp3ds::Keyboard::Down;
+  input[KeyFireLeft]  = cpp3ds::Keyboard::Left;
+  input[KeyFireRight] = cpp3ds::Keyboard::Right;
+  input[KeyFire] = cpp3ds::Keyboard::RControl;
+  input[KeySpell] = cpp3ds::Keyboard::Space;
+  input[KeyInteract] = cpp3ds::Keyboard::E;
+  input[KeyFireSelect] = cpp3ds::Keyboard::Tab;
+  input[KeyTimeControl] = cpp3ds::Keyboard::RShift;
 
   // Joystick
   joystickInput[KeyUp].isButton = false;
-  joystickInput[KeyUp].axis = sf::Joystick::Y;
+  joystickInput[KeyUp].axis = cpp3ds::Joystick::Y;
   joystickInput[KeyUp].value = -1;
 
   joystickInput[KeyDown].isButton = false;
-  joystickInput[KeyDown].axis = sf::Joystick::Y;
+  joystickInput[KeyDown].axis = cpp3ds::Joystick::Y;
   joystickInput[KeyDown].value = 1;
 
   joystickInput[KeyLeft].isButton = false;
-  joystickInput[KeyLeft].axis = sf::Joystick::X;
+  joystickInput[KeyLeft].axis = cpp3ds::Joystick::X;
   joystickInput[KeyLeft].value = -1;
 
   joystickInput[KeyRight].isButton = false;
-  joystickInput[KeyRight].axis = sf::Joystick::X;
+  joystickInput[KeyRight].axis = cpp3ds::Joystick::X;
   joystickInput[KeyRight].value = 1;
 
   for (unsigned int i = KeyFireUp; i < NumberKeys; i++)
   {
     joystickInput[i].isButton = true;
-    joystickInput[i].axis = sf::Joystick::X;
+    joystickInput[i].axis = cpp3ds::Joystick::X;
 
     if (i > KeyFireRight) joystickInput[i].value = i - 4;
   }
@@ -6404,8 +6411,8 @@ void WitchBlastGame::configureFromFile()
     if (n > -1000)
       joystickInput[i].value = n;
     n = config.findInt(oss_axis.str());
-    if (n >= sf::Joystick::Axis::X && n <= sf::Joystick::Axis::PovY)
-      joystickInput[i].axis = (sf::Joystick::Axis)n;
+    if (n >= cpp3ds::Joystick::Axis::X && n <= cpp3ds::Joystick::Axis::PovY)
+      joystickInput[i].axis = (cpp3ds::Joystick::Axis)n;
   }
 
   int i = config.findInt("language");
@@ -6561,7 +6568,7 @@ void WitchBlastGame::buildMenu(bool rebuild)
 
   menuItemStuct itemJoystick;
   itemJoystick.label = tools::getLabel("config_joystick");
-  if (sf::Joystick::isConnected(0))
+  if (cpp3ds::Joystick::isConnected(0))
     itemJoystick.description = tools::getLabel("redef_joystick");
   else
     itemJoystick.description = tools::getLabel("joystick_not_found");
@@ -6687,26 +6694,26 @@ void WitchBlastGame::registerLanguage()
   if (parameters.language == 1)
   {
     // french keyboard
-    input[KeyUp]    = sf::Keyboard::Z;
-    input[KeyLeft]  = sf::Keyboard::Q;
+    input[KeyUp]    = cpp3ds::Keyboard::Z;
+    input[KeyLeft]  = cpp3ds::Keyboard::Q;
   }
   else
   {
     // QWERT / QWERTZ keyboard
-    input[KeyUp]    = sf::Keyboard::W;
-    input[KeyLeft]  = sf::Keyboard::A;
+    input[KeyUp]    = cpp3ds::Keyboard::W;
+    input[KeyLeft]  = cpp3ds::Keyboard::A;
   }
 
-  input[KeyDown]  = sf::Keyboard::S;
-  input[KeyRight] = sf::Keyboard::D;
-  input[KeyFireUp]    = sf::Keyboard::Up;
-  input[KeyFireDown]  = sf::Keyboard::Down;
-  input[KeyFireLeft]  = sf::Keyboard::Left;
-  input[KeyFireRight] = sf::Keyboard::Right;
-  input[KeyFire] = sf::Keyboard::RControl;
-  input[KeyFireSelect] = sf::Keyboard::Tab;
-  input[KeyTimeControl] = sf::Keyboard::RShift;
-  input[KeySpell]  = sf::Keyboard::Space;
+  input[KeyDown]  = cpp3ds::Keyboard::S;
+  input[KeyRight] = cpp3ds::Keyboard::D;
+  input[KeyFireUp]    = cpp3ds::Keyboard::Up;
+  input[KeyFireDown]  = cpp3ds::Keyboard::Down;
+  input[KeyFireLeft]  = cpp3ds::Keyboard::Left;
+  input[KeyFireRight] = cpp3ds::Keyboard::Right;
+  input[KeyFire] = cpp3ds::Keyboard::RControl;
+  input[KeyFireSelect] = cpp3ds::Keyboard::Tab;
+  input[KeyTimeControl] = cpp3ds::Keyboard::RShift;
+  input[KeySpell]  = cpp3ds::Keyboard::Space;
 }
 
 int WitchBlastGame::getAchievementsPercents()
@@ -6799,48 +6806,48 @@ void WitchBlastGame::renderPlayer(float x, float y,
                                   int frame, int spriteDy)
 {
   bool isMirroring = false;
-  sf::Sprite sprite;
+  cpp3ds::Sprite sprite;
 
   if (equip[EQUIP_FAIRY_FIRE])
   {
     sprite.setPosition(x - 35, y - 25);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-    sprite.setTextureRect(sf::IntRect( 0, 144, 48, 60));
+    sprite.setTextureRect(cpp3ds::IntRect( 0, 144, 48, 60));
     app->draw(sprite);
   }
   if (equip[EQUIP_FAIRY_ICE])
   {
     sprite.setPosition(x - 5, y - 25);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-    sprite.setTextureRect(sf::IntRect( 0, 216, 48, 60));
+    sprite.setTextureRect(cpp3ds::IntRect( 0, 216, 48, 60));
     app->draw(sprite);
   }
   if (equip[EQUIP_FAIRY])
   {
     sprite.setPosition(x - 40, y);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-    sprite.setTextureRect(sf::IntRect( 0, 0, 48, 60));
+    sprite.setTextureRect(cpp3ds::IntRect( 0, 0, 48, 60));
     app->draw(sprite);
   }
   if (equip[EQUIP_FAIRY_TARGET])
   {
     sprite.setPosition(x - 10, y);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-    sprite.setTextureRect(sf::IntRect( 0, 72, 48, 60));
+    sprite.setTextureRect(cpp3ds::IntRect( 0, 72, 48, 60));
     app->draw(sprite);
   }
   if (equip[EQUIP_FAIRY_POISON])
   {
     sprite.setPosition(x + 20, y);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-    sprite.setTextureRect(sf::IntRect( 0, 288, 48, 60));
+    sprite.setTextureRect(cpp3ds::IntRect( 0, 288, 48, 60));
     app->draw(sprite);
   }
   if (equip[EQUIP_FAIRY_STONE])
   {
     sprite.setPosition(x - 5, y + 15);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_FAIRY));
-    sprite.setTextureRect(sf::IntRect( 0, 360, 48, 60));
+    sprite.setTextureRect(cpp3ds::IntRect( 0, 360, 48, 60));
     app->draw(sprite);
   }
 
@@ -6849,7 +6856,7 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setPosition(x - 20, y + 24);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_SLIME));
-    sprite.setTextureRect(sf::IntRect( 64, 256, 64, 64));
+    sprite.setTextureRect(cpp3ds::IntRect( 64, 256, 64, 64));
     app->draw(sprite);
   }
 
@@ -6861,9 +6868,9 @@ void WitchBlastGame::renderPlayer(float x, float y,
 
   // body
   if (isMirroring)
-    sprite.setTextureRect(sf::IntRect( frame * width + width, spriteDy * height, -width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( frame * width + width, spriteDy * height, -width, height));
   else
-    sprite.setTextureRect(sf::IntRect( frame * width, spriteDy * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( frame * width, spriteDy * height, width, height));
   app->draw(sprite);
 
   // boots
@@ -6871,18 +6878,18 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_LEATHER_BOOTS])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -6890,18 +6897,18 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_MAGICIAN_ROBE])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (12 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (12 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -6909,36 +6916,36 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_DISPLACEMENT_GLOVES])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (21 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (21 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
   if (equip[EQUIP_CRITICAL_ADVANCED])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (24 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (24 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
   else if (equip[EQUIP_CRITICAL])
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -6946,18 +6953,18 @@ void WitchBlastGame::renderPlayer(float x, float y,
   if (equip[EQUIP_RAGE_AMULET])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (18 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (18 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
   else if (equip[EQUIP_AMULET_RETALIATION])
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_2));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -6966,18 +6973,18 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
   else if (equip[EQUIP_LEATHER_BELT])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (15 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (15 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (15 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (15 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -6986,9 +6993,9 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (9 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (9 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -6996,9 +7003,9 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (6 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (6 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (6 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (6 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -7006,17 +7013,17 @@ void WitchBlastGame::renderPlayer(float x, float y,
   // staff
   int frameDx = equip[EQUIP_MAHOGANY_STAFF] ? 6 : 3;
   if (isMirroring)
-    sprite.setTextureRect(sf::IntRect( (frameDx + frame) * width + width, spriteDy * height, -width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( (frameDx + frame) * width + width, spriteDy * height, -width, height));
   else
-    sprite.setTextureRect(sf::IntRect( (frameDx + frame) * width, spriteDy * height, width, height));
+    sprite.setTextureRect(cpp3ds::IntRect( (frameDx + frame) * width, spriteDy * height, width, height));
   app->draw(sprite);
 
   if (equip[EQUIP_BLOOD_SNAKE])
   {
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (27 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (27 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
   }
 
@@ -7024,9 +7031,9 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_2));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -7034,9 +7041,9 @@ void WitchBlastGame::renderPlayer(float x, float y,
   {
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -7047,27 +7054,27 @@ void WitchBlastGame::renderPlayer(float x, float y,
     switch (shotType)
     {
     case ShotTypeIce:
-      sprite.setColor(sf::Color(100, 220, 255, 255));
+      sprite.setColor(cpp3ds::Color(100, 220, 255, 255));
       break;
 
     case ShotTypeStone:
-      sprite.setColor(sf::Color(120, 120, 150, 255));
+      sprite.setColor(cpp3ds::Color(120, 120, 150, 255));
       break;
 
     case ShotTypeLightning:
-      sprite.setColor(sf::Color(255, 255, 0, 255));
+      sprite.setColor(cpp3ds::Color(255, 255, 0, 255));
       break;
 
     case ShotTypeIllusion:
-      sprite.setColor(sf::Color(240, 180, 250, 255));
+      sprite.setColor(cpp3ds::Color(240, 180, 250, 255));
       break;
 
     case ShotTypeStandard:
-      sprite.setColor(sf::Color(255, 255, 255, 0));
+      sprite.setColor(cpp3ds::Color(255, 255, 255, 0));
       break;
 
     case ShotTypeFire:
-      sprite.setColor(sf::Color(255, 180, 0, 255));
+      sprite.setColor(cpp3ds::Color(255, 180, 0, 255));
       break;
 
     default:
@@ -7076,9 +7083,9 @@ void WitchBlastGame::renderPlayer(float x, float y,
 
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_1));
     if (isMirroring)
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width + width, spriteDy * height, -width, height));
     else
-      sprite.setTextureRect(sf::IntRect( (3 + frame) * width, spriteDy * height, width, height));
+      sprite.setTextureRect(cpp3ds::IntRect( (3 + frame) * width, spriteDy * height, width, height));
     app->draw(sprite);
     sprite.setTexture(*ImageManager::getInstance().getImage(IMAGE_PLAYER_0));
   }
@@ -7398,7 +7405,7 @@ void WitchBlastGame::activateKeyRoomEffect(bool withColorEffect)
   SoundManager::getInstance().playSound(SOUND_FORCE_FIELD);
 }
 
-void WitchBlastGame::generateStar(sf::Color starColor, float xStar, float yStar)
+void WitchBlastGame::generateStar(cpp3ds::Color starColor, float xStar, float yStar)
 {
   SpriteEntity* spriteStar = new SpriteEntity(
     ImageManager::getInstance().getImage(IMAGE_STAR_2),
@@ -7495,34 +7502,34 @@ bool WitchBlastGame::getPressingState(int p, inputKeyEnum k)
         || player->isDead()
         || player->getPlayerStatus() == PlayerEntity::playerStatusVictorious)
     {
-      if (k == KeyLeft && sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) return true;
-      if (k == KeyRight && sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) return true;
-      if (k == KeyUp && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) return true;
-      if (k == KeyDown && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) return true;
+      if (k == KeyLeft && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Left)) return true;
+      if (k == KeyRight && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Right)) return true;
+      if (k == KeyUp && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Up)) return true;
+      if (k == KeyDown && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Down)) return true;
 
-      if (k == KeyFireDown && sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) return true;
+      if (k == KeyFireDown && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Return)) return true;
     }
 
     // keyboard
-    if (sf::Keyboard::isKeyPressed(input[k])) return true;
+    if (cpp3ds::Keyboard::isKeyPressed(input[k])) return true;
   }
 
   if (p == 1 || gameState != gameStatePlaying || nbPlayers == 1)
   {
-    if (!sf::Joystick::isConnected(0)) return false;
+    if (!cpp3ds::Joystick::isConnected(0)) return false;
 
     // joystick
     if (joystickInput[k].isButton)
     {
       // button
       if (joystickInput[k].value >= 0)
-        if (sf::Joystick::isButtonPressed(0, joystickInput[k].value)) return true;
+        if (cpp3ds::Joystick::isButtonPressed(0, joystickInput[k].value)) return true;
     }
     else
     {
       // axis
-      if (joystickInput[k].value < 0 && sf::Joystick::getAxisPosition(0, joystickInput[k].axis) < -40) return true;
-      else if (joystickInput[k].value > 0 && sf::Joystick::getAxisPosition(0, joystickInput[k].axis) > 40) return true;
+      if (joystickInput[k].value < 0 && cpp3ds::Joystick::getAxisPosition(0, joystickInput[k].axis) < -40) return true;
+      else if (joystickInput[k].value > 0 && cpp3ds::Joystick::getAxisPosition(0, joystickInput[k].axis) > 40) return true;
     }
   }
 

@@ -16,7 +16,7 @@
 
 #include "CollidingSpriteEntity.h"
 
-CollidingSpriteEntity::CollidingSpriteEntity(sf::Texture* image, float x, float y, int width, int height)
+CollidingSpriteEntity::CollidingSpriteEntity(cpp3ds::Texture* image, float x, float y, int width, int height)
   : SpriteEntity(image, x, y, width, height)
 {
   maxY = 1000.0f;
@@ -45,25 +45,25 @@ void CollidingSpriteEntity::setTileDimensions(int width, int height)
   tileHeight = height;
 }
 
-void CollidingSpriteEntity::render(sf::RenderTarget* app)
+void CollidingSpriteEntity::render(cpp3ds::RenderTarget* app)
 {
   SpriteEntity::render(app);
 }
 
-void CollidingSpriteEntity::displayBoundingBox(sf::RenderTarget* app)
+void CollidingSpriteEntity::displayBoundingBox(cpp3ds::RenderTarget* app)
 {
-  sf::Vertex line[] =
+  cpp3ds::Vertex line[] =
   {
-    sf::Vertex(sf::Vector2f(boundingBox.left, boundingBox.top), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top + boundingBox.height), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top + boundingBox.height), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left, boundingBox.top + boundingBox.height), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left, boundingBox.top + boundingBox.height), sf::Color::Red),
-    sf::Vertex(sf::Vector2f(boundingBox.left, boundingBox.top), sf::Color::Red)
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left, boundingBox.top), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top + boundingBox.height), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left + boundingBox.width, boundingBox.top + boundingBox.height), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left, boundingBox.top + boundingBox.height), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left, boundingBox.top + boundingBox.height), cpp3ds::Color::Red),
+    cpp3ds::Vertex(cpp3ds::Vector2f(boundingBox.left, boundingBox.top), cpp3ds::Color::Red)
   };
-  app->draw(line, 8, sf::Lines);
+  app->draw(line, 8, cpp3ds::Lines);
 }
 
 void CollidingSpriteEntity::animate(float delay)
@@ -264,7 +264,7 @@ void CollidingSpriteEntity::stuck()
   onDying();
 }
 
-sf::IntRect CollidingSpriteEntity::getBoundingBox()
+cpp3ds::IntRect CollidingSpriteEntity::getBoundingBox()
 {
   return boundingBox;
 }
