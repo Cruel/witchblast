@@ -37,11 +37,6 @@ public:
   static float getAbsolutTime();
   void create(int screenWidth, int screenHeight, std::string windowsTitle = "Generic sfmlGame", bool fullScreen = false, bool vsync = true);
 
-	virtual void update(float delta);
-	virtual void processEvent(cpp3ds::Event& event);
-	virtual void renderTopScreen(cpp3ds::Window& window);
-	virtual void renderBottomScreen(cpp3ds::Window& window);
-
 protected:
   virtual void onRender();     // screen and game items rendering
   virtual void onUpdate();

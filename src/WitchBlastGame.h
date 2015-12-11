@@ -17,6 +17,7 @@
 #ifndef WITCH_BLAST_GAME_H
 #define WITCH_BLAST_GAME_H
 
+#include <cpp3ds/System/Thread.hpp>
 #include "sfml_game/Game.h"
 #include "sfml_game/TileMapEntity.h"
 #include "PlayerEntity.h"
@@ -29,7 +30,6 @@
 #include "Achievements.h"
 
 #include <queue>
-#include <thread>
 
 // for tests
 //#define TEST_MODE
@@ -201,6 +201,11 @@ public:
    *  \brief Destructor
    */
   virtual ~WitchBlastGame();
+
+virtual void update(float delta);
+virtual void processEvent(cpp3ds::Event& event);
+virtual void renderTopScreen(cpp3ds::Window& window);
+virtual void renderBottomScreen(cpp3ds::Window& window);
 
   /*!
   *  \brief Accessor on the current dungeon map
@@ -723,14 +728,14 @@ private:
 
   cpp3ds::Keyboard::Key input[NumberKeys];     /*!< Input key array */
 
-  struct JoystickInputStruct
-  {
-    bool isButton;
-    cpp3ds::Joystick::Axis axis;
-    int value;
-  };
-
-  JoystickInputStruct joystickInput[NumberKeys];
+//  struct JoystickInputStruct
+//  {
+//    bool isButton;
+//    cpp3ds::Joystick::Axis axis;
+//    int value;
+//  };
+//
+//  JoystickInputStruct joystickInput[NumberKeys];
 
   std::string scoreSaveFile;
 
@@ -1140,13 +1145,13 @@ private:
   bool gameFromSaveFile;
 
   // scoring server
-  std::thread sendScoreThread;
-  void sendScoreToServer();
-  void sendScoreToServerThread();
-
-  std::thread receiveScoreThread;
-  void receiveScoreFromServer();
-  void receiveScoreFromServerThread();
+//  std::thread sendScoreThread;
+//  void sendScoreToServer();
+//  void sendScoreToServerThread();
+//
+//  std::thread receiveScoreThread;
+//  void receiveScoreFromServer();
+//  void receiveScoreFromServerThread();
 
   void checkDestroyableObjects();
 

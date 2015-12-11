@@ -489,7 +489,7 @@ WitchBlastGame::WitchBlastGame()
 
   loadGameData();
   loadHiScores();
-  receiveScoreFromServer();
+//  receiveScoreFromServer();
 
   srand(time(NULL));
 
@@ -539,8 +539,8 @@ WitchBlastGame::~WitchBlastGame()
   if (miniMap != NULL) delete (miniMap);
   if (currentFloor != NULL) delete (currentFloor);
 
-  if (sendScoreThread.joinable()) sendScoreThread.join();
-  if (receiveScoreThread.joinable()) receiveScoreThread.join();
+//  if (sendScoreThread.joinable()) sendScoreThread.join();
+//  if (receiveScoreThread.joinable()) receiveScoreThread.join();
 }
 
 DungeonMap* WitchBlastGame::getCurrentMap()
@@ -1081,28 +1081,28 @@ void WitchBlastGame::updateIntro()
 
   cpp3ds::Event event;
   bool stopDemo = false;
-  while (app->pollEvent(event))
-  {
-    // Close window : exit
-    if (event.type == cpp3ds::Event::Closed)
-    {
-      //saveGameData();
-      app->close();
-    }
-
-    if (event.type == cpp3ds::Event::Resized)
-    {
-      enableAA(true);
-      cpp3ds::View view = app->getDefaultView();
-      view = getLetterboxView( view, event.size.width, event.size.height );
-      app->setView(view);
-    }
-
-    if (event.type == cpp3ds::Event::KeyPressed)
-    {
-      if (event.key.code == cpp3ds::Keyboard::Select) stopDemo = true;
-    }
-  }
+//  while (app->pollEvent(event))
+//  {
+//    // Close window : exit
+//    if (event.type == cpp3ds::Event::Closed)
+//    {
+//      //saveGameData();
+//      app->close();
+//    }
+//
+//    if (event.type == cpp3ds::Event::Resized)
+//    {
+//      enableAA(true);
+//      cpp3ds::View view = app->getDefaultView();
+//      view = getLetterboxView( view, event.size.width, event.size.height );
+//      app->setView(view);
+//    }
+//
+//    if (event.type == cpp3ds::Event::KeyPressed)
+//    {
+//      if (event.key.code == cpp3ds::Keyboard::Select) stopDemo = true;
+//    }
+//  }
   if (isPressing(0, KeyFireDown, true)) stopDemo = true;
 
   if (stopDemo)
@@ -1145,265 +1145,265 @@ void WitchBlastGame::updateRunningGame()
 
   // Process events
   cpp3ds::Event event;
-  while (app->pollEvent(event))
-  {
-    // Close window : exit
-    if (event.type == cpp3ds::Event::Closed)
-    {
-      if ((gameState == gameStatePlaying && !player->isDead()) || gameState == gameStatePlayingPause) saveGame();
-      saveGameData();
-      app->close();
-    }
-
-    if (event.type == cpp3ds::Event::Resized)
-    {
-      enableAA(true);
-      cpp3ds::View view = app->getDefaultView();
-      view = getLetterboxView( view, event.size.width, event.size.height );
-      app->setView(view);
-    }
-
-    if (event.type == cpp3ds::Event::MouseWheelMoved)
-    {
-      if (gameState == gameStatePlaying) player->selectNextShotType();
-    }
-
-    if (event.type == cpp3ds::Event::MouseButtonPressed)
-    {
-      if (gameState == gameStatePlaying)
-      {
-        cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
-        cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
-
-        int mouseButton = 1;
-        if (event.mouseButton.button == cpp3ds::Mouse::Left) mouseButton = 0;
-
-        tryToClick(mousePosition.x, mousePosition.y, mouseButton);
-      }
-    }
-
-    if (event.type == cpp3ds::Event::KeyPressed)
-    {
-      if (event.key.code == cpp3ds::Keyboard::Escape)
-      {
-        escape = true;
-      }
-
-      if (event.key.code == cpp3ds::Keyboard::Return && gameState == gameStatePlaying)
-      {
-        if (!achievementsQueue.empty())
-        {
-          if (achievementsQueue.front().timer > 1.0f)
-            achievementsQueue.front().timer = 1.0f;
-        }
-        else if (!messagesQueue.empty())
-        {
-          if (messagesQueue.front().timer > 0.5f)
-            messagesQueue.front().timer = 0.5f;
-        }
-      }
-
-      if (event.key.code == cpp3ds::Keyboard::X)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift)) startNewGame(false, 1);
-      }
-
-      if (event.key.code >= cpp3ds::Keyboard::Num1 && event.key.code <= cpp3ds::Keyboard::Num8)
-      {
-#ifdef LEVEL_TEST_MODE
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt) && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LControl))
-        {
-          startNewGame(false, event.key.code - cpp3ds::Keyboard::Num1 + 1);
-        }
-        else
-#endif
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift)
-            || cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::RShift))
-        {
-          player->dropConsumables(event.key.code - cpp3ds::Keyboard::Num1);
-        }
-        else
-        {
-          player->tryToConsume(event.key.code - cpp3ds::Keyboard::Num1);
-        }
-      }
-
-      if (event.key.code == cpp3ds::Keyboard::F1)
-      {
-        if (!isPlayerAlive && player->getEndAge() > 3.5f)
-        {
-          if (scoreSaveFile.compare("") == 0) saveDeathScreen();
-        }
-        else
-        {
-          saveScreen();
-        }
-      }
-
-      if (event.key.code == cpp3ds::Keyboard::F2)
-      {
-        showLogical = !showLogical;
-      }
-      if (event.key.code == cpp3ds::Keyboard::F3)
-      {
-        showGameTime = !showGameTime;
-      }
-
-      // DEBUG
-#ifdef TEST_MODE
-      /*if (event.key.code == cpp3ds::Keyboard::Delete)
-      {
-        StructHurt hurt;
-        hurt.critical = false;
-        hurt.damage = 1;
-        hurt.enemyType = EnemyTypeGhost; //EnemyTypeNone;
-        hurt.goThrough = false;
-        hurt.hurtingType = ShotTypeStandard;
-        hurt.level = 0;
-        hurt.sourceType = SourceTypeMelee;
-        player->hurt(hurt);
-      }*/
-      if (event.key.code == cpp3ds::Keyboard::F5)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new BubbleEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2 + 70,
-                           OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2, BubbleTriple, 0);
-          new BubbleEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2 - 70,
-                           OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2, BubbleIce, 0);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeRat, 1);
-          findPlaceMonsters(EnemyTypeRatBlack, 1);
-          findPlaceMonsters(EnemyTypeRatGreen, 1);
-          findPlaceMonsters(EnemyTypeRatHelmet, 1);
-          findPlaceMonsters(EnemyTypeRatBlackHelmet, 1);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F6)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new ButcherEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeBat, 1);
-          findPlaceMonsters(EnemyTypeBatSkeleton, 2);
-          findPlaceMonsters(EnemyTypeImpBlue, 1);
-          findPlaceMonsters(EnemyTypeImpRed, 1);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F7)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new GiantSlimeEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                               OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeEvilFlower, 1);
-          findPlaceMonsters(EnemyTypeEvilFlowerIce, 1);
-          findPlaceMonsters(EnemyTypeEvilFlowerFire, 1);
-          findPlaceMonsters(EnemyTypePumpkin, 1);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F8)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new CyclopsEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeSlime, 1);
-          findPlaceMonsters(EnemyTypeSlimeBlue, 1);
-          findPlaceMonsters(EnemyTypeSlimeRed, 1);
-          findPlaceMonsters(EnemyTypeSlimeViolet, 1);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F9)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new KingRatEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeSnake, 2);
-          findPlaceMonsters(EnemyTypeSnakeBlood, 2);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F10)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new GiantSpiderEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                                OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeWitch, 1);
-          findPlaceMonsters(EnemyTypeWitchRed, 1);
-          findPlaceMonsters(EnemyTypeCauldron, 1);
-          findPlaceMonsters(EnemyTypeCauldronElemental, 1);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F11)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new FranckyEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeSpiderEgg_invocated, 2);
-          findPlaceMonsters(EnemyTypeSpiderLittle, 2);
-          findPlaceMonsters(EnemyTypeSpiderTarantula, 2);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F12)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
-        {
-          new VampireEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
-                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
-        }
-        else
-        {
-          initMonsterArray();
-          findPlaceMonsters(EnemyTypeZombie, 2);
-          findPlaceMonsters(EnemyTypeZombieDark, 2);
-          findPlaceMonsters(EnemyTypeGhost, 2);
-
-          findPlaceMonsters(EnemyTypeBogeyman, 2);
-        }
-      }
-      if (event.key.code == cpp3ds::Keyboard::F4)
-      {
-        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift))
-          for (int i = 0; i < NUMBER_ITEMS - NUMBER_EQUIP_ITEMS; i++)
-            new ItemEntity((enumItemType)i, 100 + (i % 14) * 58, 100 + (i / 14) * 60);
-        else
-          for (int i = NUMBER_ITEMS - NUMBER_EQUIP_ITEMS; i < NUMBER_ITEMS; i++)
-            new ItemEntity((enumItemType)i, 100 + ( (i - NUMBER_ITEMS + NUMBER_EQUIP_ITEMS) % 14) * 58, 100 + ((i - NUMBER_ITEMS + NUMBER_EQUIP_ITEMS) / 14) * 60);
-      }
-#endif // TEST_MODE
-    }
-  }
+//  while (app->pollEvent(event))
+//  {
+//    // Close window : exit
+//    if (event.type == cpp3ds::Event::Closed)
+//    {
+//      if ((gameState == gameStatePlaying && !player->isDead()) || gameState == gameStatePlayingPause) saveGame();
+//      saveGameData();
+//      app->close();
+//    }
+//
+//    if (event.type == cpp3ds::Event::Resized)
+//    {
+//      enableAA(true);
+//      cpp3ds::View view = app->getDefaultView();
+//      view = getLetterboxView( view, event.size.width, event.size.height );
+//      app->setView(view);
+//    }
+//
+//    if (event.type == cpp3ds::Event::MouseWheelMoved)
+//    {
+//      if (gameState == gameStatePlaying) player->selectNextShotType();
+//    }
+//
+//    if (event.type == cpp3ds::Event::MouseButtonPressed)
+//    {
+//      if (gameState == gameStatePlaying)
+//      {
+//        cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
+//        cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
+//
+//        int mouseButton = 1;
+//        if (event.mouseButton.button == cpp3ds::Mouse::Left) mouseButton = 0;
+//
+//        tryToClick(mousePosition.x, mousePosition.y, mouseButton);
+//      }
+//    }
+//
+//    if (event.type == cpp3ds::Event::KeyPressed)
+//    {
+//      if (event.key.code == cpp3ds::Keyboard::Escape)
+//      {
+//        escape = true;
+//      }
+//
+//      if (event.key.code == cpp3ds::Keyboard::Return && gameState == gameStatePlaying)
+//      {
+//        if (!achievementsQueue.empty())
+//        {
+//          if (achievementsQueue.front().timer > 1.0f)
+//            achievementsQueue.front().timer = 1.0f;
+//        }
+//        else if (!messagesQueue.empty())
+//        {
+//          if (messagesQueue.front().timer > 0.5f)
+//            messagesQueue.front().timer = 0.5f;
+//        }
+//      }
+//
+//      if (event.key.code == cpp3ds::Keyboard::X)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift)) startNewGame(false, 1);
+//      }
+//
+//      if (event.key.code >= cpp3ds::Keyboard::Num1 && event.key.code <= cpp3ds::Keyboard::Num8)
+//      {
+//#ifdef LEVEL_TEST_MODE
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt) && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LControl))
+//        {
+//          startNewGame(false, event.key.code - cpp3ds::Keyboard::Num1 + 1);
+//        }
+//        else
+//#endif
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift)
+//            || cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::RShift))
+//        {
+//          player->dropConsumables(event.key.code - cpp3ds::Keyboard::Num1);
+//        }
+//        else
+//        {
+//          player->tryToConsume(event.key.code - cpp3ds::Keyboard::Num1);
+//        }
+//      }
+//
+//      if (event.key.code == cpp3ds::Keyboard::F1)
+//      {
+//        if (!isPlayerAlive && player->getEndAge() > 3.5f)
+//        {
+//          if (scoreSaveFile.compare("") == 0) saveDeathScreen();
+//        }
+//        else
+//        {
+//          saveScreen();
+//        }
+//      }
+//
+//      if (event.key.code == cpp3ds::Keyboard::F2)
+//      {
+//        showLogical = !showLogical;
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F3)
+//      {
+//        showGameTime = !showGameTime;
+//      }
+//
+//      // DEBUG
+//#ifdef TEST_MODE
+//      /*if (event.key.code == cpp3ds::Keyboard::Delete)
+//      {
+//        StructHurt hurt;
+//        hurt.critical = false;
+//        hurt.damage = 1;
+//        hurt.enemyType = EnemyTypeGhost; //EnemyTypeNone;
+//        hurt.goThrough = false;
+//        hurt.hurtingType = ShotTypeStandard;
+//        hurt.level = 0;
+//        hurt.sourceType = SourceTypeMelee;
+//        player->hurt(hurt);
+//      }*/
+//      if (event.key.code == cpp3ds::Keyboard::F5)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new BubbleEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2 + 70,
+//                           OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2, BubbleTriple, 0);
+//          new BubbleEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2 - 70,
+//                           OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2, BubbleIce, 0);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeRat, 1);
+//          findPlaceMonsters(EnemyTypeRatBlack, 1);
+//          findPlaceMonsters(EnemyTypeRatGreen, 1);
+//          findPlaceMonsters(EnemyTypeRatHelmet, 1);
+//          findPlaceMonsters(EnemyTypeRatBlackHelmet, 1);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F6)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new ButcherEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeBat, 1);
+//          findPlaceMonsters(EnemyTypeBatSkeleton, 2);
+//          findPlaceMonsters(EnemyTypeImpBlue, 1);
+//          findPlaceMonsters(EnemyTypeImpRed, 1);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F7)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new GiantSlimeEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                               OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeEvilFlower, 1);
+//          findPlaceMonsters(EnemyTypeEvilFlowerIce, 1);
+//          findPlaceMonsters(EnemyTypeEvilFlowerFire, 1);
+//          findPlaceMonsters(EnemyTypePumpkin, 1);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F8)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new CyclopsEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeSlime, 1);
+//          findPlaceMonsters(EnemyTypeSlimeBlue, 1);
+//          findPlaceMonsters(EnemyTypeSlimeRed, 1);
+//          findPlaceMonsters(EnemyTypeSlimeViolet, 1);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F9)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new KingRatEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeSnake, 2);
+//          findPlaceMonsters(EnemyTypeSnakeBlood, 2);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F10)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new GiantSpiderEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                                OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeWitch, 1);
+//          findPlaceMonsters(EnemyTypeWitchRed, 1);
+//          findPlaceMonsters(EnemyTypeCauldron, 1);
+//          findPlaceMonsters(EnemyTypeCauldronElemental, 1);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F11)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new FranckyEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeSpiderEgg_invocated, 2);
+//          findPlaceMonsters(EnemyTypeSpiderLittle, 2);
+//          findPlaceMonsters(EnemyTypeSpiderTarantula, 2);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F12)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LAlt))
+//        {
+//          new VampireEntity(OFFSET_X + (MAP_WIDTH / 2) * TILE_WIDTH + TILE_WIDTH / 2,
+//                            OFFSET_Y + (MAP_HEIGHT / 2) * TILE_HEIGHT + TILE_HEIGHT / 2);
+//        }
+//        else
+//        {
+//          initMonsterArray();
+//          findPlaceMonsters(EnemyTypeZombie, 2);
+//          findPlaceMonsters(EnemyTypeZombieDark, 2);
+//          findPlaceMonsters(EnemyTypeGhost, 2);
+//
+//          findPlaceMonsters(EnemyTypeBogeyman, 2);
+//        }
+//      }
+//      if (event.key.code == cpp3ds::Keyboard::F4)
+//      {
+//        if (cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::LShift))
+//          for (int i = 0; i < NUMBER_ITEMS - NUMBER_EQUIP_ITEMS; i++)
+//            new ItemEntity((enumItemType)i, 100 + (i % 14) * 58, 100 + (i / 14) * 60);
+//        else
+//          for (int i = NUMBER_ITEMS - NUMBER_EQUIP_ITEMS; i < NUMBER_ITEMS; i++)
+//            new ItemEntity((enumItemType)i, 100 + ( (i - NUMBER_ITEMS + NUMBER_EQUIP_ITEMS) % 14) * 58, 100 + ((i - NUMBER_ITEMS + NUMBER_EQUIP_ITEMS) / 14) * 60);
+//      }
+//#endif // TEST_MODE
+//    }
+//  }
 
   // POST EVENT
   if (escape)
@@ -1536,55 +1536,55 @@ void WitchBlastGame::updateRunningGame()
       player->fire(firingDirection);
     }
     // alternative "firing with the mouse" gameplay
-    else if (cpp3ds::Mouse::isButtonPressed(cpp3ds::Mouse::Left))
-    {
-      cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
-      cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
-
-      int xm = mousePosition.x - player->getX();
-      int ym = mousePosition.y - player->getY();
-
-      if (mousePosition.x >= xOffset && mousePosition.x <= xOffset + GAME_WIDTH
-          && mousePosition.y >= yOffset && mousePosition.y <= yOffset + GAME_HEIGHT)
-      {
-        if (abs(xm) >= abs(ym))
-        {
-          if (xm > 0) player->fire(6);
-          else player->fire(4);
-        }
-        else
-        {
-          if (ym > 0) player->fire(2);
-          else player->fire(8);
-        }
-      }
-    }
+//    else if (cpp3ds::Mouse::isButtonPressed(cpp3ds::Mouse::Left))
+//    {
+//      cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
+//      cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
+//
+//      int xm = mousePosition.x - player->getX();
+//      int ym = mousePosition.y - player->getY();
+//
+//      if (mousePosition.x >= xOffset && mousePosition.x <= xOffset + GAME_WIDTH
+//          && mousePosition.y >= yOffset && mousePosition.y <= yOffset + GAME_HEIGHT)
+//      {
+//        if (abs(xm) >= abs(ym))
+//        {
+//          if (xm > 0) player->fire(6);
+//          else player->fire(4);
+//        }
+//        else
+//        {
+//          if (ym > 0) player->fire(2);
+//          else player->fire(8);
+//        }
+//      }
+//    }
 
     // spell (right click)
-    if (cpp3ds::Mouse::isButtonPressed(cpp3ds::Mouse::Right) && (gameState == gameStatePlaying))
-    {
-      cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
-      cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
-
-      if (mousePosition.x >= xOffset && mousePosition.x <= xOffset + GAME_WIDTH
-          && mousePosition.y >= yOffset && mousePosition.y <= yOffset + GAME_HEIGHT)
-      {
-        int xm = mousePosition.x - player->getX();
-        int ym = mousePosition.y - player->getY();
-
-        if (abs(xm) >= abs(ym))
-        {
-          if (xm > 0) player->setFacingDirection(6);
-          else player->setFacingDirection(4);
-        }
-        else
-        {
-          if (ym > 0) player->setFacingDirection(2);
-          else player->setFacingDirection(8);
-        }
-        player->castSpell();
-      }
-    }
+//    if (cpp3ds::Mouse::isButtonPressed(cpp3ds::Mouse::Right) && (gameState == gameStatePlaying))
+//    {
+//      cpp3ds::Vector2i mousePositionInWindow = cpp3ds::Mouse::getPosition(*app);
+//      cpp3ds::Vector2f mousePosition = app->mapPixelToCoords(mousePositionInWindow);
+//
+//      if (mousePosition.x >= xOffset && mousePosition.x <= xOffset + GAME_WIDTH
+//          && mousePosition.y >= yOffset && mousePosition.y <= yOffset + GAME_HEIGHT)
+//      {
+//        int xm = mousePosition.x - player->getX();
+//        int ym = mousePosition.y - player->getY();
+//
+//        if (abs(xm) >= abs(ym))
+//        {
+//          if (xm > 0) player->setFacingDirection(6);
+//          else player->setFacingDirection(4);
+//        }
+//        else
+//        {
+//          if (ym > 0) player->setFacingDirection(2);
+//          else player->setFacingDirection(8);
+//        }
+//        player->castSpell();
+//      }
+//    }
 
     // Joystick control for fairy
     if (nbPlayers == 2)
@@ -2843,11 +2843,11 @@ void WitchBlastGame::saveDeathScreen()
 
   int width = 810, height = 300, border = 4;
   int x = 80, y = 110;
-  cpp3ds::Image screenShot(app->capture());
-  cpp3ds::Image savedImage;
-  savedImage.create(width + border * 2, height + border * 2);
-  savedImage.copy(screenShot,0 , 0, cpp3ds::IntRect( x - border, y - border, width + border * 2, height + border * 2));
-  savedImage.saveToFile(ss.str());
+//  cpp3ds::Image screenShot(app->capture());
+//  cpp3ds::Image savedImage;
+//  savedImage.create(width + border * 2, height + border * 2);
+//  savedImage.copy(screenShot,0 , 0, cpp3ds::IntRect( x - border, y - border, width + border * 2, height + border * 2));
+//  savedImage.saveToFile(ss.str());
 }
 
 void WitchBlastGame::saveScreen()
@@ -2870,8 +2870,8 @@ void WitchBlastGame::saveScreen()
   ss << (now->tm_sec);
   ss << ".png";
 
-  cpp3ds::Image screenShot(app->capture());
-  screenShot.saveToFile(ss.str());
+//  cpp3ds::Image screenShot(app->capture());
+//  screenShot.saveToFile(ss.str());
 }
 
 void WitchBlastGame::renderDeathScreen(float x, float y)
@@ -3050,165 +3050,165 @@ void WitchBlastGame::updateMenu()
 
   // Process events
   cpp3ds::Event event;
-  while (app->pollEvent(event))
-  {
-    // Close window : exit
-    if (event.type == cpp3ds::Event::Closed)
-    {
-      saveGameData();
-      app->close();
-    }
-
-    if (event.type == cpp3ds::Event::Resized)
-    {
-      enableAA(true);
-      cpp3ds::View view = app->getDefaultView();
-      view = getLetterboxView( view, event.size.width, event.size.height );
-      app->setView(view);
-    }
-
-    if (event.type == cpp3ds::Event::TextEntered)
-    {
-      if (menuState == MenuStateChangeName)
-      {
-        if (event.text.unicode < 128)
-        {
-          char c = static_cast<char>(event.text.unicode);
-
-          if ( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
-            parameters.playerName += static_cast<char>(event.text.unicode);
-        }
-      }
-    }
-
-    if (event.type == cpp3ds::Event::KeyPressed && menuState == MenuStateKeys)
-    {
-      bool alreadyUsed = false;
-      if (event.key.code == cpp3ds::Keyboard::Escape) alreadyUsed = true;
-      for (unsigned int i = 0; i < menuKeyIndex; i++)
-        if (input[i] == event.key.code) alreadyUsed = true;
-
-      // TODO more tests
-      if (!alreadyUsed)
-      {
-        input[menuKeyIndex] = event.key.code;
-        menuKeyIndex++;
-        if (menuKeyIndex == NumberKeys)
-        {
-          menuState = MenuStateConfig;
-          saveConfigurationToFile();
-        }
-      }
-    }
-    else if (menuState == MenuStateJoystick)
-    {
-      bool alreadyUsed = false;
-      int nbButtons = cpp3ds::Joystick::getButtonCount(0);
-
-      bool found = false;
-      JoystickInputStruct jInput;
-
-      // Escape = out
-      if (event.key.code == cpp3ds::Keyboard::Escape)
-      {
-        menuState = MenuStateConfig;
-        saveConfigurationToFile();
-        return;
-      }
-
-      // button pressed ?
-      for (int i = 0; !found && i < nbButtons; i++)
-      {
-        if (cpp3ds::Joystick::isButtonPressed(0, i))
-        {
-          jInput.isButton = true;
-          jInput.value = i;
-          jInput.axis = cpp3ds::Joystick::X;
-          found = true;
-        }
-      }
-
-      if (!found)
-      {
-        // axis ?
-        for (int i = cpp3ds::Joystick::X; i <= cpp3ds::Joystick::PovY; i++)
-        {
-          if (cpp3ds::Joystick::hasAxis(0, (cpp3ds::Joystick::Axis)i))
-          {
-            if (cpp3ds::Joystick::getAxisPosition(0, (cpp3ds::Joystick::Axis)i) < -50)
-            {
-              jInput.isButton = false;
-              jInput.value = -1;
-              jInput.axis = (cpp3ds::Joystick::Axis)i;
-              found = true;
-            }
-            else if (cpp3ds::Joystick::getAxisPosition(0, (cpp3ds::Joystick::Axis)i) > 50)
-            {
-              jInput.isButton = false;
-              jInput.value = 1;
-              jInput.axis = (cpp3ds::Joystick::Axis)i;
-              found = true;
-            }
-          }
-        }
-      }
-
-      if (found)
-      {
-        // already exist ?
-        for (unsigned int i = 0; i < menuKeyIndex; i++)
-        {
-          if (jInput.isButton && joystickInput[i].isButton
-              && joystickInput[i].value == jInput.value)
-            alreadyUsed = true;
-
-          if (!jInput.isButton && !joystickInput[i].isButton
-              && joystickInput[i].axis == jInput.axis
-              && joystickInput[i].value == jInput.value)
-            alreadyUsed = true;
-        }
-
-        if (!alreadyUsed)
-        {
-          joystickInput[menuKeyIndex] = jInput;
-          menuKeyIndex++;
-          if (menuKeyIndex == NumberKeys)
-          {
-            menuState = MenuStateConfig;
-            saveConfigurationToFile();
-          }
-        }
-      }
-    }
-
-    else
-    {
-      if (event.type == cpp3ds::Event::KeyPressed)
-      {
-        if (event.key.code == cpp3ds::Keyboard::F1)
-        {
-            saveScreen();
-        }
-        if (menuState == MenuStateChangeName)
-        {
-          if (event.key.code == cpp3ds::Keyboard::Escape || event.key.code == cpp3ds::Keyboard::Return)
-          {
-            saveConfigurationToFile();
-            menuState = MenuStateMain;
-          }
-          else if (event.key.code == cpp3ds::Keyboard::BackSpace)
-          {
-            if (parameters.playerName.size() > 0)
-              parameters.playerName.erase(parameters.playerName.size() - 1);
-          }
-        }
-        else if (event.key.code == cpp3ds::Keyboard::Escape)
-        {
-          escape = true;
-        }
-      }
-    }
-  }
+//  while (app->pollEvent(event))
+//  {
+//    // Close window : exit
+//    if (event.type == cpp3ds::Event::Closed)
+//    {
+//      saveGameData();
+//      app->close();
+//    }
+//
+//    if (event.type == cpp3ds::Event::Resized)
+//    {
+//      enableAA(true);
+//      cpp3ds::View view = app->getDefaultView();
+//      view = getLetterboxView( view, event.size.width, event.size.height );
+//      app->setView(view);
+//    }
+//
+//    if (event.type == cpp3ds::Event::TextEntered)
+//    {
+//      if (menuState == MenuStateChangeName)
+//      {
+//        if (event.text.unicode < 128)
+//        {
+//          char c = static_cast<char>(event.text.unicode);
+//
+//          if ( (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '_')
+//            parameters.playerName += static_cast<char>(event.text.unicode);
+//        }
+//      }
+//    }
+//
+//    if (event.type == cpp3ds::Event::KeyPressed && menuState == MenuStateKeys)
+//    {
+//      bool alreadyUsed = false;
+//      if (event.key.code == cpp3ds::Keyboard::Escape) alreadyUsed = true;
+//      for (unsigned int i = 0; i < menuKeyIndex; i++)
+//        if (input[i] == event.key.code) alreadyUsed = true;
+//
+//      // TODO more tests
+//      if (!alreadyUsed)
+//      {
+//        input[menuKeyIndex] = event.key.code;
+//        menuKeyIndex++;
+//        if (menuKeyIndex == NumberKeys)
+//        {
+//          menuState = MenuStateConfig;
+//          saveConfigurationToFile();
+//        }
+//      }
+//    }
+//    else if (menuState == MenuStateJoystick)
+//    {
+//      bool alreadyUsed = false;
+//      int nbButtons = cpp3ds::Joystick::getButtonCount(0);
+//
+//      bool found = false;
+//      JoystickInputStruct jInput;
+//
+//      // Escape = out
+//      if (event.key.code == cpp3ds::Keyboard::Escape)
+//      {
+//        menuState = MenuStateConfig;
+//        saveConfigurationToFile();
+//        return;
+//      }
+//
+//      // button pressed ?
+//      for (int i = 0; !found && i < nbButtons; i++)
+//      {
+//        if (cpp3ds::Joystick::isButtonPressed(0, i))
+//        {
+//          jInput.isButton = true;
+//          jInput.value = i;
+//          jInput.axis = cpp3ds::Joystick::X;
+//          found = true;
+//        }
+//      }
+//
+//      if (!found)
+//      {
+//        // axis ?
+//        for (int i = cpp3ds::Joystick::X; i <= cpp3ds::Joystick::PovY; i++)
+//        {
+//          if (cpp3ds::Joystick::hasAxis(0, (cpp3ds::Joystick::Axis)i))
+//          {
+//            if (cpp3ds::Joystick::getAxisPosition(0, (cpp3ds::Joystick::Axis)i) < -50)
+//            {
+//              jInput.isButton = false;
+//              jInput.value = -1;
+//              jInput.axis = (cpp3ds::Joystick::Axis)i;
+//              found = true;
+//            }
+//            else if (cpp3ds::Joystick::getAxisPosition(0, (cpp3ds::Joystick::Axis)i) > 50)
+//            {
+//              jInput.isButton = false;
+//              jInput.value = 1;
+//              jInput.axis = (cpp3ds::Joystick::Axis)i;
+//              found = true;
+//            }
+//          }
+//        }
+//      }
+//
+//      if (found)
+//      {
+//        // already exist ?
+//        for (unsigned int i = 0; i < menuKeyIndex; i++)
+//        {
+//          if (jInput.isButton && joystickInput[i].isButton
+//              && joystickInput[i].value == jInput.value)
+//            alreadyUsed = true;
+//
+//          if (!jInput.isButton && !joystickInput[i].isButton
+//              && joystickInput[i].axis == jInput.axis
+//              && joystickInput[i].value == jInput.value)
+//            alreadyUsed = true;
+//        }
+//
+//        if (!alreadyUsed)
+//        {
+//          joystickInput[menuKeyIndex] = jInput;
+//          menuKeyIndex++;
+//          if (menuKeyIndex == NumberKeys)
+//          {
+//            menuState = MenuStateConfig;
+//            saveConfigurationToFile();
+//          }
+//        }
+//      }
+//    }
+//
+//    else
+//    {
+//      if (event.type == cpp3ds::Event::KeyPressed)
+//      {
+//        if (event.key.code == cpp3ds::Keyboard::F1)
+//        {
+//            saveScreen();
+//        }
+//        if (menuState == MenuStateChangeName)
+//        {
+//          if (event.key.code == cpp3ds::Keyboard::Escape || event.key.code == cpp3ds::Keyboard::Return)
+//          {
+//            saveConfigurationToFile();
+//            menuState = MenuStateMain;
+//          }
+//          else if (event.key.code == cpp3ds::Keyboard::BackSpace)
+//          {
+//            if (parameters.playerName.size() > 0)
+//              parameters.playerName.erase(parameters.playerName.size() - 1);
+//          }
+//        }
+//        else if (event.key.code == cpp3ds::Keyboard::Escape)
+//        {
+//          escape = true;
+//        }
+//      }
+//    }
+//  }
   // END EVENT PROCESSING
 
   if (menuState == MenuStateAchievements)
@@ -3312,7 +3312,7 @@ void WitchBlastGame::updateMenu()
       {
         nbPlayers++;
         if (nbPlayers > NB_PLAYERS_MAX) nbPlayers = 1;
-        if (nbPlayers > 1 && !cpp3ds::Joystick::isConnected(0)) nbPlayers = 1;
+        if (nbPlayers > 1) nbPlayers = 1;
         SoundManager::getInstance().playSound(SOUND_SHOT_SELECT);
         buildMenu(true);
       }
@@ -3348,7 +3348,7 @@ void WitchBlastGame::updateMenu()
       {
         nbPlayers--;
         if (nbPlayers <= 0) nbPlayers = NB_PLAYERS_MAX;
-        if (nbPlayers > 1 && !cpp3ds::Joystick::isConnected(0)) nbPlayers = 1;
+        if (nbPlayers > 1) nbPlayers = 1;
         SoundManager::getInstance().playSound(SOUND_SHOT_SELECT);
         buildMenu(true);
       }
@@ -3369,13 +3369,13 @@ void WitchBlastGame::updateMenu()
         menuKeyIndex = 0;
         break;
       case MenuJoystick:
-        if (cpp3ds::Joystick::isConnected(0))
-        {
-          buildMenu(true);
-          menuState = MenuStateJoystick;
-          menuKeyIndex = 0;
-        }
-        else
+//        if (cpp3ds::Joystick::isConnected(0))
+//        {
+//          buildMenu(true);
+//          menuState = MenuStateJoystick;
+//          menuKeyIndex = 0;
+//        }
+//        else
           buildMenu(true);
         break;
       case MenuCredits:
@@ -3388,7 +3388,7 @@ void WitchBlastGame::updateMenu()
 #else
         menuScoreIndex = 2;
 #endif
-        receiveScoreFromServer();
+//        receiveScoreFromServer();
         break;
       case MenuAchievements:
         menuState = MenuStateAchievements;
@@ -3411,7 +3411,7 @@ void WitchBlastGame::updateMenu()
       case MenuLanguage:
         if (menuState == MenuStateFirst)
         {
-          registerLanguage();
+//          registerLanguage();
           if (parameters.playerName.compare("") == 0 )
           {
             menuMain.index = 0;
@@ -3922,66 +3922,110 @@ void WitchBlastGame::startGame()
 
   prepareIntro();
 
+  run();
+
   // Start game loop
-  while (app->isOpen())
-  {
-    deltaTime = getAbsolutTime() - lastTime;
-    if (deltaTime < 0.008f)
-    {
-      float sleepTime = 1.0f / 60.0f - deltaTime;
-      cpp3ds::sleep(cpp3ds::seconds(sleepTime));
-      deltaTime = getAbsolutTime() - lastTime;
-    }
+//  while (app->isOpen())
+//  {
+//    deltaTime = getAbsolutTime() - lastTime;
+//    if (deltaTime < 0.008f)
+//    {
+//      float sleepTime = 1.0f / 60.0f - deltaTime;
+//      cpp3ds::sleep(cpp3ds::seconds(sleepTime));
+//      deltaTime = getAbsolutTime() - lastTime;
+//    }
+//
+//    lastTime = getAbsolutTime();
+//    if (deltaTime > 0.05f) deltaTime = 0.05f;
 
-    lastTime = getAbsolutTime();
-    if (deltaTime > 0.05f) deltaTime = 0.05f;
-
-    if (app->hasFocus())
-    {
-      updateActionKeys();
-
-      switch (gameState)
-      {
-      case gameStateInit:
-      case gameStateKeyConfig:
-      case gameStateJoystickConfig:
-      case gameStateMenu:
-        updateMenu();
-        break;
-      case gameStateIntro:
-        updateIntro();
-        break;
-      case gameStatePlaying:
-      case gameStatePlayingPause:
-      case gameStatePlayingDisplayBoss:
-        updateRunningGame();
-        break;
-      }
-    }
-    else
-    {
-      // Process events
-      cpp3ds::Event event;
-      while (app->pollEvent(event))
-      {
-        // Close window : exit
-        if (event.type == cpp3ds::Event::Closed)
-        {
-          saveGameData();
-          app->close();
-        }
-
-        if (event.type == cpp3ds::Event::LostFocus)
-        {
-          if (parameters.pauseOnFocusLost && gameState == gameStatePlaying && !player->isDead())
-            gameState = gameStatePlayingPause;
-        }
-      }
-    }
-
-    onRender();
-  }
+//    if (app->hasFocus())
+//    {
+//      updateActionKeys();
+//
+//      switch (gameState)
+//      {
+//      case gameStateInit:
+//      case gameStateKeyConfig:
+//      case gameStateJoystickConfig:
+//      case gameStateMenu:
+//        updateMenu();
+//        break;
+//      case gameStateIntro:
+//        updateIntro();
+//        break;
+//      case gameStatePlaying:
+//      case gameStatePlayingPause:
+//      case gameStatePlayingDisplayBoss:
+//        updateRunningGame();
+//        break;
+//      }
+//    }
+//    else
+//    {
+//      // Process events
+//      cpp3ds::Event event;
+//      while (app->pollEvent(event))
+//      {
+//        // Close window : exit
+//        if (event.type == cpp3ds::Event::Closed)
+//        {
+//          saveGameData();
+//          app->close();
+//        }
+//
+//        if (event.type == cpp3ds::Event::LostFocus)
+//        {
+//          if (parameters.pauseOnFocusLost && gameState == gameStatePlaying && !player->isDead())
+//            gameState = gameStatePlayingPause;
+//        }
+//      }
+//    }
+//
+//    onRender();
+//  }
   quitGame();
+}
+
+void WitchBlastGame::update(float delta)
+{
+  lastTime = getAbsolutTime();
+  deltaTime = delta;
+
+  updateActionKeys();
+
+  switch (gameState)
+  {
+    case gameStateInit:
+    case gameStateKeyConfig:
+    case gameStateJoystickConfig:
+    case gameStateMenu:
+      updateMenu();
+      break;
+    case gameStateIntro:
+      updateIntro();
+      break;
+    case gameStatePlaying:
+    case gameStatePlayingPause:
+    case gameStatePlayingDisplayBoss:
+      updateRunningGame();
+      break;
+  }
+}
+
+void WitchBlastGame::processEvent(cpp3ds::Event &event)
+{
+
+}
+
+void WitchBlastGame::renderTopScreen(cpp3ds::Window &window)
+{
+  app = &window;
+  onRender();
+}
+
+void WitchBlastGame::renderBottomScreen(cpp3ds::Window &window)
+{
+//  app = &window;
 }
 
 void WitchBlastGame::createFloor()
@@ -6303,19 +6347,19 @@ void WitchBlastGame::saveConfigurationToFile()
   newMap["keyboard_fire_select"] = intToString(input[KeyFireSelect]);
 
   // Joystick
-  for (unsigned int i = 0; i < NumberKeys; i++)
-  {
-    std::stringstream oss_button;
-    oss_button << "joy_" << inputKeyStr[i] << "_button";
-    std::stringstream oss_value;
-    oss_value << "joy_" << inputKeyStr[i] << "_value";
-    std::stringstream oss_axis;
-    oss_axis << "joy_" << inputKeyStr[i] << "_axis";
-
-    newMap[oss_button.str()] = joystickInput[i].isButton ? "1" : "0";
-    newMap[oss_value.str()] = intToString(joystickInput[i].value);
-    newMap[oss_axis.str()] = intToString(joystickInput[i].axis);
-  }
+//  for (unsigned int i = 0; i < NumberKeys; i++)
+//  {
+//    std::stringstream oss_button;
+//    oss_button << "joy_" << inputKeyStr[i] << "_button";
+//    std::stringstream oss_value;
+//    oss_value << "joy_" << inputKeyStr[i] << "_value";
+//    std::stringstream oss_axis;
+//    oss_axis << "joy_" << inputKeyStr[i] << "_axis";
+//
+//    newMap[oss_button.str()] = joystickInput[i].isButton ? "1" : "0";
+//    newMap[oss_value.str()] = intToString(joystickInput[i].value);
+//    newMap[oss_axis.str()] = intToString(joystickInput[i].axis);
+//  }
 
   config.saveToFile(CONFIG_FILE, newMap);
 }
@@ -6336,48 +6380,48 @@ void WitchBlastGame::configureFromFile()
   parameters.playerName = "";
   parameters.displayBossPortrait = false;
 
-  input[KeyUp]    = cpp3ds::Keyboard::W;
-  input[KeyDown]  = cpp3ds::Keyboard::S;
-  input[KeyLeft]  = cpp3ds::Keyboard::A;
-  input[KeyRight] = cpp3ds::Keyboard::D;
-  input[KeyFireUp]    = cpp3ds::Keyboard::Up;
-  input[KeyFireDown]  = cpp3ds::Keyboard::Down;
-  input[KeyFireLeft]  = cpp3ds::Keyboard::Left;
-  input[KeyFireRight] = cpp3ds::Keyboard::Right;
-  input[KeyFire] = cpp3ds::Keyboard::RControl;
-  input[KeySpell] = cpp3ds::Keyboard::Space;
-  input[KeyInteract] = cpp3ds::Keyboard::E;
-  input[KeyFireSelect] = cpp3ds::Keyboard::Tab;
-  input[KeyTimeControl] = cpp3ds::Keyboard::RShift;
+  input[KeyUp]    = cpp3ds::Keyboard::DPadUp;
+  input[KeyLeft]  = cpp3ds::Keyboard::DPadLeft;
+  input[KeyDown]  = cpp3ds::Keyboard::DPadDown;
+  input[KeyRight] = cpp3ds::Keyboard::DPadRight;
+  input[KeyFireUp]    = cpp3ds::Keyboard::X;
+  input[KeyFireDown]  = cpp3ds::Keyboard::B;
+  input[KeyFireLeft]  = cpp3ds::Keyboard::Y;
+  input[KeyFireRight] = cpp3ds::Keyboard::A;
+  input[KeyFire] = cpp3ds::Keyboard::L;
+  input[KeyInteract] = cpp3ds::Keyboard::R;
+  input[KeyFireSelect] = cpp3ds::Keyboard::ZL;
+  input[KeyTimeControl] = cpp3ds::Keyboard::ZR;
+  input[KeySpell]  = cpp3ds::Keyboard::R;
 
   // Joystick
-  joystickInput[KeyUp].isButton = false;
-  joystickInput[KeyUp].axis = cpp3ds::Joystick::Y;
-  joystickInput[KeyUp].value = -1;
-
-  joystickInput[KeyDown].isButton = false;
-  joystickInput[KeyDown].axis = cpp3ds::Joystick::Y;
-  joystickInput[KeyDown].value = 1;
-
-  joystickInput[KeyLeft].isButton = false;
-  joystickInput[KeyLeft].axis = cpp3ds::Joystick::X;
-  joystickInput[KeyLeft].value = -1;
-
-  joystickInput[KeyRight].isButton = false;
-  joystickInput[KeyRight].axis = cpp3ds::Joystick::X;
-  joystickInput[KeyRight].value = 1;
-
-  for (unsigned int i = KeyFireUp; i < NumberKeys; i++)
-  {
-    joystickInput[i].isButton = true;
-    joystickInput[i].axis = cpp3ds::Joystick::X;
-
-    if (i > KeyFireRight) joystickInput[i].value = i - 4;
-  }
-  joystickInput[KeyFireUp].value = 3;
-  joystickInput[KeyFireDown].value = 0;
-  joystickInput[KeyFireLeft].value = 2;
-  joystickInput[KeyFireRight].value = 1;
+//  joystickInput[KeyUp].isButton = false;
+//  joystickInput[KeyUp].axis = cpp3ds::Joystick::Y;
+//  joystickInput[KeyUp].value = -1;
+//
+//  joystickInput[KeyDown].isButton = false;
+//  joystickInput[KeyDown].axis = cpp3ds::Joystick::Y;
+//  joystickInput[KeyDown].value = 1;
+//
+//  joystickInput[KeyLeft].isButton = false;
+//  joystickInput[KeyLeft].axis = cpp3ds::Joystick::X;
+//  joystickInput[KeyLeft].value = -1;
+//
+//  joystickInput[KeyRight].isButton = false;
+//  joystickInput[KeyRight].axis = cpp3ds::Joystick::X;
+//  joystickInput[KeyRight].value = 1;
+//
+//  for (unsigned int i = KeyFireUp; i < NumberKeys; i++)
+//  {
+//    joystickInput[i].isButton = true;
+//    joystickInput[i].axis = cpp3ds::Joystick::X;
+//
+//    if (i > KeyFireRight) joystickInput[i].value = i - 4;
+//  }
+//  joystickInput[KeyFireUp].value = 3;
+//  joystickInput[KeyFireDown].value = 0;
+//  joystickInput[KeyFireLeft].value = 2;
+//  joystickInput[KeyFireRight].value = 1;
 
   // from file
   addKey(KeyUp, "keyboard_move_up");
@@ -6395,25 +6439,25 @@ void WitchBlastGame::configureFromFile()
   addKey(KeyFireSelect, "keyboard_fire_select");
 
   // Joystick
-  for (unsigned int i = 0; i < NumberKeys; i++)
-  {
-    std::stringstream oss_button;
-    oss_button << "joy_" << inputKeyStr[i] << "_button";
-    std::stringstream oss_value;
-    oss_value << "joy_" << inputKeyStr[i] << "_value";
-    std::stringstream oss_axis;
-    oss_axis << "joy_" << inputKeyStr[i] << "_axis";
-
-    int isButton = config.findInt(oss_button.str());
-    if (isButton > -1000)
-      joystickInput[i].isButton = isButton;
-    int n = config.findInt(oss_value.str());
-    if (n > -1000)
-      joystickInput[i].value = n;
-    n = config.findInt(oss_axis.str());
-    if (n >= cpp3ds::Joystick::Axis::X && n <= cpp3ds::Joystick::Axis::PovY)
-      joystickInput[i].axis = (cpp3ds::Joystick::Axis)n;
-  }
+//  for (unsigned int i = 0; i < NumberKeys; i++)
+//  {
+//    std::stringstream oss_button;
+//    oss_button << "joy_" << inputKeyStr[i] << "_button";
+//    std::stringstream oss_value;
+//    oss_value << "joy_" << inputKeyStr[i] << "_value";
+//    std::stringstream oss_axis;
+//    oss_axis << "joy_" << inputKeyStr[i] << "_axis";
+//
+//    int isButton = config.findInt(oss_button.str());
+//    if (isButton > -1000)
+//      joystickInput[i].isButton = isButton;
+//    int n = config.findInt(oss_value.str());
+//    if (n > -1000)
+//      joystickInput[i].value = n;
+//    n = config.findInt(oss_axis.str());
+//    if (n >= cpp3ds::Joystick::Axis::X && n <= cpp3ds::Joystick::Axis::PovY)
+//      joystickInput[i].axis = (cpp3ds::Joystick::Axis)n;
+//  }
 
   int i = config.findInt("language");
   if (i >= 0 && i < NB_LANGUAGES) parameters.language = i;
@@ -6568,9 +6612,9 @@ void WitchBlastGame::buildMenu(bool rebuild)
 
   menuItemStuct itemJoystick;
   itemJoystick.label = tools::getLabel("config_joystick");
-  if (cpp3ds::Joystick::isConnected(0))
-    itemJoystick.description = tools::getLabel("redef_joystick");
-  else
+//  if (cpp3ds::Joystick::isConnected(0))
+//    itemJoystick.description = tools::getLabel("redef_joystick");
+//  else
     itemJoystick.description = tools::getLabel("joystick_not_found");
   itemJoystick.id = MenuJoystick;
   menuConfig.items.push_back(itemJoystick);
@@ -6691,29 +6735,18 @@ void WitchBlastGame::addKilledEnemy(enemyTypeEnum enemyType, enumShotType hurtin
 void WitchBlastGame::registerLanguage()
 {
   // default keys
-  if (parameters.language == 1)
-  {
-    // french keyboard
-    input[KeyUp]    = cpp3ds::Keyboard::Z;
-    input[KeyLeft]  = cpp3ds::Keyboard::Q;
-  }
-  else
-  {
-    // QWERT / QWERTZ keyboard
-    input[KeyUp]    = cpp3ds::Keyboard::W;
-    input[KeyLeft]  = cpp3ds::Keyboard::A;
-  }
-
-  input[KeyDown]  = cpp3ds::Keyboard::S;
-  input[KeyRight] = cpp3ds::Keyboard::D;
-  input[KeyFireUp]    = cpp3ds::Keyboard::Up;
-  input[KeyFireDown]  = cpp3ds::Keyboard::Down;
-  input[KeyFireLeft]  = cpp3ds::Keyboard::Left;
-  input[KeyFireRight] = cpp3ds::Keyboard::Right;
-  input[KeyFire] = cpp3ds::Keyboard::RControl;
-  input[KeyFireSelect] = cpp3ds::Keyboard::Tab;
-  input[KeyTimeControl] = cpp3ds::Keyboard::RShift;
-  input[KeySpell]  = cpp3ds::Keyboard::Space;
+//  input[KeyUp]    = cpp3ds::Keyboard::DPadUp;
+//  input[KeyLeft]  = cpp3ds::Keyboard::DPadLeft;
+//  input[KeyDown]  = cpp3ds::Keyboard::DPadDown;
+//  input[KeyRight] = cpp3ds::Keyboard::DPadRight;
+//  input[KeyFireUp]    = cpp3ds::Keyboard::X;
+//  input[KeyFireDown]  = cpp3ds::Keyboard::B;
+//  input[KeyFireLeft]  = cpp3ds::Keyboard::Y;
+//  input[KeyFireRight] = cpp3ds::Keyboard::A;
+//  input[KeyFire] = cpp3ds::Keyboard::L;
+//  input[KeyFireSelect] = cpp3ds::Keyboard::ZL;
+//  input[KeyTimeControl] = cpp3ds::Keyboard::ZR;
+//  input[KeySpell]  = cpp3ds::Keyboard::R;
 }
 
 int WitchBlastGame::getAchievementsPercents()
@@ -7507,31 +7540,31 @@ bool WitchBlastGame::getPressingState(int p, inputKeyEnum k)
       if (k == KeyUp && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Up)) return true;
       if (k == KeyDown && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Down)) return true;
 
-      if (k == KeyFireDown && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Return)) return true;
+      if (k == KeyFireDown && cpp3ds::Keyboard::isKeyPressed(cpp3ds::Keyboard::Start)) return true;
     }
 
     // keyboard
     if (cpp3ds::Keyboard::isKeyPressed(input[k])) return true;
   }
 
-  if (p == 1 || gameState != gameStatePlaying || nbPlayers == 1)
-  {
-    if (!cpp3ds::Joystick::isConnected(0)) return false;
-
-    // joystick
-    if (joystickInput[k].isButton)
-    {
-      // button
-      if (joystickInput[k].value >= 0)
-        if (cpp3ds::Joystick::isButtonPressed(0, joystickInput[k].value)) return true;
-    }
-    else
-    {
-      // axis
-      if (joystickInput[k].value < 0 && cpp3ds::Joystick::getAxisPosition(0, joystickInput[k].axis) < -40) return true;
-      else if (joystickInput[k].value > 0 && cpp3ds::Joystick::getAxisPosition(0, joystickInput[k].axis) > 40) return true;
-    }
-  }
+//  if (p == 1 || gameState != gameStatePlaying || nbPlayers == 1)
+//  {
+//    if (!cpp3ds::Joystick::isConnected(0)) return false;
+//
+//    // joystick
+//    if (joystickInput[k].isButton)
+//    {
+//      // button
+//      if (joystickInput[k].value >= 0)
+//        if (cpp3ds::Joystick::isButtonPressed(0, joystickInput[k].value)) return true;
+//    }
+//    else
+//    {
+//      // axis
+//      if (joystickInput[k].value < 0 && cpp3ds::Joystick::getAxisPosition(0, joystickInput[k].axis) < -40) return true;
+//      else if (joystickInput[k].value > 0 && cpp3ds::Joystick::getAxisPosition(0, joystickInput[k].axis) > 40) return true;
+//    }
+//  }
 
   return false;
 }
@@ -7549,47 +7582,47 @@ void WitchBlastGame::updateActionKeys()
   }
 }
 
-void WitchBlastGame::sendScoreToServer()
-{
-  if (sendScoreThread.joinable()) sendScoreThread.join();
-  sendScoreThread = std::thread(&WitchBlastGame::sendScoreToServerThread, this);
-  receiveScoreFromServer();
-}
+//void WitchBlastGame::sendScoreToServer()
+//{
+//  if (sendScoreThread.joinable()) sendScoreThread.join();
+//  sendScoreThread = std::thread(&WitchBlastGame::sendScoreToServerThread, this);
+//  receiveScoreFromServer();
+//}
+//
+//void WitchBlastGame::sendScoreToServerThread()
+//{
+//#ifdef ONLINE_MODE
+//  sendScore(lastScore.score,
+//            lastScore.level,
+//            lastScore.name,
+//            equipToString(lastScore.equip),
+//            lastScore.shotType,
+//            lastScore.divinity,
+//            lastScore.killedBy,
+//            lastScore.time,
+//            statsStr,
+//            SCORE_VERSION);
+//#endif
+//}
 
-void WitchBlastGame::sendScoreToServerThread()
-{
-#ifdef ONLINE_MODE
-  sendScore(lastScore.score,
-            lastScore.level,
-            lastScore.name,
-            equipToString(lastScore.equip),
-            lastScore.shotType,
-            lastScore.divinity,
-            lastScore.killedBy,
-            lastScore.time,
-            statsStr,
-            SCORE_VERSION);
-#endif
-}
-
-void WitchBlastGame::receiveScoreFromServer()
-{
-#ifdef ONLINE_MODE
-  scoreState = ScoreLoading;
-
-  if (receiveScoreThread.joinable()) receiveScoreThread.join();
-  receiveScoreThread = std::thread(&WitchBlastGame::receiveScoreFromServerThread, this);
-#endif
-}
-
-void WitchBlastGame::receiveScoreFromServerThread()
-{
-  if (sendScoreThread.joinable()) sendScoreThread.join();
-  loadHiScoresOnline(false);
-  scoreState = ScoreLoadingDay;
-  loadHiScoresOnline(true);
-  scoreState = ScoreOK;
-}
+//void WitchBlastGame::receiveScoreFromServer()
+//{
+//#ifdef ONLINE_MODE
+//  scoreState = ScoreLoading;
+//
+//  if (receiveScoreThread.joinable()) receiveScoreThread.join();
+//  receiveScoreThread = std::thread(&WitchBlastGame::receiveScoreFromServerThread, this);
+//#endif
+//}
+//
+//void WitchBlastGame::receiveScoreFromServerThread()
+//{
+//  if (sendScoreThread.joinable()) sendScoreThread.join();
+//  loadHiScoresOnline(false);
+//  scoreState = ScoreLoadingDay;
+//  loadHiScoresOnline(true);
+//  scoreState = ScoreOK;
+//}
 
 void WitchBlastGame::loadHiScoresOnline(bool fromDayOnly)
 {

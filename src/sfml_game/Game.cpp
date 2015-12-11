@@ -41,7 +41,7 @@ void Game::create(int screenWidth, int screenHeight, std::string windowsTitle, b
 Game::~Game()
 {
   printf("Deleting the game...\n");
-  delete(app);
+//  delete(app);
 }
 
 float Game::getAbsolutTime()
@@ -60,13 +60,13 @@ void Game::startGame()
     // Process events
     cpp3ds::Event event;
 
-    while (app->pollEvent(event))
-    {
-      // Close window : exit
-      if (event.type == cpp3ds::Event::Closed)
-        app->close();
-
-    }
+//    while (app->pollEvent(event))
+//    {
+//      // Close window : exit
+//      if (event.type == cpp3ds::Event::Closed)
+//        app->close();
+//
+//    }
 
     onUpdate();
     onRender();
@@ -97,22 +97,3 @@ void Game::onUpdate()
   EntityManager::getInstance().animate(delta);
 }
 
-void Game::update(float delta)
-{
-
-}
-
-void Game::processEvent(cpp3ds::Event &event)
-{
-
-}
-
-void Game::renderTopScreen(cpp3ds::Window &window)
-{
-	app = &window;
-}
-
-void Game::renderBottomScreen(cpp3ds::Window &window)
-{
-
-}

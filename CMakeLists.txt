@@ -1,124 +1,45 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_OSX_DEPLOYMENT_TARGET 10.9)
+# Project name without spaces or special characters
+project("witchblast")
 
-# Projet name
-project("Witch_Blast")
+set(APP_TITLE "Witch Blast")
+set(APP_DESCRIPTION "Basic cpp3ds template project")
+set(APP_AUTHOR "Cruel")
+set(APP_ICON ${PROJECT_SOURCE_DIR}/res/app/icon.png)
 
-# Detect compiler
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    set(USING_GCC TRUE)
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    set(USING_CLANG TRUE)
+# CIA settings
+set(APP_UNIQUE_ID 0xfffff) # This must be unique for your CIA project
+set(APP_PRODUCT_CODE ${PROJECT_NAME})
+set(BANNER_IMAGE ${PROJECT_SOURCE_DIR}/res/app/banner.png)
+set(BANNER_SOUND ${PROJECT_SOURCE_DIR}/res/app/banner.wav)
+set(CIA_CONFIG ${PROJECT_SOURCE_DIR}/res/app/cia.rsf)
+
+# Include cpp3ds cmake module
+set(CPP3DS $ENV{CPP3DS})
+if(NOT CPP3DS)
+	message(FATAL_ERROR "You need to set the env variable CPP3DS before compiling.")
 endif()
+set(CMAKE_MODULE_PATH "${CPP3DS}/cmake" ${CMAKE_MODULE_PATH})
+include(cpp3ds)
 
-# For GCC and Clang, enable C++11 support and add some other flags
-if(USING_GCC OR USING_CLANG)
-  add_compile_options(-std=c++11 -pedantic -Wall)
-endif()
+# Use either nihstro or picasso for your shader scripts
+set(SHADER_AS nihstro)
 
-# Compilation options
-option(ONLINE_MODE "Enable online mode, which requires src/OnlineScoring.h" OFF)
-
-if(ONLINE_MODE)
-  add_compile_options(-DONLINE_MODE)
-endif()
-
-include_directories(.)
-
-file(
-        GLOB_RECURSE
-        source_files
-        src/*
+set(SOURCE_FILES
+		${PROJECT_SOURCE_DIR}/src/main.cpp
 )
+file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
+file(GLOB_RECURSE SHADER_FILES ${PROJECT_SOURCE_DIR}/res/romfs/shaders/[^.]*.vsh)
 
-if(APPLE)
-  set(${source_files} “${source_files} src/ressources/witchblast.icns”)
-  set_source_files_properties(src/ressources/witchblast.icns
-    PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-  set(MACOSX_BUNDLE_ICON_FILE witchblast.icns)
-endif()
+##################################################
+# Don't usually need to change anything below
+##################################################
+set(CPP3DS_ARM_FLAGS "-g -O2 -fno-exceptions -march=armv6k -mtune=mpcore -mfloat-abi=hard")
+set(CPP3DS_EMU_FLAGS "-g -O0")
 
-add_executable(
-        "Witch_Blast"
-        MACOSX_BUNDLE
-        ${source_files}
-)
-set_target_properties(Witch_Blast PROPERTIES
-	RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_BINARY_DIR}
-	RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_BINARY_DIR}
-)
-if(APPLE)
-	set_target_properties(Witch_Blast PROPERTIES
-		MACOSX_RPATH 1
-		BUILD_WITH_INSTALL_RPATH 1
-		INSTALL_RPATH "@loader_path/../Frameworks")
-  set(EXTRA_LIBRARIES "-framework CoreFoundation")
-endif()
+set(CPP3DS_ARM_LIBS cpp3ds-window cpp3ds-graphics cpp3ds-audio cpp3ds-system gl3ds ctru freetype png z vorbisenc vorbisfile vorbis ogg)
+set(CPP3DS_EMU_LIBS cpp3ds-emu sfml-graphics sfml-window sfml-system sfml-audio openal GLEW GL jpeg freetype vorbisenc vorbisfile vorbis ogg)
 
-if(UNIX)
-	find_package(Threads REQUIRED)
-	if(THREADS_HAVE_PTHREAD_ARG)
-	  target_compile_options(PUBLIC Witch_Blast "-pthread")
-	endif()
-	if(CMAKE_THREAD_LIBS_INIT)
-	  target_link_libraries(Witch_Blast "${CMAKE_THREAD_LIBS_INIT}")
-	endif()
-endif()
-
-# Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
-if(ONLINE_MODE)
-  find_package(SFML 2.2 REQUIRED system window graphics audio network)
-else()
-  find_package(SFML 2.2 REQUIRED system window graphics audio)
-endif()
-target_link_libraries(Witch_Blast ${SFML_LIBRARIES} ${EXTRA_LIBRARIES})
-
-include_directories(${SFML_INCLUDE_DIR})
-
-Message(${SFML_LIBRARIES})
-
-if(APPLE)
-	install(
-		DIRECTORY Witch_Blast.app
-		DESTINATION "."
-		USE_SOURCE_PERMISSIONS)
-  install(
-    DIRECTORY
-    ${CMAKE_SOURCE_DIR}/data
-    ${CMAKE_SOURCE_DIR}/media
-    DESTINATION Witch_Blast.app/Contents/Resources)
-  # copy SFML frameworks into app bundle for Mac OS X
-  foreach(LIB ${SFML_LIBRARIES})
-    install(DIRECTORY ${LIB}
-      DESTINATION Witch_Blast.app/Contents/Frameworks)
-  endforeach()
-  set(SFML_LIBRARIES_EXTRA
-    SFML FLAC freetype ogg OpenAL vorbis vorbisenc vorbisfile)
-  foreach(LIB ${SFML_LIBRARIES_EXTRA})
-    install(DIRECTORY /Library/Frameworks/${LIB}.framework
-      DESTINATION Witch_Blast.app/Contents/Frameworks)
-  endforeach()
-  install(FILES
-    ${CMAKE_SOURCE_DIR}/COPYING.txt
-    ${CMAKE_SOURCE_DIR}/readme.txt
-    DESTINATION ".")
-endif()
-
-# Packaging
-SET(CPACK_PACKAGE_VERSION "0.7.5")
-SET(CPACK_PACKAGE_VERSION_MAJOR "0")
-SET(CPACK_PACKAGE_VERSION_MINOR "7")
-SET(CPACK_PACKAGE_VERSION_PATCH "5")
-SET(CPACK_PACKAGE_EXECUTABLES "Witch_Blast;Witch Blast")
-if(APPLE)
-  set(CPACK_GENERATOR "DragNDrop")
-  set(CPACK_DMG_FORMAT "UDBZ")
-  set(CPACK_DMG_VOLUME_NAME "Witch Blast")
-  set(CPACK_SYSTEM_NAME "OSX")
-  set(CPACK_PACKAGE_ICON src/ressources/witchblast.icns)
-  # TODO: CPACK_DMG_BACKGROUND_IMAGE
-  # TODO: CPACK_DMG_DS_STORE
-endif()
-include(CPack)
+add_subdirectory(${CPP3DS}/cmake/template_arm build/arm)
+add_subdirectory(${CPP3DS}/cmake/template_emu build/emu)

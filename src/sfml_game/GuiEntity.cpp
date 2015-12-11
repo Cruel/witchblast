@@ -37,5 +37,5 @@ void GuiEntity::animate(float delay)
 
 void GuiEntity::onEvent(cpp3ds::Event event)
 {
-    if (event.type == cpp3ds::Event::Closed) return;
+//    if (event.type == cpp3ds::Event::Closed) return;
 }
