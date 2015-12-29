@@ -9,7 +9,7 @@
 
 float const fireDelayAdvancedMult = 0.8f;
 
-FairyEntity::FairyEntity(float x, float y, enumFamiliar fairyType, bool isPlayerControlled) : SpriteEntity (ImageManager::getInstance().getImage(IMAGE_FAIRY), x, y, 48, 72),
+FairyEntity::FairyEntity(float x, float y, enumFamiliar fairyType, bool isPlayerControlled) : SpriteEntity (ImageManager::getInstance().getImage(IMAGE_FAIRY), x, y, 24, 36),
   isPlayer(isPlayerControlled)
 {
   this->x = x;

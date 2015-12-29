@@ -12,7 +12,7 @@
 #include <iostream>
 
 ChestEntity::ChestEntity(float x, float y, int chestType, bool isOpen)
-    : CollidingSpriteEntity(ImageManager::getInstance().getImage(IMAGE_CHEST), x, y, 48, 64)
+    : CollidingSpriteEntity(ImageManager::getInstance().getImage(IMAGE_CHEST), x, y, 24, 32)
 {
   type = ENTITY_CHEST;
   imagesProLine = 2;
@@ -26,7 +26,7 @@ ChestEntity::ChestEntity(float x, float y, int chestType, bool isOpen)
 
   timer = -1.0f;
   appearTimer = -1.0f;
-  sprite.setOrigin(24, 40);
+  sprite.setOrigin(12, 20);
 }
 
 bool ChestEntity::getOpened()
@@ -111,8 +111,8 @@ void ChestEntity::calculateBB()
 {
   boundingBox.left = (int)x - width / 2;
   boundingBox.width = width;
-  boundingBox.top = (int)y - 24;
-  boundingBox.height =  46;
+  boundingBox.top = (int)y - 12;
+  boundingBox.height =  23;
 }
 
 

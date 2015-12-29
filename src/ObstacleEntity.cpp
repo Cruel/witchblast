@@ -125,10 +125,10 @@ void ObstacleEntity::dying()
 
 void ObstacleEntity::calculateBB()
 {
-  boundingBox.left = (int)x - 30;
-  boundingBox.width = 60;
-  boundingBox.top = (int)y - 30;
-  boundingBox.height =  60;
+  boundingBox.left = (int)x - 15;
+  boundingBox.width = 30;
+  boundingBox.top = (int)y - 15;
+  boundingBox.height =  30;
 }
 
 

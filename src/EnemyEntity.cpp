@@ -10,7 +10,7 @@
 const float FACING_DELAY = 0.25f;
 
 EnemyEntity::EnemyEntity(cpp3ds::Texture* image, float x, float y)
-  : BaseCreatureEntity (image, x, y, 64, 64)
+  : BaseCreatureEntity (image, x, y, 32, 32)
 {
   type = ENTITY_ENEMY;
   bloodColor = BloodRed;

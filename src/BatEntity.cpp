@@ -23,7 +23,7 @@ BatEntity::BatEntity(float x, float y, EnumBatType batType, bool invocated)
   movingStyle = movFlying;
 
   agonizingSound = SOUND_BAT_DYING;
-  sprite.setOrigin(32.0f, 26.0f);
+  sprite.setOrigin(16.0f, 13.0f);
 
   if (batType == BatStandard)
   {

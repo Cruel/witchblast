@@ -75,8 +75,8 @@ bool TileMapEntity::getChanged()
 
 void TileMapEntity::computeVertices()
 {
-  vertices.setPrimitiveType(cpp3ds::Quads);
-  vertices.resize(gameMap->getWidth() * gameMap->getHeight() * 4);
+  vertices.setPrimitiveType(cpp3ds::Triangles);
+  vertices.resize(gameMap->getWidth() * gameMap->getHeight() * 6);
 
   for (int i = 0; i < gameMap->getWidth(); i++)
     for (int j = 0; j < gameMap->getHeight(); j++)
@@ -84,17 +84,20 @@ void TileMapEntity::computeVertices()
       int nx = gameMap->getTile(i, j) % tilesProLine;
       int ny = gameMap->getTile(i, j) / tilesProLine;
 
-      cpp3ds::Vertex* quad = &vertices[(i + j * gameMap->getWidth()) * 4];
+      cpp3ds::Vertex* quad = &vertices[(i + j * gameMap->getWidth()) * 6];
 
       quad[0].position = cpp3ds::Vector2f(x + i * tileWidth, y + j * tileHeight);
-      quad[1].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
+      quad[3].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + j * tileHeight);
       quad[2].position = cpp3ds::Vector2f(x + (i + 1) * tileWidth + (tileBoxWidth -tileWidth), y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
-      quad[3].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
+      quad[1].position = cpp3ds::Vector2f(x + i * tileWidth, y + (j + 1) * tileHeight + (tileBoxHeight - tileHeight));
 
       quad[0].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, ny * tileBoxHeight);
-      quad[1].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
+      quad[3].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, ny * tileBoxHeight);
       quad[2].texCoords = cpp3ds::Vector2f((nx + 1) * tileBoxWidth, (ny + 1) * tileBoxHeight);
-      quad[3].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
+      quad[1].texCoords = cpp3ds::Vector2f(nx * tileBoxWidth, (ny + 1) * tileBoxHeight);
+
+      quad[4] = quad[0];
+      quad[5] = quad[2];
     }
 }
 

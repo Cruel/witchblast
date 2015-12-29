@@ -1804,7 +1804,7 @@ void DungeonMap::generateCorridors()
   int xCor = 1 + rand()% 4;
   int yCor = 1 + rand()% 1;
 
-  int wallOffset = wallType * 24;
+  int wallOffset = wallType * 12;
 
   if (!hasNeighbourLeft())
   {

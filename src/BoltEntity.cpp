@@ -133,7 +133,7 @@ void BoltEntity::animate(float delay)
 {
   if (boltType != ShotTypeBomb)
     particleGenerator.GenerateParticles(frame, IMAGE_BOLT, x, y, BOLT_WIDTH, BOLT_HEIGHT,
-                        boltType == ShotTypeLightning ? Vector2D(20.0f) : Vector2D(0.0f, 0.0f),
+                        boltType == ShotTypeLightning ? Vector2D(20.0f/2) : Vector2D(0.0f, 0.0f),
                         10, boltType == ShotTypeIce ? renderScale * 1.3f : renderScale);
 
   z = y + height;
@@ -143,7 +143,7 @@ void BoltEntity::animate(float delay)
   {
     isDying = true;
     SoundManager::getInstance().playSound(SOUND_WALL_IMPACT);
-    for (int i=0; i<5; i++) generateParticule(100.0f + rand() % 150);
+    for (int i=0; i<5; i++) generateParticule(100.0f/2 + rand() % 150/2);
   }
   else
   {
@@ -162,23 +162,23 @@ void BoltEntity::animate(float delay)
   if (game().getCurrentMap()->getRoomType() == roomTypeKey && !game().getCurrentMap()->isCleared())
   {
     cpp3ds::IntRect col1;
-    col1.width = 198;
-    col1.height = 68;
-    col1.top = 254;
-    col1.left = 380;
+    col1.width = 198/2;
+    col1.height = 68/2;
+    col1.top = 254/2;
+    col1.left = 380/2;
 
     cpp3ds::IntRect col2;
-    col2.width = 68;
-    col2.height = 198;
-    col2.top = 189;
-    col2.left = 445;
+    col2.width = 68/2;
+    col2.height = 198/2;
+    col2.top = 189/2;
+    col2.left = 445/2;
 
     if (boundingBox.intersects(col1) || boundingBox.intersects(col2))
     {
       game().activateKeyRoomEffect(false);
-      if (x < 390) collideMapRight();
-      else if (x > 565) collideMapLeft();
-      else if (y < 265) collideMapBottom();
+      if (x < 390/2) collideMapRight();
+      else if (x > 565/2) collideMapLeft();
+      else if (y < 265/2) collideMapBottom();
       else collideMapTop();
     }
   }
@@ -194,7 +194,7 @@ void BoltEntity::animate(float delay)
       sprite.setColor(cpp3ds::Color(255, 255, 255, (cpp3ds::Uint8)((lifetime - age) / 0.2f * 255)));
   }
 
-  if (((velocity.x)*(velocity.x) + (velocity.y)*(velocity.y)) < 1500.0f) isDying = true;
+  if (((velocity.x)*(velocity.x) + (velocity.y)*(velocity.y)) < 1500.0f/2) isDying = true;
 }
 
 void BoltEntity::render(cpp3ds::RenderTarget* app)
@@ -243,7 +243,7 @@ void BoltEntity::collide()
   {
     for (int i=0; i<5; i++)
     {
-      Vector2D vel(40.0f + rand() % 50);
+      Vector2D vel(40.0f/2 + rand() % 50/2);
       generateParticule(vel);
     }
   }
@@ -306,7 +306,7 @@ void BoltEntity::stuck()
   {
     for (int i=0; i<5; i++)
     {
-      Vector2D vel(100.0f + rand() % 150);
+      Vector2D vel(100.0f/2 + rand() % 150/2);
       generateParticule(vel);
     }
   }
@@ -330,7 +330,7 @@ void BoltEntity::collideMapRight()
     SoundManager::getInstance().playSound(SOUND_WALL_IMPACT);
     for (int i=0; i<5; i++)
     {
-      Vector2D vel(100.0f + rand() % 150);
+      Vector2D vel(100.0f/2 + rand() % 150/2);
       if (vel.x > 0.0f) vel.x = - vel.x;
       generateParticule(vel);
     }
@@ -353,7 +353,7 @@ void BoltEntity::collideMapLeft()
     SoundManager::getInstance().playSound(SOUND_WALL_IMPACT);
     for (int i=0; i<5; i++)
     {
-      Vector2D vel(100.0f + rand() % 150);
+      Vector2D vel(100.0f/2 + rand() % 150/2);
       if (vel.x < 0.0f) vel.x = - vel.x;
       generateParticule(vel);
     }
@@ -376,7 +376,7 @@ void BoltEntity::collideMapTop()
     SoundManager::getInstance().playSound(SOUND_WALL_IMPACT);
     for (int i=0; i<5; i++)
     {
-      Vector2D vel(100.0f + rand() % 150);
+      Vector2D vel(100.0f/2 + rand() % 150/2);
       if (vel.y < 0.0f) vel.y = - vel.y;
       generateParticule(vel);
     }
@@ -399,7 +399,7 @@ void BoltEntity::collideMapBottom()
     SoundManager::getInstance().playSound(SOUND_WALL_IMPACT);
     for (int i=0; i<5; i++)
     {
-      Vector2D vel(100.0f + rand() % 150);
+      Vector2D vel(100.0f/2 + rand() % 150/2);
       if (vel.y > 0.0f) vel.y = - vel.y;
       generateParticule(vel);
     }

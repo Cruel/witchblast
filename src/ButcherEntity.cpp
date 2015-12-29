@@ -12,9 +12,9 @@
 ButcherEntity::ButcherEntity(float x, float y)
   : EnemyEntity (ImageManager::getInstance().getImage(IMAGE_BUTCHER), x, y)
 {
-  width = 80;
-  height = 160;
-  sprite.setOrigin(40, 115);
+  width = 80/2;
+  height = 160/2;
+  sprite.setOrigin(40/2, 115/2);
 
   creatureSpeed = BUTCHER_VELOCITY;
   velocity = Vector2D(creatureSpeed);
@@ -74,10 +74,10 @@ void ButcherEntity::animate(float delay)
 
 void ButcherEntity::calculateBB()
 {
-    boundingBox.left = (int)x - 22;
-    boundingBox.width = 44;
-    boundingBox.top = (int)y - 18;
-    boundingBox.height =  48;
+    boundingBox.left = (int)x - 22/2;
+    boundingBox.width = 44/2;
+    boundingBox.top = (int)y - 18/2;
+    boundingBox.height =  48/2;
 }
 
 void ButcherEntity::collideMapRight()

@@ -24,9 +24,9 @@ SausageEntity::SausageEntity(float x, float y, bool invocated)
   deathFrame = FRAME_CORPSE_SLIME_VIOLET;
   agonizingSound = SOUND_NONE;
 
-  width = 48;
-  height = 48;
-  sprite.setOrigin(24, 24);
+  width = 48/2;
+  height = 48/2;
+  sprite.setOrigin(24/2, 24/2);
 
   h = 0;
   state = 0;
@@ -67,7 +67,7 @@ void SausageEntity::animate(float delay)
     if (state == 0) // waiting
     {
       state++;
-      hVelocity = 450.0f;
+      hVelocity = 450.0f/2;
     }
     else if (state == 2) // waiting in air
     {
@@ -77,13 +77,13 @@ void SausageEntity::animate(float delay)
 
   if (state == 1 || state == 3) // jumping / falling
   {
-    hVelocity -= 750.0f * sausDelay;
+    hVelocity -= 750.0f/2 * sausDelay;
 
     if (state == 1 && /*hVelocity <= 0.0f*/ h > 35)
     {
       state = 2;
       timer = 0.4f;
-      hVelocity = -100.0f;
+      hVelocity = -100.0f/2;
     }
     else
       h += hVelocity * sausDelay;
@@ -116,10 +116,10 @@ bool SausageEntity::canCollide()
 
 void SausageEntity::calculateBB()
 {
-    boundingBox.left = (int)x - 16;
-    boundingBox.width = 32;
-    boundingBox.top = (int)y - 14;
-    boundingBox.height =  28;
+    boundingBox.left = (int)x - 16/2;
+    boundingBox.width = 32/2;
+    boundingBox.top = (int)y - 14/2;
+    boundingBox.height =  28/2;
 }
 
 void SausageEntity::collideMapRight()
@@ -173,7 +173,7 @@ void SausageEntity::collideWithEnemy(EnemyEntity* entity)
 {
   if (recoil.active && recoil.stun) return;
 
-  Vector2D vel = Vector2D(entity->getX(), entity->getY()).vectorTo(Vector2D(x, y), 50.0f );
+  Vector2D vel = Vector2D(entity->getX(), entity->getY()).vectorTo(Vector2D(x, y), 50.0f/2 );
     giveRecoil(false, vel, 0.3f);
 }
 

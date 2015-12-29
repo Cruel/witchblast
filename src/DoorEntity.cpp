@@ -59,13 +59,13 @@ void DoorEntity::renderDoors(cpp3ds::RenderTarget* app)
 
   if (direction == 8 || direction == 2)
   {
-    x0 = 64 + 256 * (doorType / DOORS_PRO_COLUMN);
-    y0 = 192 * ((int)doorType % DOORS_PRO_COLUMN);
+    x0 = 32 + 128 * (doorType / DOORS_PRO_COLUMN);
+    y0 = 96 * ((int)doorType % DOORS_PRO_COLUMN);
   }
   else
   {
-    x0 = 0 + 256 * (doorType / DOORS_PRO_COLUMN);
-    y0 = 192 * ((int)doorType % DOORS_PRO_COLUMN);
+    x0 = 0 + 128 * (doorType / DOORS_PRO_COLUMN);
+    y0 = 96 * ((int)doorType % DOORS_PRO_COLUMN);
   }
 
   if (direction == 8)

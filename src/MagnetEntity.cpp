@@ -9,7 +9,7 @@ MagnetEntity::MagnetEntity(float x, float y, PlayerEntity* parentEntity, enumIte
   this->setLifetime(0.7f);
   //itemFadingEntity->setFading(true);
   this->setShrinking(true);
-  this->setVelocity(Vector2D(150.0f - rand()%300, -260.0f));
+  this->setVelocity(Vector2D(150.0f/2 - rand()%300/2, -260.0f/2));
   this->setWeight(800.0f);
   this->setFrame(itemType);
   this->parentEntity = parentEntity;
@@ -23,8 +23,8 @@ void MagnetEntity::animate(float delay)
 
   if (age > lifetime * 0.3f)
   {
-    velocity.x += (parentEntity->getX() - x) * delay * 30.0f;
-    velocity.y += (parentEntity->getY() - y) * delay * 30.0f;
+    velocity.x += (parentEntity->getX() - x) * delay * 30.0f/2;
+    velocity.y += (parentEntity->getY() - y) * delay * 30.0f/2;
   }
 
   SpriteEntity::animate(delay);

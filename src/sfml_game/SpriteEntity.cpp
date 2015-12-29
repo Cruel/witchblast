@@ -56,7 +56,7 @@ void SpriteEntity::setFading(bool isFading)
 void SpriteEntity::setColor(cpp3ds::Color color)
 {
   this->color = color;
-  sprite.setColor(cpp3ds::Color(color.r, color.g, color.b, color.a));
+  sprite.setColor(color);
 }
 
 void SpriteEntity::setTexture(cpp3ds::Texture* image)
@@ -158,16 +158,16 @@ void SpriteEntity::render(cpp3ds::RenderTarget* app)
 
 void SpriteEntity::displayCenterAndZ(cpp3ds::RenderTarget* app)
 {
-  cpp3ds::Vertex line[] =
-  {
-    cpp3ds::Vertex(cpp3ds::Vector2f(x - 2, y), cpp3ds::Color::Green),
-    cpp3ds::Vertex(cpp3ds::Vector2f(x + 2, y), cpp3ds::Color::Green),
-    cpp3ds::Vertex(cpp3ds::Vector2f(x, y - 2), cpp3ds::Color::Green),
-    cpp3ds::Vertex(cpp3ds::Vector2f(x, y + 2), cpp3ds::Color::Green),
-    cpp3ds::Vertex(cpp3ds::Vector2f(x - 5, z), cpp3ds::Color::Green),
-    cpp3ds::Vertex(cpp3ds::Vector2f(x + 5, z), cpp3ds::Color::Green)
-  };
-  app->draw(line, 6, cpp3ds::Lines);
+//  cpp3ds::Vertex line[] =
+//  {
+//    cpp3ds::Vertex(cpp3ds::Vector2f(x - 2, y), cpp3ds::Color::Green),
+//    cpp3ds::Vertex(cpp3ds::Vector2f(x + 2, y), cpp3ds::Color::Green),
+//    cpp3ds::Vertex(cpp3ds::Vector2f(x, y - 2), cpp3ds::Color::Green),
+//    cpp3ds::Vertex(cpp3ds::Vector2f(x, y + 2), cpp3ds::Color::Green),
+//    cpp3ds::Vertex(cpp3ds::Vector2f(x - 5, z), cpp3ds::Color::Green),
+//    cpp3ds::Vertex(cpp3ds::Vector2f(x + 5, z), cpp3ds::Color::Green)
+//  };
+//  app->draw(line, 6, cpp3ds::Lines);
 }
 
 void SpriteEntity::animate(float delay)

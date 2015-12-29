@@ -75,9 +75,9 @@ BubbleEntity::BubbleEntity(float x, float y, EnumBubbleType bubbleType, int bubb
     spin = 20 + rand() % 20;
   }
 
-  width = 128;
-  height = 128;
-  sprite.setOrigin(64, 64);
+  width = 64;
+  height = 64;
+  sprite.setOrigin(32, 32);
   canExplode = false;
 }
 
@@ -88,10 +88,10 @@ int BubbleEntity::getBubbleSize()
 
 void BubbleEntity::calculateBB()
 {
-  boundingBox.left = (int)x - 50 * sprite.getScale().x;
-  boundingBox.width = 100 * sprite.getScale().x;
-  boundingBox.top = (int)y - 50 * sprite.getScale().x;
-  boundingBox.height =  100 * sprite.getScale().x;
+  boundingBox.left = (int)x - 25 * sprite.getScale().x;
+  boundingBox.width = 50 * sprite.getScale().x;
+  boundingBox.top = (int)y - 25 * sprite.getScale().x;
+  boundingBox.height =  50 * sprite.getScale().x;
 }
 
 void BubbleEntity::animate(float delay)

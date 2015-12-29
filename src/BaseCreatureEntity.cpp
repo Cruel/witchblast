@@ -584,9 +584,9 @@ int BaseCreatureEntity::hurt(StructHurt hurtParam)
       std::ostringstream oss;
       oss << "-" << displayedDamage;
       int textSize;
-      if (displayedDamage < 8) textSize = 17;
-      else textSize = 17 + (displayedDamage - 3) / 5;
-      TextEntity* text = new TextEntity(oss.str(), textSize, x, y - 20.0f);
+      if (displayedDamage < 8) textSize = 14;
+      else textSize = 14 + (displayedDamage - 3) / 5;
+      TextEntity* text = new TextEntity(oss.str(), textSize, x, y - 20.0f/2);
       text->setColor(TextEntity::COLOR_FADING_RED);
       text->setAge(-0.6f);
       text->setLifetime(0.3f);
@@ -604,12 +604,12 @@ int BaseCreatureEntity::hurt(StructHurt hurtParam)
           crss << " X3";
         else
           crss << " X2";
-        displayFlyingText(x, text->getY() - 16.0f, 16, crss.str(), TextEntity::COLOR_FADING_RED);
+        displayFlyingText(x, text->getY() - 16.0f/2, 14, crss.str(), TextEntity::COLOR_FADING_RED);
       }
 
       if (poisoned)
       {
-        displayFlyingText(x, text->getY() - 16.0f, 16, tools::getLabel("poison"), TextEntity::COLOR_FADING_RED);
+        displayFlyingText(x, text->getY() - 16.0f/2, 14, tools::getLabel("poison"), TextEntity::COLOR_FADING_RED);
       }
       if (hurtParam.critical) SoundManager::getInstance().playSound(SOUND_CRITICAL);
     }
@@ -830,9 +830,9 @@ void BaseCreatureEntity::heal(int healPoints)
     std::ostringstream oss;
     oss << "+" << healedHp;
     int textSize;
-    if (healedHp < 8) textSize = 17;
-    else textSize = 17 + (healedHp - 3) / 5;
-    TextEntity* text = new TextEntity(oss.str(), textSize, x, y - 20.0f);
+    if (healedHp < 8) textSize = 14;
+    else textSize = 14 + (healedHp - 3) / 5;
+    TextEntity* text = new TextEntity(oss.str(), textSize, x, y - 20.0f/2);
     text->setColor(TextEntity::COLOR_FADING_GREEN);
     text->setAge(-0.6f);
     text->setLifetime(0.3f);
@@ -840,7 +840,7 @@ void BaseCreatureEntity::heal(int healPoints)
     text->setZ(2000);
     text->setAlignment(ALIGN_CENTER);
     text->setType(ENTITY_FLYING_TEXT);
-    while (textTooClose(text, 15, 15)) text->setY(text->getY() - 5);
+    while (textTooClose(text, 15, 15)) text->setY(text->getY() - 5.f/2);
   }
 }
 

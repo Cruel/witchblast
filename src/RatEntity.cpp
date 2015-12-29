@@ -47,7 +47,7 @@ RatEntity::RatEntity(float x, float y, ratTypeEnum ratType, bool invocated)
   shadowFrame = -1;
 
   agonizingSound = SOUND_RAT_DYING;
-  sprite.setOrigin(32.0f, 38.0f);
+  sprite.setOrigin(16.0f, 19.0f);
 }
 
 void RatEntity::animate(float delay)

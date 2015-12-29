@@ -22,7 +22,7 @@ ArtefactDescriptionEntity::ArtefactDescriptionEntity(enumItemType itemType)
   rectangle.setPosition(x0, ARTEFACT_POS_Y);
 
   this->x = x0;
-  this->y = 500.0f;
+  this->y = 500.0f/2;
   sprite.setScale(3.5f, 3.5f);
 
   z = 5000.0f;
@@ -94,7 +94,7 @@ void ArtefactDescriptionEntity::render(cpp3ds::RenderTarget* app)
     }
 
     app->draw(rectangle);
-    game().write(artefactName, 19, 470.0f, ARTEFACT_POS_Y + 15.0f, ALIGN_CENTER, fadeColor, app, 0, 0, 0);
-    game().write(artefactDescription, 17, 470.0f, ARTEFACT_POS_Y + 55.0f, ALIGN_CENTER, fadeColor, app, 0, 0, 340);
+    game().write(artefactName, 10, 470.0f/2, ARTEFACT_POS_Y + 9.f, ALIGN_CENTER, fadeColor, app, 0, 0, 0);
+    game().write(artefactDescription, 8, 470.0f/2, ARTEFACT_POS_Y + 28.f, ALIGN_CENTER, fadeColor, app, 0, 0, 340);
     app->draw(sprite);
 }

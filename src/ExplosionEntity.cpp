@@ -9,7 +9,7 @@
 #include <iostream>
 
 ExplosionEntity::ExplosionEntity(float x, float y, explosionTypeEnum explosionType, int damage, enemyTypeEnum enemyType, bool canHurtPlayer)
-  : SpriteEntity(ImageManager::getInstance().getImage(IMAGE_EXPLOSION), x, y, 100, 100)
+  : SpriteEntity(ImageManager::getInstance().getImage(IMAGE_EXPLOSION), x, y, 50, 50)
 {
   type = ENTITY_EXPLOSION;
   this->explosionType = explosionType;
@@ -25,7 +25,7 @@ ExplosionEntity::ExplosionEntity(float x, float y, explosionTypeEnum explosionTy
     case ExplosionTypeViolet: frame = 6; break;
   }
 
-  sprite.setOrigin(50, 50);
+  sprite.setOrigin(25, 25);
   testCollisions();
 }
 
@@ -83,17 +83,17 @@ void ExplosionEntity::testCollisions()
         entity->calculateBB();
 
         cpp3ds::IntRect bb;
-        bb.left = x - 90;
-        bb.width = 180;
-        bb.top = y - 90;
-        bb.height = 180;
+        bb.left = x - 45;
+        bb.width = 90;
+        bb.top = y - 45;
+        bb.height = 90;
 
         if (bb.intersects(entity->getBoundingBox()))
         {
           // TODO explosion type
           if (damage > 0) entity->hurt(BaseCreatureEntity::getHurtParams(damage, ShotTypeFire, 0, false, SourceTypeExplosion, enemyType, false));
 
-          Vector2D recoilVector = Vector2D(x, y).vectorTo(Vector2D(entity->getX(), entity->getY()), 800.0f );
+          Vector2D recoilVector = Vector2D(x, y).vectorTo(Vector2D(entity->getX(), entity->getY()), 800.f/2 );
           entity->giveRecoil(true, recoilVector, 1.0f);
         }
       }

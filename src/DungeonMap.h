@@ -55,16 +55,16 @@ const int MAP_WALL_7        =   2 + MAP_WALL_BEGIN;
 const int MAP_WALL_77       =   4 + MAP_WALL_BEGIN;
 const int MAP_WALL_87       =   5 + MAP_WALL_BEGIN;
 
-const int DOOR_WALL_SPRITE_X     = 1344;
-const int DOOR_WALL_SPRITE_Y     = (MAP_NB_FLOORS + 3) * 64;
+const int DOOR_WALL_SPRITE_X     = 1344/2;
+const int DOOR_WALL_SPRITE_Y     = (MAP_NB_FLOORS + 3) * 32;
 
-const int DOOR_GRID_SPRITE_X   = 1280;
-const int DOOR_GRID_SPRITE_Y   = (MAP_NB_FLOORS + 2) * 64;
+const int DOOR_GRID_SPRITE_X   = 1280/2;
+const int DOOR_GRID_SPRITE_Y   = (MAP_NB_FLOORS + 2) * 32;
 
-const int DOOR_STAIRS_SPRITE_X   = 1088;
+const int DOOR_STAIRS_SPRITE_X   = 1088/2;
 const int DOOR_STAIRS_SPRITE_Y   = DOOR_GRID_SPRITE_Y;
 
-const int DOOR_SHADOW_SPRITE_X   = 896;
+const int DOOR_SHADOW_SPRITE_X   = 896/2;
 const int DOOR_SHADOW_SPRITE_Y   = DOOR_GRID_SPRITE_Y;
 
 const int ROOM_TYPE_CHECKER = 5;
@@ -120,28 +120,28 @@ const int NB_RANDOM_TILES_IN_ROOM = 4;
 /** Array with all the items and data */
 const randomDungeonTileStruct randomDungeonTiles[NB_RANDOM_TILES] =
 {
-  { 192, 192, 0, 0, true, true, true, 1},
-  { 192, 192, 192, 0, true, true, true, 1},
-  { 192, 192, 384, 0, true, true, true, 1},
-  { 192, 192, 576, 0, true, true, true, 1},
-  { 256, 256, 0, 192, true, true, true, 1},
-  { 512, 256, 256, 192, true, true, true, 1},
-  { 128, 128, 0, 448, true, false, true, 6},
-  { 128, 128, 128, 448, true, false, true, 3},
-  { 128, 128, 256, 448, true, false, true, 3},
-  { 128, 128, 384, 448, false, false, false, 1},
-  { 128, 128, 512, 448, false, false, false, 6},
-  { 128, 128, 640, 448, false, false, false, 6},
-  { 192, 192, 0, 576, true, true, true, 1},
-  { 192, 192, 192, 576, true, true, true, 1},
-  { 192, 192, 384, 576, true, true, true , 1},
-  { 192, 192, 576, 576, true, true, true, 1},
+  { 192/2, 192/2, 0, 0, true, true, true, 1},
+  { 192/2, 192/2, 192/2, 0, true, true, true, 1},
+  { 192/2, 192/2, 384/2, 0, true, true, true, 1},
+  { 192/2, 192/2, 576/2, 0, true, true, true, 1},
+  { 256/2, 256/2, 0, 192/2, true, true, true, 1},
+  { 512/2, 256/2, 256/2, 192/2, true, true, true, 1},
+  { 128/2, 128/2, 0, 448/2, true, false, true, 6},
+  { 128/2, 128/2, 128/2, 448/2, true, false, true, 3},
+  { 128/2, 128/2, 256/2, 448/2, true, false, true, 3},
+  { 128/2, 128/2, 384/2, 448/2, false, false, false, 1},
+  { 128/2, 128/2, 512/2, 448/2, false, false, false, 6},
+  { 128/2, 128/2, 640/2, 448/2, false, false, false, 6},
+  { 192/2, 192/2, 0, 576/2, true, true, true, 1},
+  { 192/2, 192/2, 192/2, 576/2, true, true, true, 1},
+  { 192/2, 192/2, 384/2, 576/2, true, true, true , 1},
+  { 192/2, 192/2, 576/2, 576/2, true, true, true, 1},
 
-  { 256, 256, 0, 768, true, true, true, 1},
-  { 256, 256, 256, 768, true, true, true, 1},
-  { 256, 192, 768, 0, true, true, true, 1},
-  { 256, 192, 768, 192, true, true, true, 1},
-  { 256, 192, 768, 384, true, true, true, 1},
+  { 256/2, 256/2, 0, 768/2, true, true, true, 1},
+  { 256/2, 256/2, 256/2, 768/2, true, true, true, 1},
+  { 256/2, 192/2, 768/2, 0, true, true, true, 1},
+  { 256/2, 192/2, 768/2, 192/2, true, true, true, 1},
+  { 256/2, 192/2, 768/2, 384/2, true, true, true, 1},
 };
 
 class DungeonMap : public GameMap

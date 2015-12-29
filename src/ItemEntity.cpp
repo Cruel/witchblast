@@ -138,14 +138,14 @@ void ItemEntity::animate(float delay)
       if (velocity.x < -10 || velocity.x > 10 || velocity.y < -10 || velocity.y > 10) // moving
       {
         // stay in the map
-        if (velocity.x < 40 && x < TILE_WIDTH) velocity.x = 220.0f;
-        else if (velocity.x > -40 && x > (TILE_WIDTH - 1) * MAP_WIDTH) velocity.x = -220.0f;
-        if (velocity.y < 40 && y < TILE_HEIGHT) velocity.y = 220.0f;
-        else if (velocity.y > -40 && y > (TILE_HEIGHT - 1) * MAP_HEIGHT) velocity.y = -220.0f;
+        if (velocity.x < 40 && x < TILE_WIDTH) velocity.x = 220.0f/2;
+        else if (velocity.x > -40 && x > (TILE_WIDTH - 1) * MAP_WIDTH) velocity.x = -220.0f/2;
+        if (velocity.y < 40 && y < TILE_HEIGHT) velocity.y = 220.0f/2;
+        else if (velocity.y > -40 && y > (TILE_HEIGHT - 1) * MAP_HEIGHT) velocity.y = -220.0f/2;
       }
       else // not moving
       {
-        setVelocity(Vector2D(100.0f + rand()% 250));
+        setVelocity(Vector2D(100.0f/2 + rand()% 250));
       }
       // make move
       x += velocity.x * delay;
@@ -170,7 +170,7 @@ void ItemEntity::animate(float delay)
         {
           jumpTimer = 2.0f + 0.1f * (rand() % 40);
           h = 0.1f;
-          hVelocity = 150.0f;
+          hVelocity = 150.0f/2;
         }
       }
     }
@@ -179,7 +179,7 @@ void ItemEntity::animate(float delay)
   if (h > 0.0f)
   {
     h += hVelocity * delay;
-    hVelocity -= 1200.0f * delay;
+    hVelocity -= 1200.0f/2 * delay;
   }
 
   if (age > 0.7f) testSpriteCollisions();

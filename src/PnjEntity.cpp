@@ -5,7 +5,7 @@
 
 #include "TextMapper.h"
 
-PnjEntity::PnjEntity(float x, float y, int pnjType) : SpriteEntity (ImageManager::getInstance().getImage(IMAGE_PNJ), x, y, 64, 96)
+PnjEntity::PnjEntity(float x, float y, int pnjType) : SpriteEntity (ImageManager::getInstance().getImage(IMAGE_PNJ), x, y, 32, 48)
 {
   this->x = x;
   this->y = y;
@@ -13,9 +13,9 @@ PnjEntity::PnjEntity(float x, float y, int pnjType) : SpriteEntity (ImageManager
   x0 = x;
   y0 = y;
 
-  pnjVelocity = 140.0f;
+  pnjVelocity = 70.0f;
 
-  xGoal = x0 + 180.0f;
+  xGoal = x0 + 90.0f;
   direction = 6;
   velocity.x = pnjVelocity;
 
@@ -33,14 +33,14 @@ void PnjEntity::animate(float delay)
   {
     direction = 4;
     velocity.x = -pnjVelocity;
-    xGoal = x0 - 180.0f;
+    xGoal = x0 - 90.0f;
     isMirroring = true;
   }
   else if (direction == 4 && x <= xGoal)
   {
     direction = 6;
     velocity.x = pnjVelocity;
-    xGoal = x0 + 180.0f;
+    xGoal = x0 + 90.0f;
     isMirroring = false;
   }
 
@@ -88,7 +88,7 @@ void PnjEntity::render(cpp3ds::RenderTarget* app)
 
   if (isSpeaking)
   {
-    game().write(speech, 20, x0, y0 - 72.0f, ALIGN_CENTER, cpp3ds::Color(255, 255, 255), app, 0 , 0, 0);
+    game().write(speech, 11, x0, y0 - 35.0f, ALIGN_CENTER, cpp3ds::Color(255, 255, 255), app, 0 , 0, 0);
   }
 
   if (game().getShowLogical())
